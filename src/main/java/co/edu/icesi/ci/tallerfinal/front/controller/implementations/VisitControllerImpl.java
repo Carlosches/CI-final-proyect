@@ -3,9 +3,7 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.icesi.ci.tallerfinal.back.repositories.CampusRepository;
-import co.edu.icesi.ci.tallerfinal.back.repositories.PersonRepository;
-import co.edu.icesi.ci.tallerfinal.front.bd.VisitBD;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.VisitController;
 import co.edu.icesi.ci.tallerfinal.back.groups.AddVisit;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
-import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 
 @Controller
 @RequestMapping("/visits")
 public class VisitControllerImpl implements VisitController {
 
-	public VisitBD visitBD;
+	public BusinessDelegate visitBD;
 
 	@Autowired
-	public VisitControllerImpl(VisitBD visitBD) {
+	public VisitControllerImpl(BusinessDelegate visitBD) {
 		this.visitBD = visitBD;
 	}
 
