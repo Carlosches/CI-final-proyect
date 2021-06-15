@@ -1,7 +1,5 @@
 package co.edu.icesi.ci.tallerfinal.back.model;
 
-
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -14,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddCheckMeasure;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * The persistent class for the CHECK_MEASUR database table.
@@ -32,12 +31,14 @@ public class CheckMeasur implements Serializable {
 	private BigDecimal measvalue;
 
 	// bi-directional many-to-one association to Measurement
+	@JsonBackReference
 	@ManyToOne
 	@NotNull(message="se debe agregar una medida", groups=AddCheckMeasure.class)
 	@JoinColumn(name = "MEAS_ID", insertable = false, updatable = false)
 	private Measurement measurement;
 
 	// bi-directional many-to-one association to Physicalcheckup
+	@JsonBackReference
 	@ManyToOne
 	@NotNull(message="se debe agregar un chequeo físico", groups=AddCheckMeasure.class)
 	@JoinColumn(name = "PHYCHE_ID", insertable = false, updatable = false)

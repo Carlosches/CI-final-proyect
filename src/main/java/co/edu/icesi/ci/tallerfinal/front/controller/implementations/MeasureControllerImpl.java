@@ -21,7 +21,7 @@ import co.edu.icesi.ci.tallerfinal.back.model.Measurement;
 import co.edu.icesi.ci.tallerfinal.back.service.MeasurementService;
 
 @Controller
-@RequestMapping("/measurements")
+@RequestMapping("/api/measurements")
 public class MeasureControllerImpl implements MeasureController {
 	public MeasurementService measureService;
 	public InstitutionRepository institutionRepository;

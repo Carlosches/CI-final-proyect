@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddMeasurement;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -50,6 +51,7 @@ public class Measurement implements Serializable {
 	private String measUnit;
 
 	//bi-directional many-to-one association to CheckMeasur
+	@JsonManagedReference
 	@OneToMany(mappedBy="measurement")
 	private List<CheckMeasur> checkMeasurs;
 

@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configuration 
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
@@ -33,6 +33,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		return new BCryptPasswordEncoder(11);
 //	}
 
+//	@Override
+//	protected void configure(HttpSecurity httpSecurity) throws Exception {
+////
+////		/*httpSecurity.authorizeRequests().antMatchers("/**").authenticated().anyRequest().permitAll().and().httpBasic().and().logout()
+////				.invalidateHttpSession(true).clearAuthentication(true)
+////				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+////				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
+////
+////
+//		httpSecurity.authorizeRequests()
+//        .antMatchers("/login**").permitAll()
+//        .antMatchers("/h2/**").permitAll()
+////        .antMatchers("/h2-console/**").permitAll()
+//        .antMatchers("/measurements/showFromCheckMeasur/**").hasAnyRole("admin", "operator")
+//        .antMatchers("/checkmeasures/showFromMeasures/**").hasAnyRole("admin", "operator")
+//        .antMatchers("/measurements/**").hasRole("admin")
+//        .antMatchers("/phycheckups/**").hasRole("operator")
+//        .antMatchers("/visits/**").hasRole("operator")
+//        .antMatchers("/checkmeasures/**").hasRole("operator")
+//        .antMatchers("/**").authenticated().anyRequest().permitAll()
+//        .and()
+//            .formLogin().loginPage("/login").failureUrl("/login?error")
+//                .usernameParameter("username").passwordParameter("password")
+//        .and().logout().invalidateHttpSession(true).clearAuthentication(true)
+//        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+//        .permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+//	}
+
+
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 //
@@ -40,24 +69,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //				.invalidateHttpSession(true).clearAuthentication(true)
 //				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
 //				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
-//		
 //
+//
+
+
 		httpSecurity.authorizeRequests()
-        .antMatchers("/login**").permitAll()
-        .antMatchers("/h2/**").permitAll()
-//        .antMatchers("/h2-console/**").permitAll()
-        .antMatchers("/measurements/showFromCheckMeasur/**").hasAnyRole("admin", "operator")
-        .antMatchers("/checkmeasures/showFromMeasures/**").hasAnyRole("admin", "operator")
-        .antMatchers("/measurements/**").hasRole("admin")
-        .antMatchers("/phycheckups/**").hasRole("operator")
-        .antMatchers("/visits/**").hasRole("operator")
-        .antMatchers("/checkmeasures/**").hasRole("operator")
-        .antMatchers("/**").authenticated().anyRequest().permitAll()
-        .and()
-            .formLogin().loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("username").passwordParameter("password")
-        .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-        .permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+				.antMatchers("/**").permitAll().and().csrf().disable();
 	}
+
 }

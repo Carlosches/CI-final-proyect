@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component            
+@Component
 public class LoggingAccessDeniedHandler  implements AccessDeniedHandler  {
 
     private static Logger log = LoggerFactory.getLogger(LoggingAccessDeniedHandler.class);

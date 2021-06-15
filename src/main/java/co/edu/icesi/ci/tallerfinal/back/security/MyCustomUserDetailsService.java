@@ -14,17 +14,17 @@ import co.edu.icesi.ci.tallerfinal.back.model.Userr;
 import co.edu.icesi.ci.tallerfinal.back.service.PersonService;
 
 
-@Service          
+@Service
 public class MyCustomUserDetailsService implements UserDetailsService{
-	
+
 	private UserRepository userRepository;
 	private PersonService personService;
-	
+
 	public  MyCustomUserDetailsService(UserRepository userRepository, PersonService personService) {
 		this.userRepository = userRepository;
 		this.personService = personService;
 	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Userr userApp = userRepository.findByuserName(username);
@@ -43,6 +43,6 @@ public class MyCustomUserDetailsService implements UserDetailsService{
 		}
 	}
 
-	
-	
+
+
 }

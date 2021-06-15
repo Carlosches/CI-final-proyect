@@ -6,7 +6,9 @@ import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class CheckMeasurRestControllerImpl implements CheckMeasurRestController {
 
     public CheckMeasurService checkMeasurService;

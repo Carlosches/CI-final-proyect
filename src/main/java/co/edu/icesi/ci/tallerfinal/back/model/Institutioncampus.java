@@ -2,6 +2,8 @@ package co.edu.icesi.ci.tallerfinal.back.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -43,10 +45,12 @@ public class Institutioncampus implements Serializable {
 	private Institution institution;
 
 	//bi-directional many-to-one association to Physicalspace
+	//@JsonManagedReference
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Physicalspace> physicalspaces;
 
 	//bi-directional many-to-one association to Visit
+	@JsonManagedReference(value="visit-institutioncampus")
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Visit> visits;
 

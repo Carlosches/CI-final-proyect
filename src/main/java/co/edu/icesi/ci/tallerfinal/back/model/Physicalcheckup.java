@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -36,6 +38,7 @@ public class Physicalcheckup implements Serializable {
 	private Date phycheDate;
 
 	//bi-directional many-to-one association to CheckMeasur
+	@JsonManagedReference
 	@OneToMany(mappedBy="physicalcheckup")
 	private List<CheckMeasur> checkMeasurs;
 
@@ -43,12 +46,14 @@ public class Physicalcheckup implements Serializable {
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una persona", groups=AddPhycheckup.class)
 	@JoinColumn(name="PERS_PERS_ID")
+	@JsonBackReference
 	private Person person;
 
 	//bi-directional many-to-one association to Visit
+	//@JoinColumn(name = "VISIT_VISIT_ID")
+	@JsonBackReference(value="visit-physicalcheckups")
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una visita", groups=AddPhycheckup.class)
-	//@JoinColumn(name = "VISIT_VISIT_ID")
 	private Visit visit;
 
 	public Physicalcheckup() {

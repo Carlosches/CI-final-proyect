@@ -27,7 +27,7 @@ import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
 
 
 @Controller
-@RequestMapping("/checkmeasures")
+@RequestMapping("/api/checkmeasures")
 public class CheckMeasureControllerImpl implements CheckMeasureController {
 	
 	private CheckMeasurService checkMeasureService;

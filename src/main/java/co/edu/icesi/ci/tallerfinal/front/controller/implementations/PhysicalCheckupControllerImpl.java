@@ -25,7 +25,7 @@ import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 
 
 @Controller
-@RequestMapping("/phycheckups")
+@RequestMapping("/api/phycheckups")
 public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
 	public VisitService visitService;
 	public PhysicalcheckupService phycheckupService;

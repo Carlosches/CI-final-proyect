@@ -2,6 +2,8 @@ package co.edu.icesi.ci.tallerfinal.back.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
@@ -27,6 +29,7 @@ public class VisitVisitreason implements Serializable {
 	private String dumy;
 
 	// bi-directional many-to-one association to Visit
+	@JsonBackReference(value="visit-reason")
 	@ManyToOne
 	@JoinColumn(insertable = false, updatable = false)
 	private Visit visit;
