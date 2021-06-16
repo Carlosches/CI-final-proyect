@@ -1,5 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
+import co.edu.icesi.ci.tallerfinal.front.model.classes.Institutioncampus;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.Person;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
@@ -29,6 +31,42 @@ public class BusinessDelegate {
     }
 
     // ==========================
+    // Person
+    // ==========================
+
+    public List<Person> personFindAll(){
+
+        String endpoint = REST_URL + "/persons/";
+
+        Person[] r = restTemplate.getForObject(endpoint, Person[].class);
+        List<Person> response = Arrays.asList(r);
+
+        return response;
+    }
+
+
+    // ==========================
+    // Institution
+    // ==========================
+
+
+    // ==========================
+    // InstitutionCampus
+    // ==========================
+
+    public List<Institutioncampus> institutionCampusFindAll(){
+
+        String endpoint = REST_URL + "/institution-campus/";
+
+        Institutioncampus[] r = restTemplate.getForObject(endpoint, Institutioncampus[].class);
+        List<Institutioncampus> response = Arrays.asList(r);
+
+        return response;
+
+    }
+
+
+    // ==========================
     // Visit
     // ==========================
 
@@ -40,6 +78,17 @@ public class BusinessDelegate {
         List<Visit> response = Arrays.asList(r);
 
         return response;
+    }
+
+    //GET
+    public Visit visitFindById(long persId){
+
+        // REST endpoint
+        String endpoint = REST_URL + "/visits/" + persId;
+
+        Visit response = restTemplate.getForObject(endpoint, Visit.class);
+
+        return response; // TODO
     }
 
     //POST
@@ -72,6 +121,14 @@ public class BusinessDelegate {
 
         restTemplate.put(endpoint, visit, Visit.class);
 
+    }
+
+    // DELETE
+    public void deleteVisit(long visitId){
+
+        String endpoint = REST_URL + "/visits/" + visitId;
+
+        restTemplate.delete(endpoint);
     }
 
     // ==========================

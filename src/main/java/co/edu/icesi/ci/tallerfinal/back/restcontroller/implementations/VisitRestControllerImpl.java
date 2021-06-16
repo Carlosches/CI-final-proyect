@@ -24,6 +24,13 @@ public class VisitRestControllerImpl implements VisitRestController {
         return visitService.findAll();
     }
 
+
+    //GET
+    @GetMapping("/visits/{persId}")
+    public Visit visitFindById(@PathVariable("persId") long persId){
+        return new Visit(); // TODO
+    }
+
     @Override
     @PostMapping("/visits")
     public Visit saveVisit(@RequestBody Visit visit,
@@ -41,10 +48,6 @@ public class VisitRestControllerImpl implements VisitRestController {
         visitService.editVisit(visit);
     }
 
-    //TEST
-    @GetMapping("/visit/")
-    public Visit visit(){
-        return new Visit();
-    }
+
 
 }
