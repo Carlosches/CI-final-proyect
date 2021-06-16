@@ -1,8 +1,8 @@
 package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
-import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.PhysicalCheckupController;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.AddPhycheckup;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 import org.springframework.beans.factory.annotation.Autowired;

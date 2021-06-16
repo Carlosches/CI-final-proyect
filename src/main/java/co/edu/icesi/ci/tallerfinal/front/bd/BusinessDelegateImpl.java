@@ -47,6 +47,17 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // Institution
     // ==========================
 
+    // TODO in REST CONTROLLER
+    public List<Institution> institutionFindAll(){
+
+        String endpoint = REST_URL + "/institutions/";
+
+        Institution[] r = restTemplate.getForObject(endpoint, Institution[].class);
+        List<Institution> response = Arrays.asList(r);
+
+        return  response;
+    }
+
 
     // ==========================
     // InstitutionCampus
@@ -130,7 +141,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // ==========================
-    // PhysicalCheckup
+    // PHYSICAL CHECKUP
     // ==========================
 
     // GET // TODO in REST CONTROLLER
@@ -196,6 +207,62 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     }
 
+    // ==========================
+    // MEASUREMENT
+    // ==========================
 
+    // GET // TODO in REST CONTROLLER
+    public List<Measurement> measurementFindAll(){
+
+        String endpoint = REST_URL + "/measurements";
+
+        Measurement[] r = restTemplate.getForObject(endpoint, Measurement[].class);
+        List<Measurement> response = Arrays.asList(r);
+
+        return response;
+    }
+
+    // GET // TODO in REST CONTROLLER
+    public Measurement measurementFindById(long measId){
+
+        String endpoint = REST_URL + "/measurements/" + measId;
+
+        Measurement response = restTemplate.getForObject(endpoint, Measurement.class);
+
+        return response;
+
+    }
+
+    // POST // TODO in REST CONTROLLER
+    public Measurement saveMeasurement(Measurement measurement, long instId){
+        // REST endpoint
+        String endpoint = REST_URL + "/measurements";
+
+        // Add query parameters to URL
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
+                .queryParam("instId", instId);
+        endpoint = builder.toUriString();
+
+        // Perform REST CALL
+        Measurement response = restTemplate.postForObject(endpoint, measurement, Measurement.class);
+
+        return response;
+    }
+
+    // PUT // TODO in REST CONTROLLER
+    public void setMeasurement(Measurement measurement){
+        String endpoint = REST_URL + "/measurements";
+
+        restTemplate.put(endpoint, measurement, Measurement.class);
+    }
+
+    // DELETE  // TODO in REST CONTROLLER
+    public void deleteMeasurement(long measId){
+
+        String endpoint = REST_URL + "/measurements/" + measId;
+
+        restTemplate.delete(endpoint);
+
+    }
 
 }

@@ -1,23 +1,32 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Institutioncampus;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Person;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Physicalcheckup;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 
 import java.util.List;
 
 public interface BusinessDelegate {
 
+    // ==========================
     // PERSON
+    // ==========================
 
     List<Person> personFindAll();
 
+    // ==========================
+    // INSTITUTION
+    // ==========================
+
+    List<Institution> institutionFindAll();
+
+    // ==========================
     // INSTITUTION CAMPUS
+    // ==========================
 
     List<Institutioncampus> institutionCampusFindAll();
 
+    // ==========================
     // VISIT
+    // ==========================
 
     List<Visit> visitFindAll();
 
@@ -29,7 +38,9 @@ public interface BusinessDelegate {
 
     void deleteVisit(long visitId);
 
+    // ==========================
     // PhysicalCheckup
+    // ==========================
 
     List<Physicalcheckup> physicalcheckupsFindAll();
 
@@ -40,5 +51,19 @@ public interface BusinessDelegate {
     void setPhysicalcheckup(Physicalcheckup pc);
 
     void deletePhysicalcheckup(long phycheId);
+
+    // ==========================
+    // MEASUREMENT
+    // ==========================
+
+    List<Measurement> measurementFindAll();
+
+    Measurement measurementFindById(long measId);
+
+    Measurement saveMeasurement(Measurement measurement, long instId);
+
+    void setMeasurement(Measurement measurement);
+
+    void deleteMeasurement(long measId);
 
 }
