@@ -1,8 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Institutioncampus;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Person;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 import co.edu.icesi.ci.tallerfinal.front.model.wrapper.VisitList;
@@ -123,7 +121,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     }
 
-    // DELETE
+    // DELETE // TODO in REST CONTROLLER
     public void deleteVisit(long visitId){
 
         String endpoint = REST_URL + "/visits/" + visitId;
@@ -134,6 +132,70 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
     // PhysicalCheckup
     // ==========================
+
+    // GET // TODO in REST CONTROLLER
+    public List<Physicalcheckup> physicalcheckupsFindAll(){
+
+        String endpoint = REST_URL + "/physical-checkup";
+
+        Physicalcheckup[] r = restTemplate.getForObject(endpoint, Physicalcheckup[].class);
+        List<Physicalcheckup> response = Arrays.asList(r);
+
+        return response;
+
+    }
+
+    // GET // TODO in REST CONTROLLER
+    public Physicalcheckup physicalcheckupsFindById(long id){
+
+        String endpoint = REST_URL + "/physical-checkup/" + id;
+
+        Physicalcheckup response = restTemplate.getForObject(endpoint, Physicalcheckup.class);
+
+        return response;
+    }
+
+    // POST // TODO in REST CONTROLLER
+    public Physicalcheckup savePhysicalcheckup(Physicalcheckup pc, long persId, long visitId){
+
+        // REST endpoint
+        String endpoint = REST_URL + "/physical-checkup";
+
+        // Add query parameters to URL
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
+                .queryParam("persId", persId)
+                .queryParam("visitId", visitId);
+        endpoint = builder.toUriString();
+
+
+        // Add Entity
+        HttpEntity<Physicalcheckup> request = new HttpEntity<>(pc);
+
+        // Perform REST CALL
+        Physicalcheckup response = restTemplate.postForObject(endpoint, request, Physicalcheckup.class);
+
+        return response;
+
+    }
+
+    //PUT // TODO in REST CONTROLLER
+    public void setPhysicalcheckup(Physicalcheckup pc){
+
+        String endpoint = REST_URL + "/physical-checkup";
+
+        restTemplate.put(endpoint, pc, Physicalcheckup.class);
+
+    }
+
+    // DELETE // TODO in REST CONTROLLER
+    public void deletePhysicalcheckup(long phycheId){
+
+        String endpoint = REST_URL + "/physical-checkup/" + phycheId;
+
+        restTemplate.delete(endpoint);
+
+    }
+
 
 
 }
