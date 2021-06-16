@@ -37,17 +37,18 @@ public class Visit implements Serializable {
 	@NotNull(message="La fecha de ingreso es obligatoria", groups=AddVisit.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-	@Column(name="VISIT_ENTRANCEDATE")
 	@FutureOrPresent(message="La fecha de ingreso debe ser en el futuro", groups=AddVisit.class)
+	@Column(name="VISIT_ENTRANCEDATE")
 	private Date visitEntrancedate;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="VISIT_EXITDATE")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@FutureOrPresent(message="La fecha de egreso debe ser en el futuro", groups=AddVisit.class)
+	@Column(name="VISIT_EXITDATE")
 	private Date visitExitdate;
 
 	//bi-directional many-to-one association to Physicalcheckup+
+	@JsonIgnore
 	@OneToMany(mappedBy="visit")
 	private List<Physicalcheckup> physicalcheckups;
 
@@ -64,6 +65,7 @@ public class Visit implements Serializable {
 	private Person person;
 
 	//bi-directional many-to-one association to VisitVisitreason
+	@JsonIgnore
 	@OneToMany(mappedBy="visit")
 	private List<VisitVisitreason> visitVisitreasons;
 

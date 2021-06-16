@@ -25,7 +25,7 @@ public class VisitRestControllerImpl implements VisitRestController {
     }
 
     @Override
-    @PostMapping(path="/visits", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/visits")
     public Visit saveVisit(@RequestBody Visit visit,
                           @RequestParam(value = "personId", required = true) long personId,
                           @RequestParam(value = "campusId", required = true) long campusId){

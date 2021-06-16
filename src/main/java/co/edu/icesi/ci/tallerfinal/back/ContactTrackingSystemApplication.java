@@ -58,8 +58,11 @@ public class ContactTrackingSystemApplication {
 
 		BusinessDelegate bd = ac.getBean(BusinessDelegate.class);
 		//List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> visits = bd.visitFindAll();
-		co.edu.icesi.ci.tallerfinal.front.model.classes.Visit v = bd.saveVisit(new co.edu.icesi.ci.tallerfinal.front.model.classes.Visit(), 1, 1);
-		System.out.println();
+
+		List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> v = bd.visitFindAll();
+
+/*		co.edu.icesi.ci.tallerfinal.front.model.classes.Visit vv = bd.saveVisit(new co.edu.icesi.ci.tallerfinal.front.model.classes.Visit(), 1, 1);
+		System.out.println();*/
 
 	}
 	

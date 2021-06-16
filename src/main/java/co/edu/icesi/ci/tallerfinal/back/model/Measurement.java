@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddMeasurement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.math.BigDecimal;
@@ -35,7 +36,6 @@ public class Measurement implements Serializable {
 
 	@NotNull(message="Se debe agregar un umbral máximo", groups= AddMeasurement.class)
 	@Column(name="MEAS_MAXTHRESHOLD")
-
 	private BigDecimal measMaxthreshold;
 
 	@NotNull(message="Se debe agregar un umbral mínimo", groups= AddMeasurement.class)
@@ -51,6 +51,7 @@ public class Measurement implements Serializable {
 	private String measUnit;
 
 	//bi-directional many-to-one association to CheckMeasur
+	@JsonIgnore
 	@OneToMany(mappedBy="measurement")
 	private List<CheckMeasur> checkMeasurs;
 

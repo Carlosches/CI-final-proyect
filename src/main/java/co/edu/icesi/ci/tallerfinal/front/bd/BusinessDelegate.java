@@ -54,12 +54,9 @@ public class BusinessDelegate {
                 .queryParam("campusId", campusId);
         endpoint = builder.toUriString();
 
-        // Create JSON Header
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
 
         // Add Entity
-        HttpEntity<Visit> request = new HttpEntity<>(visit, headers);
+        HttpEntity<Visit> request = new HttpEntity<>(visit);
 
         // Perform REST CALL
         Visit response = restTemplate.postForObject(endpoint, request, Visit.class);
@@ -69,8 +66,17 @@ public class BusinessDelegate {
     }
 
     //PUT
-    public void setVisit(){
+    public void setVisit(Visit visit){
+
+        String endpoint = REST_URL + "/visits";
+
+        restTemplate.put(endpoint, visit, Visit.class);
 
     }
+
+    // ==========================
+    // PhysicalCheckup
+    // ==========================
+
 
 }
