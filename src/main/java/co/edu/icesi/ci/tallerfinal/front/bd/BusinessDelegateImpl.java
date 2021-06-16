@@ -1,17 +1,13 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
-
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
-import co.edu.icesi.ci.tallerfinal.front.model.wrapper.VisitList;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class BusinessDelegateImpl implements BusinessDelegate {
@@ -262,6 +258,70 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         String endpoint = REST_URL + "/measurements/" + measId;
 
         restTemplate.delete(endpoint);
+
+    }
+
+    // ==========================
+    // CHECK MEASURES
+    // ==========================
+
+    // GET // TODO in REST CONTROLLER
+    public List<CheckMeasur> checkMeasurFindAll(){
+        String endpoint = REST_URL + "/check-measures";
+
+        CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
+        List<CheckMeasur> response = Arrays.asList(r);
+
+        return response;
+    }
+
+    // POST // TODO in REST CONTROLLER
+    public CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK){
+        String endpoint = REST_URL + "/check-measures";
+
+        CheckMeasur response = restTemplate.postForObject(endpoint, checkMeasurPK, CheckMeasur.class);
+
+        return response;
+
+    }
+
+    // POST // TODO in REST CONTROLLER
+    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
+        String endpoint = REST_URL + "/check-measures/fk";
+
+        Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
+
+        return response.booleanValue();
+
+    }
+
+    // POST // TODO in REST CONTROLLER
+    public CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId){
+
+        String endpoint = REST_URL + "/check-measures/data";
+
+        // Add query parameters to URL
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
+                .queryParam("measId", measId)
+                .queryParam("phycheId", phycheId);
+        endpoint = builder.toUriString();
+
+        CheckMeasur cm = restTemplate.postForObject(endpoint, checkMeasur, CheckMeasur.class);
+
+        return cm;
+    }
+
+    public void setCheckMeasur(CheckMeasur checkMeasur){
+        String endpoint = REST_URL + "/check-measures/data";
+
+        restTemplate.put(endpoint, checkMeasur, CheckMeasur.class);
+
+    }
+
+    public void deleteCheckMeasur(CheckMeasur checkMeasur){
+        String endpoint = REST_URL + "/check-measures/data";
+
+        restTemplate.delete(endpoint, checkMeasur, CheckMeasur.class);
 
     }
 

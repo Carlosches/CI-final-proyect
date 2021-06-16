@@ -66,4 +66,20 @@ public interface BusinessDelegate {
 
     void deleteMeasurement(long measId);
 
+    // ==========================
+    // CHECK MEASURES
+    // ==========================
+
+    List<CheckMeasur> checkMeasurFindAll();
+
+    boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK);
+
+    CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK);
+
+    CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId);
+
+    void setCheckMeasur(CheckMeasur checkMeasur);
+
+    void deleteCheckMeasur(CheckMeasur checkMeasur);
+
 }
