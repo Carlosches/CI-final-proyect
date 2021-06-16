@@ -19,9 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
  * The persistent class for the VISIT database table.
  * 
  */
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "visitId")
 @Entity
 @NamedQuery(name="Visit.findAll", query="SELECT v FROM Visit v")
 public class Visit implements Serializable {
@@ -51,26 +48,22 @@ public class Visit implements Serializable {
 	private Date visitExitdate;
 
 	//bi-directional many-to-one association to Physicalcheckup+
-	@JsonManagedReference(value="visit-physicalcheckups")
 	@OneToMany(mappedBy="visit")
 	private List<Physicalcheckup> physicalcheckups;
 
 	//bi-directional many-to-one association to Institutioncampus
-	@JsonBackReference(value="visit-institutioncampus")
 	@ManyToOne
 	@JoinColumn(name="INSTCAM_INSTCAM_ID")
 	@NotNull(message="Se debe elegir una institución", groups=AddVisit.class)
 	private Institutioncampus institutioncampus;
 
 	//bi-directional many-to-one association to Person
-	@JsonBackReference(value="visit-person")
 	@ManyToOne
 	@JoinColumn(name="PERS_PERS_ID")
 	@NotNull(message="Se debe elegir una persona", groups=AddVisit.class)
 	private Person person;
 
 	//bi-directional many-to-one association to VisitVisitreason
-	@JsonManagedReference(value="visit-reason")
 	@OneToMany(mappedBy="visit")
 	private List<VisitVisitreason> visitVisitreasons;
 

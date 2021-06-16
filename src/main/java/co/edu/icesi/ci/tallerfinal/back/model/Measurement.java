@@ -51,7 +51,6 @@ public class Measurement implements Serializable {
 	private String measUnit;
 
 	//bi-directional many-to-one association to CheckMeasur
-	@JsonManagedReference
 	@OneToMany(mappedBy="measurement")
 	private List<CheckMeasur> checkMeasurs;
 

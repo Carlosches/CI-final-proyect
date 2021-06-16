@@ -72,89 +72,72 @@ public class Person implements Serializable {
 
 	//bi-directional many-to-one association to Accessdenialevent
 	@OneToMany(mappedBy="person1")
-	@JsonManagedReference
 	private List<Accessdenialevent> accessdenialevents1;
 
 	//bi-directional many-to-one association to Accessdenialevent
 	@OneToMany(mappedBy="person2")
-	@JsonManagedReference
 	private List<Accessdenialevent> accessdenialevents2;
 
 	//bi-directional many-to-one association to Attendance
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Attendance> attendances;
 
 	//bi-directional many-to-one association to Contactfence
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Contactfence> contactfences;
 
 	//bi-directional many-to-one association to Docstateinstance
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Docstateinstance> docstateinstances;
 
 	//bi-directional many-to-one association to Documentt
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Documentt> documentts;
 
 	//bi-directional many-to-one association to Followup
 	@OneToMany(mappedBy="person1")
-	@JsonManagedReference
 	private List<Followup> followups1;
 
 	//bi-directional many-to-one association to Followup
 	@OneToMany(mappedBy="person2")
-	@JsonManagedReference
 	private List<Followup> followups2;
 
 	//bi-directional many-to-one association to Iddocumenttype
 	@ManyToOne
 	@JoinColumn(name="IDDOCTYPE_IDDOCTYPE_ID")
-	@JsonManagedReference
 	private Iddocumenttype iddocumenttype;
 
 	//bi-directional many-to-one association to Institution
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="INST_INST_ID")
 	private Institution institution;
 
 	//bi-directional many-to-one association to Personautotran
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Personautotran> personautotrans;
 
 	//bi-directional many-to-one association to Personrelationship
 	@OneToMany(mappedBy="person1")
-	@JsonManagedReference
 	private List<Personrelationship> personrelationships1;
 
 	//bi-directional many-to-one association to Personrelationship
 	@OneToMany(mappedBy="person2")
-	@JsonManagedReference
 	private List<Personrelationship> personrelationships2;
 
 	//bi-directional many-to-one association to PersonFence
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<PersonFence> personFences;
 
 	//bi-directional many-to-one association to PersonRole
 	@OneToMany(mappedBy="person", fetch=FetchType.EAGER)
-	@JsonManagedReference
 	private List<PersonRole> personRoles;
 
 	//bi-directional many-to-one association to PersonVulner
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<PersonVulner> personVulners;
 
 	//bi-directional many-to-one association to Physicalcheckup
 	@OneToMany(mappedBy="person")
-	@JsonManagedReference
 	private List<Physicalcheckup> physicalcheckups;
 
 	//bi-directional many-to-one association to Posession
@@ -182,7 +165,6 @@ public class Person implements Serializable {
 	private List<UstSocialclosecontact> ustSocialclosecontacts;
 
 	//bi-directional many-to-one association to Visit
-	@JsonManagedReference(value="visit-person")
 	@OneToMany(mappedBy="person")
 	private List<Visit> visits;
 

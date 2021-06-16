@@ -29,7 +29,6 @@ public class VisitVisitreason implements Serializable {
 	private String dumy;
 
 	// bi-directional many-to-one association to Visit
-	@JsonBackReference(value="visit-reason")
 	@ManyToOne
 	@JoinColumn(insertable = false, updatable = false)
 	private Visit visit;

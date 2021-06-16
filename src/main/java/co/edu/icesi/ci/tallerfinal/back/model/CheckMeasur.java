@@ -31,14 +31,12 @@ public class CheckMeasur implements Serializable {
 	private BigDecimal measvalue;
 
 	// bi-directional many-to-one association to Measurement
-	@JsonBackReference
 	@ManyToOne
 	@NotNull(message="se debe agregar una medida", groups=AddCheckMeasure.class)
 	@JoinColumn(name = "MEAS_ID", insertable = false, updatable = false)
 	private Measurement measurement;
 
 	// bi-directional many-to-one association to Physicalcheckup
-	@JsonBackReference
 	@ManyToOne
 	@NotNull(message="se debe agregar un chequeo físico", groups=AddCheckMeasure.class)
 	@JoinColumn(name = "PHYCHE_ID", insertable = false, updatable = false)

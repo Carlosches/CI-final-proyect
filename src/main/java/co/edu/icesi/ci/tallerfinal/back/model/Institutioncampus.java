@@ -45,12 +45,10 @@ public class Institutioncampus implements Serializable {
 	private Institution institution;
 
 	//bi-directional many-to-one association to Physicalspace
-	//@JsonManagedReference
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Physicalspace> physicalspaces;
 
 	//bi-directional many-to-one association to Visit
-	@JsonManagedReference(value="visit-institutioncampus")
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Visit> visits;
 

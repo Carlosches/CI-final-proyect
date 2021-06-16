@@ -38,7 +38,6 @@ public class Physicalcheckup implements Serializable {
 	private Date phycheDate;
 
 	//bi-directional many-to-one association to CheckMeasur
-	@JsonManagedReference
 	@OneToMany(mappedBy="physicalcheckup")
 	private List<CheckMeasur> checkMeasurs;
 
@@ -46,12 +45,9 @@ public class Physicalcheckup implements Serializable {
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una persona", groups=AddPhycheckup.class)
 	@JoinColumn(name="PERS_PERS_ID")
-	@JsonBackReference
 	private Person person;
 
 	//bi-directional many-to-one association to Visit
-	//@JoinColumn(name = "VISIT_VISIT_ID")
-	@JsonBackReference(value="visit-physicalcheckups")
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una visita", groups=AddPhycheckup.class)
 	private Visit visit;
