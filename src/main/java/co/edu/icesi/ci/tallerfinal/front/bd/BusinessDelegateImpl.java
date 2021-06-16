@@ -311,6 +311,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         return cm;
     }
 
+    // PUT // TODO in REST CONTROLLER
     public void setCheckMeasur(CheckMeasur checkMeasur){
         String endpoint = REST_URL + "/check-measures/data";
 
@@ -318,6 +319,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     }
 
+    // DELETE // TODO in REST CONTROLLER
     public void deleteCheckMeasur(CheckMeasur checkMeasur){
         String endpoint = REST_URL + "/check-measures/data";
 
