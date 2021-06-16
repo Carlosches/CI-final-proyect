@@ -9,8 +9,7 @@ import java.util.List;
 import co.edu.icesi.ci.tallerfinal.back.dao.MeasurementDao;
 import co.edu.icesi.ci.tallerfinal.back.dao.PhysicalcheckupDao;
 import co.edu.icesi.ci.tallerfinal.back.dao.VisitDao;
-import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.VisitRestController;
-import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegateImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -56,7 +55,7 @@ public class ContactTrackingSystemApplication {
 		ApplicationContext ac = SpringApplication.run(ContactTrackingSystemApplication.class, args);
 
 
-		BusinessDelegate bd = ac.getBean(BusinessDelegate.class);
+		BusinessDelegateImpl bd = ac.getBean(BusinessDelegateImpl.class);
 		//List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> visits = bd.visitFindAll();
 
 		List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> v = bd.visitFindAll();

@@ -3,7 +3,8 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.icesi.ci.tallerfinal.back.repositories.PersonRepository;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegateImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,22 +21,17 @@ import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.PhysicalCheckupCo
 import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
 import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
-import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
-import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 
 
 @Controller
 @RequestMapping("/api/phycheckups")
 public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
-	public VisitService visitService;
-	public PhysicalcheckupService phycheckupService;
-	public PersonRepository personRepository;
+
+	public BusinessDelegate bd;
 
 	@Autowired
-	public PhysicalCheckupControllerImpl(VisitService visitService,PhysicalcheckupService phycheckupService,PersonRepository personRepository) {
-		this.visitService = visitService;
-		this.phycheckupService= phycheckupService;
-		this.personRepository = personRepository;
+	public PhysicalCheckupControllerImpl(BusinessDelegate bd) {
+		this.bd = bd;
 	}
 	@Override
 	@GetMapping("/")
@@ -48,8 +44,8 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
 	@GetMapping("/add/")
 	public String addPhycheckup(Model model) {
 		model.addAttribute("physicalcheckup", new Physicalcheckup());
-		model.addAttribute("visits", visitService.findAll());
-		model.addAttribute("persons", personRepository.findAll());
+		model.addAttribute("visits", bd.visitFindAll());
+		model.addAttribute("persons", bd.personFindAll());
 		return "phycheckups/add-phycheckup";
 	}
 	@Override
@@ -58,8 +54,8 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
 		if (!action.equals("Cancel")) {
 			if (result.hasErrors()) {
 				model.addAttribute("physicalcheckup", physicalcheckup);
-				model.addAttribute("visits", visitService.findAll());
-				model.addAttribute("persons", personRepository.findAll());
+				model.addAttribute("visits", bd.visitFindAll());
+				model.addAttribute("persons", bd.personFindAll());
 				return "phycheckups/add-phycheckup";
 			}
 			Visit visit = physicalcheckup.getVisit();
@@ -77,8 +73,8 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
 		 Physicalcheckup phycheckup = phycheckupService.getPhysicalcheckup(id);
 		
 		model.addAttribute("physicalcheckup", phycheckup);
-		model.addAttribute("visits", visitService.findAll());
-		model.addAttribute("persons", personRepository.findAll());
+		model.addAttribute("visits", bd.visitFindAll());
+		model.addAttribute("persons", bd.personFindAll());
 		return "phycheckups/update-phycheckup";
 	}
 	@Override
@@ -90,8 +86,8 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController{
 			if (bindingResult.hasErrors()) {
 
 				physicalcheckup.setPhycheId(id);
-				model.addAttribute("visits", visitService.findAll());
-				model.addAttribute("persons", personRepository.findAll());
+				model.addAttribute("visits", bd.visitFindAll());
+				model.addAttribute("persons", bd.personFindAll());
 				return "phycheckups/update-phycheckup";
 			}
 			physicalcheckup.setPhycheId(id);

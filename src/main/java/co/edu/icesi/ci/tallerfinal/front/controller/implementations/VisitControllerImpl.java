@@ -3,9 +3,10 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
-import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegateImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
