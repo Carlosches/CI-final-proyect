@@ -1,6 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class Institutioncampus {
 
     private BigDecimal instcamOccupation;
 
-
     private Institution institution;
 
+    @JsonIgnore
     private List<Visit> visits;
 
     public Institutioncampus() {

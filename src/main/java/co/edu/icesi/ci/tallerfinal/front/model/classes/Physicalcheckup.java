@@ -1,6 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Physicalcheckup {
     @FutureOrPresent(message="La fecha debe ser en el futuro", groups=AddPhycheckup.class)
     private Date phycheDate;
 
+    @JsonIgnore
     private List<CheckMeasur> checkMeasurs;
 
     @NotNull(message="se debe seleccionar una persona", groups=AddPhycheckup.class)

@@ -1,6 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddMeasurement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -30,6 +31,7 @@ public class Measurement {
     @NotEmpty(message="Se debe agregar una unidad", groups= AddMeasurement.class)
     private String measUnit;
 
+    @JsonIgnore
     private List<CheckMeasur> checkMeasurs;
 
     @NotNull(message="Se debe elegir una institución", groups= AddMeasurement.class)

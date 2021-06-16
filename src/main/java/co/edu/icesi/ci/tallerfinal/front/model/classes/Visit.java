@@ -1,6 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddVisit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Visit {
     @FutureOrPresent(message="La fecha de egreso debe ser en el futuro", groups=AddVisit.class)
     private Date visitExitdate;
 
-
+    @JsonIgnore
     private List<Physicalcheckup> physicalcheckups;
 
     @NotNull(message="Se debe elegir una institución", groups=AddVisit.class)
