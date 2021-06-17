@@ -345,4 +345,17 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     }
 
+    // ==========================
+    // NEXUS POLL
+    // ==========================
+
+    public List<Nexuspoll> nexusPollFindAll(){
+        String endpoint = REST_URL + "/nexus-poll";
+
+        Nexuspoll[] r = restTemplate.getForObject(endpoint, Nexuspoll[].class);
+        List<Nexuspoll> response = Arrays.asList(r);
+
+        return response;
+    }
+
 }

@@ -82,4 +82,10 @@ public interface BusinessDelegate {
 
     void deleteCheckMeasur(CheckMeasur checkMeasur);
 
+    // ==========================
+    // NEXUS POLL
+    // ==========================
+
+    List<Nexuspoll> nexusPollFindAll();
+
 }
