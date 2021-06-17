@@ -34,4 +34,9 @@ public class NexusPollRestControllerImpl implements NexusPollController {
         return nexusPollService.findById(id);
     }
 
+    @PutMapping("/nexus-poll/")
+    public Nexuspoll putNexusPoll(@RequestBody Nexuspoll nexuspoll){
+        return nexusPollService.update(nexuspoll);
+    }
+
 }

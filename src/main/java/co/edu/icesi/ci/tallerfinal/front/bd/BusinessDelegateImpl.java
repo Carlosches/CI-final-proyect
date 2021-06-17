@@ -423,7 +423,21 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         Nexuspoll response = restTemplate.getForObject(endpoint, Nexuspoll.class);
         return response;
+    }
 
+    @Override
+    public Nexuspoll updateNexusPoll(Nexuspoll nexuspoll){
+
+        String endpoint = REST_URL + "/nexus-poll/";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
+
+        restTemplate.put(endpoint, request ,Nexuspoll.class);
+
+        return nexuspoll;
 
     }
 

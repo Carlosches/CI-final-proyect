@@ -93,4 +93,6 @@ public interface BusinessDelegate {
     Nexuspoll addNexusPoll(Nexuspoll nexuspoll);
 
     Nexuspoll nexusPollFindById(long id);
+
+    Nexuspoll updateNexusPoll(Nexuspoll nexuspoll);
 }

@@ -2,6 +2,7 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.AddNexusPoll;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Nexuspoll;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +62,35 @@ public class NexusPollControllerImpl {
     }
 
     @GetMapping("/edit/{id}")
-    public String editVisit(@PathVariable("id") long id, Model model) {
+    public String editNexusPoll(@PathVariable("id") long id, Model model) {
 
         Nexuspoll nexuspoll = bd.nexusPollFindById(id);
 
         model.addAttribute("poll", nexuspoll);
         model.addAttribute("institutions", bd.institutionFindAll());
         return "nexuspoll/update-nexuspoll";
+
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPostNexusPoll(@PathVariable("id") long id,
+                                    @RequestParam(value = "action", required = true) String action,
+                                    @ModelAttribute("visit") @Validated({AddVisit.class}) Nexuspoll nexuspoll,
+                                    BindingResult bindingResult,
+                                    Model model){
+
+        if (action != null && !action.equals("Cancel")) {
+            if (bindingResult.hasErrors()) {
+                nexuspoll.setNexpollId(id);
+                model.addAttribute("institutions", bd.institutionFindAll());
+                return "nexuspoll/update-nexuspoll";
+            }
+            nexuspoll.setNexpollId(id);
+
+            bd.updateNexusPoll(nexuspoll);
+        }
+        return "redirect:/front/nexuspoll/";
+
 
     }
 
