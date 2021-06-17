@@ -33,7 +33,9 @@ public class PhysicalcheckupRestControllerImpl implements PhysicaclchekcupRestCo
     }
 
     @GetMapping("/phycheckups/{pycheId}")
-    public Physicalcheckup visitFindById(@PathVariable("pycheId") long pycheId) {
+    public Physicalcheckup physicalcheckupsFindById(@PathVariable("pycheId") long pycheId) {
         return physicalcheckupService.getPhysicalcheckup(pycheId);
     }
+
+   // public Iterable<Physicalcheckup>
 }

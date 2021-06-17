@@ -1,6 +1,5 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
-import co.edu.icesi.ci.tallerfinal.back.groups.AddMeasurement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;

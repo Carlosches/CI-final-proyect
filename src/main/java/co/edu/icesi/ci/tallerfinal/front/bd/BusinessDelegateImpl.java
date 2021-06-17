@@ -118,7 +118,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public Visit saveVisit(Visit visit, long personId, long campusId){
 
         // REST endpoint
-        String endpoint = REST_URL + "/visits/";
+        String endpoint = REST_URL + "/visits";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -184,7 +184,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public Physicalcheckup savePhysicalcheckup(Physicalcheckup pc, long persId, long visitId){
 
         // REST endpoint
-        String endpoint = REST_URL + "/phycheckups/";
+        String endpoint = REST_URL + "/phycheckups";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -250,7 +250,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // POST // TODO in REST CONTROLLER
     public Measurement saveMeasurement(Measurement measurement, long instId){
         // REST endpoint
-        String endpoint = REST_URL + "/measurements/";
+        String endpoint = REST_URL + "/measurements";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -331,7 +331,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // PUT // TODO in REST CONTROLLER
     public void setCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/checkmeasures//data";
+        String endpoint = REST_URL + "/checkmeasures/data";
 
         restTemplate.put(endpoint, checkMeasur, CheckMeasur.class);
 
@@ -339,7 +339,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // DELETE // TODO in REST CONTROLLER
     public void deleteCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/checkmeasures//data";
+        String endpoint = REST_URL + "/checkmeasures/data";
 
         restTemplate.delete(endpoint, checkMeasur, CheckMeasur.class);
 

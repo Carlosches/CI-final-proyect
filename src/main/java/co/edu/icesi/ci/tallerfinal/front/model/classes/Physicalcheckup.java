@@ -1,6 +1,5 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
-import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 

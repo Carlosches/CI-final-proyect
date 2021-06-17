@@ -1,6 +1,5 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
-import co.edu.icesi.ci.tallerfinal.back.groups.AddCheckMeasure;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.JoinColumn;

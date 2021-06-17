@@ -48,10 +48,12 @@ public class VisitControllerImpl implements VisitController {
     public String saveVisit(@Validated(AddVisit.class) Visit visit, BindingResult result, Model model, @RequestParam(value = "action", required = true) String action) {
         if (!action.equals("Cancel")) {
             if (result.hasErrors()) {
+                //System.out.println("insti id: " + visit.getInstitutioncampus().getInstcamId());
                 model.addAttribute("institutions", bd.institutionCampusFindAll());
                 model.addAttribute("persons", bd.personFindAll());
                 return "/visits/add-visit";
             }
+
             bd.saveVisit(visit, visit.getPerson().getPersId(), visit.getInstitutioncampus().getInstcamId());
         }
 
