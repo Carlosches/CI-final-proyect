@@ -37,7 +37,7 @@ public interface BusinessDelegate {
     void setVisit(Visit visit);
 
     void deleteVisit(long visitId);
-
+    public List<Physicalcheckup> getPychesFromVisit(long visitId);
     // ==========================
     // PhysicalCheckup
     // ==========================
@@ -51,6 +51,7 @@ public interface BusinessDelegate {
     void setPhysicalcheckup(Physicalcheckup pc);
 
     void deletePhysicalcheckup(long phycheId);
+    public List<CheckMeasur> getCheckMeasureFromPyche(long pycheId);
 
     // ==========================
     // MEASUREMENT
@@ -65,6 +66,7 @@ public interface BusinessDelegate {
     void setMeasurement(Measurement measurement);
 
     void deleteMeasurement(long measId);
+    public List<CheckMeasur> getCheckMeasureFromMeas(long measId);
 
     // ==========================
     // CHECK MEASURES

@@ -1,7 +1,9 @@
 package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 
+import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.VisitRestController;
+import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
 import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class VisitRestControllerImpl implements VisitRestController {
 
     private VisitService visitService;
+    private PhysicalcheckupService physicalcheckupService;
 
     @Autowired
-    public VisitRestControllerImpl(VisitService visitService){
+    public VisitRestControllerImpl(VisitService visitService, PhysicalcheckupService physicalcheckupService){
         this.visitService = visitService;
+        this.physicalcheckupService = physicalcheckupService;
     }
 
     @Override
@@ -26,9 +30,10 @@ public class VisitRestControllerImpl implements VisitRestController {
 
 
     //GET
-    @GetMapping("/visits/{persId}")
-    public Visit visitFindById(@PathVariable("persId") long persId){
-        return visitService.getVisit(persId); // TODO
+    @GetMapping("/visits/{visId}")
+    public Visit visitFindById(@PathVariable("visId") long visId){
+      //  System.out.println("visit phyches size: " + visitService.getVisit(visId).getPhysicalcheckups().size());
+        return visitService.getVisit(visId);
     }
 
     @Override
@@ -49,9 +54,14 @@ public class VisitRestControllerImpl implements VisitRestController {
     }
 
     @Override
-    @DeleteMapping("/visits/{persId}")
-    public void deleteVisit(@PathVariable("id") long id) {
-        Visit visit = visitService.getVisit(id);
+    @DeleteMapping("/visits/{visitId}")
+    public void deleteVisit(@PathVariable("visitId") long visitId) {
+        Visit visit = visitService.getVisit(visitId);
         visitService.delete(visit);
+    }
+    @Override
+    @GetMapping("/visits/phycheckups/{visitId}")
+    public Iterable<Physicalcheckup> getPychesFromVisit(@PathVariable("visitId") long visitId){
+        return physicalcheckupService.findByVisitId(visitId);
     }
 }

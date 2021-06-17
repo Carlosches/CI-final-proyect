@@ -11,4 +11,6 @@ public interface CheckMeasurDao {
 	public void delete(CheckMeasur checkMeasur);
 	public List<CheckMeasur> findAll();
 	public CheckMeasur findById(CheckMeasurPK id);
+	public List<CheckMeasur> findByPycheId(long pycheId);
+	public List<CheckMeasur> findByMeasId(long measId);
 }

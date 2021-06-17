@@ -49,9 +49,8 @@
                   	<a th:href="@{/front/visits/showFromPhycheckup/{id}(id=${phycheckup.visit.visitId})}" th:text="'id:'+ ${phycheckup.visit.visitId} +  '  person: ' +${phycheckup.visit.person.persName}"></a>
                   </td>
                   <td>
-                 	 <a th:href="@{/front/checkmeasures/showFromPhycheckup/{id}(id=${phycheckup.phycheId})}">Show check measures</a>
-                  </td>	
-                  
+                 	 <a th:href="@{/front/phycheckups/checkmeasures/{pycheId}(pycheId=${phycheckup.phycheId})}">Show check measures</a>
+                  </td>
                   <td><a th:href="@{/front/phycheckups/edit/{id}(id=${phycheckup.phycheId})}"
 						class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
 				  <td><a th:href="@{/front/phycheckups/del/{id}(id=${phycheckup.phycheId})}"
@@ -67,7 +66,7 @@
 					<a href="/front/phycheckups/add/" class="btn btn-primary">
 					<i class="fas fa-plus-circle"></i>  Add physical checkup</a>
 				</p>
-      <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
+      <a href="/front/"><i class="fas fa-home ml-2"></i> Go back to main</a>
     </div>
   </body>
 </html>

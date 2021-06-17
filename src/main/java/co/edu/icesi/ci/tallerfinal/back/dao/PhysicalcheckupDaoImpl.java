@@ -23,11 +23,11 @@ public class PhysicalcheckupDaoImpl implements PhysicalcheckupDao {
 	
 	
 	@Override
-	public Physicalcheckup findByVisitId(long id) {
+	public List<Physicalcheckup> findByVisitId(long id) {
 		String jpql = "select p from Physicalcheckup p where p.visit.visitId = :id";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("id", id);
-		return (Physicalcheckup) query.getResultList().get(0);
+		return query.getResultList();
 	}
 	
 	@Override

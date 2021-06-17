@@ -87,7 +87,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     //GET
     public List<Visit> visitFindAll() {
         String endpoint = REST_URL + "/visits/";
-        System.out.println(endpoint);
+      //  System.out.println(endpoint);
         Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
         List<Visit> response = Arrays.asList(r);
 
@@ -110,7 +110,6 @@ public class BusinessDelegateImpl implements BusinessDelegate {
       super.setMessageConverters(messageConverters);*/
 
         Visit response = restTemplate.getForObject(endpoint, Visit.class);
-
         return response; // TODO
     }
 
@@ -153,7 +152,12 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         restTemplate.delete(endpoint);
     }
-
+    public List<Physicalcheckup> getPychesFromVisit(long visitId){
+        String endpoint = REST_URL + "/visits/phycheckups/"+visitId;
+        Physicalcheckup[] r = restTemplate.getForObject(endpoint, Physicalcheckup[].class);
+        List<Physicalcheckup> response = Arrays.asList(r);
+        return response;
+    }
     // ==========================
     // PHYSICAL CHECKUP
     // ==========================
@@ -220,7 +224,12 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         restTemplate.delete(endpoint);
 
     }
-
+    public List<CheckMeasur> getCheckMeasureFromPyche(long pycheId){
+        String endpoint = REST_URL + "/phycheckups/checkmeasures/" + pycheId;
+        CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
+        List<CheckMeasur> response = Arrays.asList(r);
+        return response;
+    }
     // ==========================
     // MEASUREMENT
     // ==========================
@@ -278,7 +287,12 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         restTemplate.delete(endpoint);
 
     }
-
+    public List<CheckMeasur> getCheckMeasureFromMeas(long measId){
+        String endpoint = REST_URL + "/measurements/checkmeasures/" + measId;
+        CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
+        List<CheckMeasur> response = Arrays.asList(r);
+        return response;
+    }
     // ==========================
     // CHECK MEASURES
     // ==========================

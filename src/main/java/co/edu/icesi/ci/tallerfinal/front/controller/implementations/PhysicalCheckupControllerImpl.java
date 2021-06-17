@@ -59,7 +59,7 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController 
             bd.savePhysicalcheckup(physicalcheckup, physicalcheckup.getPerson().getPersId(), visit.getVisitId());
         }
 
-        return "redirect:/phycheckups/";
+        return "redirect:/front/phycheckups/";
 
     }
 
@@ -90,7 +90,7 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController 
             physicalcheckup.setPhycheId(id);
             bd.setPhysicalcheckup(physicalcheckup);
         }
-        return "redirect:/phycheckups/";
+        return "redirect:/front/phycheckups/";
     }
 
     @Override
@@ -102,15 +102,10 @@ public class PhysicalCheckupControllerImpl implements PhysicalCheckupController 
     }
 
     @Override
-    @GetMapping("/showFromVisit/{id}")
-    public String showFromVisit(@PathVariable("id") long id, Model model) {
-
-        Visit visit = bd.visitFindById(id);
-        List<Physicalcheckup> phycheckups = visit.getPhysicalcheckups();
-        model.addAttribute("phycheckups", phycheckups);
-        model.addAttribute("idVisit", id);
-        model.addAttribute("from", "visit");
-        return "phycheckups/index";
+    @GetMapping("/checkmeasures/{pycheId}")
+    public String getCheckMeasures(@PathVariable("pycheId") long pycheId, Model model) {
+        model.addAttribute("checkmeasures", bd.getCheckMeasureFromPyche(pycheId));
+        return "/checkmeasures/index";
     }
 
     @Override

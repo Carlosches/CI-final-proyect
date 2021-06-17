@@ -43,10 +43,10 @@
                 <tr th:each="meas: ${checkmeasures}">
                   <td th:text="${meas.measvalue}"></td>
                       <td>
-                     	 <a th:text="${meas.measurement.measName}" th:href="@{/measurements/showFromCheckMeasur/{id}(id=${meas.measurement.measId})}"></a>
+                     	 <a th:text="${meas.measurement.measName}" th:href="@{/front/measurements/showFromCheckMeasur/{id}(id=${meas.measurement.measId})}"></a>
                       </td>
                    	<td>
-                   		 <a th:text="'id: '+${meas.physicalcheckup.phycheId}+ ' person:' + ${meas.physicalcheckup.person.persName}" th:href="@{/phycheckups/showFromCheckMeasur/{id}(id=${meas.physicalcheckup.phycheId})}"> </a>
+                   		 <a th:text="'id: '+${meas.physicalcheckup.phycheId}+ ' person:' + ${meas.physicalcheckup.person.persName}" th:href="@{/front/phycheckups/showFromCheckMeasur/{id}(id=${meas.physicalcheckup.phycheId})}"> </a>
                    	</td>
                   
                   <td><a th:href="@{/front/checkmeasures/edit/{id}/{id2}(id=${meas.id.phychePhycheId}, id2=${meas.id.measMeasId})}"
@@ -61,10 +61,10 @@
         </div>
       </div>
       <p class="my-5">
-					<a href="/checkmeasures/add/" class="btn btn-primary">
+					<a href="/front/checkmeasures/add/" class="btn btn-primary">
 					<i class="fas fa-plus-circle"></i>  Add check measure</a>
 				</p>
-      <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
+      <a href="/front/"><i class="fas fa-home ml-2"></i> Go back to main</a>
     </div>
   </body>
 </html>

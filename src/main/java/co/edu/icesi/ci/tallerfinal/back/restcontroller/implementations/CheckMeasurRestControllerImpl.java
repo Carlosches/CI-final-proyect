@@ -5,6 +5,8 @@ import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.CheckMeasurRes
 import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class CheckMeasurRestControllerImpl implements CheckMeasurRestController {
@@ -14,6 +16,7 @@ public class CheckMeasurRestControllerImpl implements CheckMeasurRestController 
     public CheckMeasurRestControllerImpl(CheckMeasurService checkMeasurService) {
         this.checkMeasurService = checkMeasurService;
     }
+
 
     @Override
     @GetMapping("/checkmeasures/")
@@ -31,4 +34,6 @@ public class CheckMeasurRestControllerImpl implements CheckMeasurRestController 
     public void updateCheckMeasur(CheckMeasur checkMeasur){
         checkMeasurService.editCheckMeasur(checkMeasur);
     }
+
+
 }

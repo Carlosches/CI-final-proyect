@@ -19,4 +19,5 @@ public interface MeasureController {
 	public String deleteMeasurement(long id);
 
 	public String showFromCheckMeasur(Model model, long id);
+	public String getCheckMeasures( long pycheId, Model model);
 }

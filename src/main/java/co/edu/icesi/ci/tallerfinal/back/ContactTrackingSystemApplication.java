@@ -186,7 +186,7 @@ public class ContactTrackingSystemApplication {
 			phys.add(phy2);
 			visit.setPhysicalcheckups(phys);
 			//System.out.println(visit.getPhysicalcheckups().size());
-			//visitService.editVisit(visit);
+			visitService.editVisit(visit);
 	
 			//visitDao.update(visit);
 			

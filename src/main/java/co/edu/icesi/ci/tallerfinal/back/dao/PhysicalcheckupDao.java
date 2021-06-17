@@ -8,7 +8,7 @@ import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 
 public interface PhysicalcheckupDao {
 	
-	public Physicalcheckup findByVisitId(long id);
+	public List<Physicalcheckup> findByVisitId(long id);
 	public List<Physicalcheckup> findByDate(Date date);
 	
 	public Physicalcheckup save(Physicalcheckup phycheckup);

@@ -44,6 +44,8 @@ public class CheckMeasurDaoImpl implements CheckMeasurDao {
 		String jpql = "SELECT a FROM CheckMeasur a";
 		return entityManager.createQuery(jpql).getResultList();
 	}
+
+
 	@Override
 	public CheckMeasur findById(CheckMeasurPK id) {
 		String jpql = "select c from CheckMeasur c where c.id=:id";
@@ -56,5 +58,20 @@ public class CheckMeasurDaoImpl implements CheckMeasurDao {
 			
 		}
 		return ch;
+	}
+	@Override
+	public List<CheckMeasur> findByPycheId(long pycheId){
+		String jpql ="select c from CheckMeasur c where c.physicalcheckup.phycheId=:id";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("id",pycheId);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<CheckMeasur> findByMeasId(long measId) {
+		String jpql ="select c from CheckMeasur c where c.measurement.measId=:id";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("id",measId);
+		return query.getResultList();
 	}
 }

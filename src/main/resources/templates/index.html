@@ -21,7 +21,7 @@
 			<h2 th:case="null">Main!</h2>
 			<br>
 
-			<p sec:authorize="hasRole('admin')"><a href="/measurements/"><i class="fas fa-tachometer-alt"></i>  Go to measures</a></p>
+			<p sec:authorize="hasRole('admin')"><a href="/front/measurements/"><i class="fas fa-tachometer-alt"></i>  Go to measures</a></p>
 
 
 			<div sec:authorize="hasRole('operator')">

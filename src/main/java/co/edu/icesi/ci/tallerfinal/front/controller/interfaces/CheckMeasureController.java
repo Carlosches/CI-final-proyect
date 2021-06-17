@@ -9,7 +9,6 @@ public interface CheckMeasureController {
 
 	public String showFromMeasures(long id, Model model);
 
-	public String showFromPhycheckup(long id, Model model);
 
 	public String deleteCheckmeasure(long id, long id2);
 
