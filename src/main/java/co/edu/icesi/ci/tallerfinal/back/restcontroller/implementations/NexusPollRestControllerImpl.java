@@ -19,21 +19,25 @@ public class NexusPollRestControllerImpl implements NexusPollController {
         this.nexusPollService = nexusPollService;
     }
 
+    @Override
     @GetMapping("/nexus-poll/")
     public Iterable<Nexuspoll> getNexusPoll(){
         return nexusPollService.findAll();
     }
 
+    @Override
     @PostMapping("/nexus-poll/")
     public Nexuspoll postNexusPoll(@RequestBody Nexuspoll nexuspoll){
         return nexusPollService.save(nexuspoll);
     }
 
+    @Override
     @GetMapping("/nexus-poll/{id}")
     public Nexuspoll findById(@PathVariable("id") long id){
         return nexusPollService.findById(id);
     }
 
+    @Override
     @PutMapping("/nexus-poll/")
     public Nexuspoll putNexusPoll(@RequestBody Nexuspoll nexuspoll){
         return nexusPollService.update(nexuspoll);
