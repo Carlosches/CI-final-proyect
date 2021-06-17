@@ -441,4 +441,56 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     }
 
+    // ==========================
+    // NEXUS POLL QUESTIONS
+    // ==========================
+
+    @Override
+    public List<Nexusquestion> nexusQuestionsFindAll(){
+        String endpoint = REST_URL + "/nexus-quest/";
+
+        Nexusquestion[] r = restTemplate.getForObject(endpoint, Nexusquestion[].class);
+        List<Nexusquestion> response = Arrays.asList(r);
+
+        return response;
+    }
+
+//    @Override
+//    public Nexuspoll addNexusPoll(Nexuspoll nexuspoll){
+//        String endpoint = REST_URL + "/nexus-poll/";
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
+//
+//        Nexuspoll response = restTemplate.postForObject(endpoint, request, Nexuspoll.class);
+//        return response;
+//    }
+
+//    @Override
+//    public Nexuspoll nexusPollFindById(long id){
+//        String endpoint = REST_URL + "/nexus-poll/"+id;
+//
+//        Nexuspoll response = restTemplate.getForObject(endpoint, Nexuspoll.class);
+//        return response;
+//    }
+
+//    @Override
+//    public Nexuspoll updateNexusPoll(Nexuspoll nexuspoll){
+//
+//        String endpoint = REST_URL + "/nexus-poll/";
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
+//
+//        restTemplate.put(endpoint, request ,Nexuspoll.class);
+//
+//        return nexuspoll;
+//
+//    }
+
+
 }

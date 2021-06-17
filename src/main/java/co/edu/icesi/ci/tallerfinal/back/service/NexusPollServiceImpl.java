@@ -28,7 +28,7 @@ public class NexusPollServiceImpl implements NexusPollService {
     @Override
     @Transactional
     public void delete(Nexuspoll nexusPoll){
-        nexusPollDao.delete(nexusPollDao);
+        nexusPollDao.delete(nexusPoll);
     }
 
     @Override

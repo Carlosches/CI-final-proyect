@@ -8,7 +8,7 @@ public interface NexusPollDao {
 
     List<Nexuspoll> findAllNexusPoll();
 
-    void delete(NexusPollDao nexusPoll);
+    void delete(Nexuspoll nexusPoll);
 
     Nexuspoll update(Nexuspoll nexusPoll);
 

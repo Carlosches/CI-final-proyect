@@ -95,4 +95,10 @@ public interface BusinessDelegate {
     Nexuspoll nexusPollFindById(long id);
 
     Nexuspoll updateNexusPoll(Nexuspoll nexuspoll);
+
+    // ==========================
+    // NEXUS POLL QUESTIONS
+    // ==========================
+
+    List<Nexusquestion> nexusQuestionsFindAll();
 }

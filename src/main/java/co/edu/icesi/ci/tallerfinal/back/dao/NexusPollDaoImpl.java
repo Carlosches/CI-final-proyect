@@ -27,7 +27,7 @@ public class NexusPollDaoImpl implements NexusPollDao {
     }
 
     @Override
-    public void delete(NexusPollDao nexusPoll) {
+    public void delete(Nexuspoll nexusPoll) {
         entityManager.remove(nexusPoll);
     }
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Nexus Poll Questions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous"
+  />
+  <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="../css/shards.min.css" />
+</head>
+<body>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-10">
+      <div>
+        <h2 class="my-5">Nexus Poll Questions</h2>
+        <h3 class="alert alert-primary" th:if="${quests.iterator().hasNext() == false}" >
+          There are not nexus poll questions
+        </h3>
+
+        <table class="table table-striped table-responsive-md">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Active</th>
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Nexus Poll</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="quest : ${quests}">
+            <td th:text="${quest.nexquesId}"></td>
+            <td th:text="${quest.nexquesIsactive}"></td>
+            <td th:text="${quest.nexquesName}"></td>
+            <td th:text="${quest.nexquesWeight}"></td>
+            <td>
+              <!--                            TODO -->
+              <!--                            <a th:href="@{/front/nexuspoll/showFromVisit/{id}(id=${poll.nexpollId})}">Show nexus questions</a>-->
+            </td>
+
+            <td><a th:href="@{/front/nexusquest/edit/{id}(id=${quest.nexquesId})}"
+                   class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
+            <td><a th:href="@{/front/nexusquest/del/{id}(id=${quest.nexquesId})}"
+                   class="btn btn-primary"><i class="fas fa-minus-circle"></i></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <p class="my-5">
+    <a href="/front/nexusquest/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add nexus poll question</a>
+  </p>
+  <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
+</div>
+</body>
+</html>
