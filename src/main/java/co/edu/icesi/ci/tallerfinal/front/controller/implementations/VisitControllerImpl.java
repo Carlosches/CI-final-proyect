@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/api/visits")
+@RequestMapping("/front/visits")
 public class VisitControllerImpl implements VisitController {
 
     public BusinessDelegate bd;
@@ -55,7 +55,7 @@ public class VisitControllerImpl implements VisitController {
             bd.saveVisit(visit, visit.getPerson().getPersId(), visit.getInstitutioncampus().getInstcamId());
         }
 
-        return "redirect:/visits/";
+        return "redirect:/front/visits/";
 
     }
 
@@ -85,14 +85,14 @@ public class VisitControllerImpl implements VisitController {
             visit.setVisitId(id);
             bd.setVisit(visit);
         }
-        return "redirect:/visits/";
+        return "redirect:/front/visits/";
     }
 
     @Override
     @GetMapping("/del/{id}")
     public String deleteVisist(@PathVariable("id") long id) {
         bd.deleteVisit(id);
-        return "redirect:/visits/";
+        return "redirect:/front/visits/";
     }
 
     @Override

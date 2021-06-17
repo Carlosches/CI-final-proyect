@@ -3,12 +3,10 @@ package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasur;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.CheckMeasurRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class CheckMeasurRestControllerImpl implements CheckMeasurRestController {
 
     public CheckMeasurService checkMeasurService;

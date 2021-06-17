@@ -20,7 +20,7 @@ import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.CheckMeasureContr
 
 
 @Controller
-@RequestMapping("/api/checkmeasures")
+@RequestMapping("/front/checkmeasures")
 public class CheckMeasureControllerImpl implements CheckMeasureController {
 
 	public BusinessDelegate bd;

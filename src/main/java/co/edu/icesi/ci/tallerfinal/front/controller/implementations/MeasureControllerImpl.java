@@ -21,7 +21,7 @@ import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.MeasureController
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Measurement;
 
 @Controller
-@RequestMapping("/api/measurements")
+@RequestMapping("/front/measurements")
 public class MeasureControllerImpl implements MeasureController {
 
 	public BusinessDelegate bd;

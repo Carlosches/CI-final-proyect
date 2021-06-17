@@ -2,17 +2,22 @@ package co.edu.icesi.ci.tallerfinal.front.bd;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class BusinessDelegateImpl implements BusinessDelegate {
 
-    public static final String REST_URL = "http://localhost:8080";
+    public static final String REST_URL = "http://localhost:8080/api";
 
     private RestTemplate restTemplate;
 
@@ -20,7 +25,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public BusinessDelegateImpl() {
 
         this.restTemplate = new RestTemplate();
-
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        this.restTemplate.setMessageConverters(messageConverters);
 
     }
 
@@ -61,7 +70,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     public List<Institutioncampus> institutionCampusFindAll(){
 
-        String endpoint = REST_URL + "/institution-campus/";
+        String endpoint = REST_URL + "/institutioncampus/";
 
         Institutioncampus[] r = restTemplate.getForObject(endpoint, Institutioncampus[].class);
         List<Institutioncampus> response = Arrays.asList(r);
@@ -78,7 +87,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     //GET
     public List<Visit> visitFindAll() {
         String endpoint = REST_URL + "/visits/";
-
+        System.out.println(endpoint);
         Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
         List<Visit> response = Arrays.asList(r);
 
@@ -90,6 +99,15 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         // REST endpoint
         String endpoint = REST_URL + "/visits/" + persId;
+     /*   List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
+      //Add the Jackson Message converter
+      MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+
+      // Note: here we are making this converter to process any kind of response, 
+      // not only application/*json, which is the default behaviour
+      converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));        
+      messageConverters.add(converter);  
+      super.setMessageConverters(messageConverters);*/
 
         Visit response = restTemplate.getForObject(endpoint, Visit.class);
 
@@ -100,7 +118,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public Visit saveVisit(Visit visit, long personId, long campusId){
 
         // REST endpoint
-        String endpoint = REST_URL + "/visits";
+        String endpoint = REST_URL + "/visits/";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -122,7 +140,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     //PUT
     public void setVisit(Visit visit){
 
-        String endpoint = REST_URL + "/visits";
+        String endpoint = REST_URL + "/visits/";
 
         restTemplate.put(endpoint, visit, Visit.class);
 
@@ -143,7 +161,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // GET // TODO in REST CONTROLLER
     public List<Physicalcheckup> physicalcheckupsFindAll(){
 
-        String endpoint = REST_URL + "/physical-checkup";
+        String endpoint = REST_URL + "/phycheckups/";
 
         Physicalcheckup[] r = restTemplate.getForObject(endpoint, Physicalcheckup[].class);
         List<Physicalcheckup> response = Arrays.asList(r);
@@ -155,7 +173,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // GET // TODO in REST CONTROLLER
     public Physicalcheckup physicalcheckupsFindById(long id){
 
-        String endpoint = REST_URL + "/physical-checkup/" + id;
+        String endpoint = REST_URL + "/phycheckups/" + id;
 
         Physicalcheckup response = restTemplate.getForObject(endpoint, Physicalcheckup.class);
 
@@ -166,7 +184,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public Physicalcheckup savePhysicalcheckup(Physicalcheckup pc, long persId, long visitId){
 
         // REST endpoint
-        String endpoint = REST_URL + "/physical-checkup";
+        String endpoint = REST_URL + "/phycheckups/";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -188,7 +206,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     //PUT // TODO in REST CONTROLLER
     public void setPhysicalcheckup(Physicalcheckup pc){
 
-        String endpoint = REST_URL + "/physical-checkup";
+        String endpoint = REST_URL + "/phycheckups/";
 
         restTemplate.put(endpoint, pc, Physicalcheckup.class);
 
@@ -197,7 +215,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // DELETE // TODO in REST CONTROLLER
     public void deletePhysicalcheckup(long phycheId){
 
-        String endpoint = REST_URL + "/physical-checkup/" + phycheId;
+        String endpoint = REST_URL + "/phycheckups/" + phycheId;
 
         restTemplate.delete(endpoint);
 
@@ -210,7 +228,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // GET // TODO in REST CONTROLLER
     public List<Measurement> measurementFindAll(){
 
-        String endpoint = REST_URL + "/measurements";
+        String endpoint = REST_URL + "/measurements/";
 
         Measurement[] r = restTemplate.getForObject(endpoint, Measurement[].class);
         List<Measurement> response = Arrays.asList(r);
@@ -232,7 +250,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // POST // TODO in REST CONTROLLER
     public Measurement saveMeasurement(Measurement measurement, long instId){
         // REST endpoint
-        String endpoint = REST_URL + "/measurements";
+        String endpoint = REST_URL + "/measurements/";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -247,7 +265,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // PUT // TODO in REST CONTROLLER
     public void setMeasurement(Measurement measurement){
-        String endpoint = REST_URL + "/measurements";
+        String endpoint = REST_URL + "/measurements/";
 
         restTemplate.put(endpoint, measurement, Measurement.class);
     }
@@ -267,7 +285,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // GET // TODO in REST CONTROLLER
     public List<CheckMeasur> checkMeasurFindAll(){
-        String endpoint = REST_URL + "/check-measures";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
         List<CheckMeasur> response = Arrays.asList(r);
@@ -277,7 +295,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // POST // TODO in REST CONTROLLER
     public CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK){
-        String endpoint = REST_URL + "/check-measures";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         CheckMeasur response = restTemplate.postForObject(endpoint, checkMeasurPK, CheckMeasur.class);
 
@@ -287,7 +305,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // POST // TODO in REST CONTROLLER
     public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
-        String endpoint = REST_URL + "/check-measures/fk";
+        String endpoint = REST_URL + "/checkmeasures/fk";
 
         Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
 
@@ -298,7 +316,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // POST // TODO in REST CONTROLLER
     public CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId){
 
-        String endpoint = REST_URL + "/check-measures/data";
+        String endpoint = REST_URL + "/checkmeasures/data";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -313,7 +331,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // PUT // TODO in REST CONTROLLER
     public void setCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/check-measures/data";
+        String endpoint = REST_URL + "/checkmeasures//data";
 
         restTemplate.put(endpoint, checkMeasur, CheckMeasur.class);
 
@@ -321,7 +339,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // DELETE // TODO in REST CONTROLLER
     public void deleteCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/check-measures/data";
+        String endpoint = REST_URL + "/checkmeasures//data";
 
         restTemplate.delete(endpoint, checkMeasur, CheckMeasur.class);
 

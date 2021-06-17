@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/api/phycheckups")
+@RequestMapping("/front/phycheckups")
 public class PhysicalCheckupControllerImpl implements PhysicalCheckupController {
 
     public BusinessDelegate bd;

@@ -50,12 +50,12 @@
                    <td th:text="${visit.institutioncampus.instcamName}"></td>
                   <td th:text="${visit.person.persName}"></td>
                   <td>
-                 	 <a th:href="@{/phycheckups/showFromVisit/{id}(id=${visit.visitId})}">Show physical checkups</a>
+                 	 <a th:href="@{/front/phycheckups/showFromVisit/{id}(id=${visit.visitId})}">Show physical checkups</a>
                   </td>
                   
-                  <td><a th:href="@{/visits/edit/{id}(id=${visit.visitId})}"
+                  <td><a th:href="@{/front/visits/edit/{id}(id=${visit.visitId})}"
 						class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-				  <td><a th:href="@{/visits/del/{id}(id=${visit.visitId})}"
+				  <td><a th:href="@{/front/visits/del/{id}(id=${visit.visitId})}"
 						class="btn btn-primary"><i class="fas fa-minus-circle"></i></a></td>
                 </tr>
               </tbody>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <p class="my-5">
-					<a href="/visits/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add visit</a>
+					<a href="/front/visits/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add visit</a>
 				</p>
       <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
     </div>

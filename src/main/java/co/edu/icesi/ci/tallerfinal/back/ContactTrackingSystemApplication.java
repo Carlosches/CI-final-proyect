@@ -58,7 +58,7 @@ public class ContactTrackingSystemApplication {
 		BusinessDelegateImpl bd = ac.getBean(BusinessDelegateImpl.class);
 		//List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> visits = bd.visitFindAll();
 
-		List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> v = bd.visitFindAll();
+	//	List<co.edu.icesi.ci.tallerfinal.front.model.classes.Visit> v = bd.visitFindAll();
 
 /*		co.edu.icesi.ci.tallerfinal.front.model.classes.Visit vv = bd.saveVisit(new co.edu.icesi.ci.tallerfinal.front.model.classes.Visit(), 1, 1);
 		System.out.println();*/
