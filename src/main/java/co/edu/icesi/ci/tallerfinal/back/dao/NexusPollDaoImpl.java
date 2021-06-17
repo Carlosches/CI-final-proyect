@@ -4,6 +4,8 @@ package co.edu.icesi.ci.tallerfinal.back.dao;
 
 import co.edu.icesi.ci.tallerfinal.back.model.Nexuspoll;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -11,6 +13,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+@Repository
+@Scope("singleton")
 public class NexusPollDaoImpl implements NexusPollDao {
 
     @PersistenceContext

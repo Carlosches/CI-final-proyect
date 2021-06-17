@@ -7,8 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import co.edu.icesi.ci.tallerfinal.back.dao.MeasurementDao;
+import co.edu.icesi.ci.tallerfinal.back.dao.NexusPollDao;
 import co.edu.icesi.ci.tallerfinal.back.dao.PhysicalcheckupDao;
 import co.edu.icesi.ci.tallerfinal.back.dao.VisitDao;
+import co.edu.icesi.ci.tallerfinal.back.model.*;
+import co.edu.icesi.ci.tallerfinal.back.service.*;
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegateImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,28 +21,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
-import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasur;
-import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasurPK;
-import co.edu.icesi.ci.tallerfinal.back.model.Institution;
-import co.edu.icesi.ci.tallerfinal.back.model.Institutioncampus;
-import co.edu.icesi.ci.tallerfinal.back.model.Measurement;
-import co.edu.icesi.ci.tallerfinal.back.model.Person;
-import co.edu.icesi.ci.tallerfinal.back.model.PersonRole;
-import co.edu.icesi.ci.tallerfinal.back.model.PersonRolePK;
-import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
-import co.edu.icesi.ci.tallerfinal.back.model.Rolee;
-import co.edu.icesi.ci.tallerfinal.back.model.Userr;
-import co.edu.icesi.ci.tallerfinal.back.model.Visit;
 import co.edu.icesi.ci.tallerfinal.back.repositories.CampusRepository;
 import co.edu.icesi.ci.tallerfinal.back.repositories.InstitutionRepository;
 import co.edu.icesi.ci.tallerfinal.back.repositories.PersonRoleRepository;
 import co.edu.icesi.ci.tallerfinal.back.repositories.RoleRepository;
-import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
-import co.edu.icesi.ci.tallerfinal.back.service.MeasurementService;
-import co.edu.icesi.ci.tallerfinal.back.service.PersonService;
-import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
-import co.edu.icesi.ci.tallerfinal.back.service.UserService;
-import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 
 
 @SpringBootApplication
@@ -69,7 +54,7 @@ public class ContactTrackingSystemApplication {
 	public CommandLineRunner dummy(UserService userService, CampusRepository campusRepository, PersonService personService,
 								   InstitutionRepository institutionRepository, VisitService visitService, MeasurementService measurService,
 								   PhysicalcheckupService phyService, CheckMeasurService checkMeasurService, RoleRepository roleRepo,
-								   PersonRoleRepository personRoleRepo, VisitDao visitDao, MeasurementDao measurementDao, PhysicalcheckupDao phycheckupDao) {
+								   PersonRoleRepository personRoleRepo, VisitDao visitDao, MeasurementDao measurementDao, PhysicalcheckupDao phycheckupDao, NexusPollService nexusPollService) {
 
 		return (args) -> {
 			Rolee adminRole = new Rolee();
@@ -203,8 +188,14 @@ public class ContactTrackingSystemApplication {
 			checkMeasur.setPhysicalcheckup(phy);
 			
 			checkMeasurService.addCheckMeasur(checkMeasur, measur.getMeasId(), phy.getPhycheId());
-			
-			
+
+			Nexuspoll np = new Nexuspoll();
+			np.setInstInstId(new BigDecimal("1"));
+			np.setNexpollName("First Poll");
+			np.setNexpollStartdate(new Date());
+			np.setNexpollEnddate(new Date());
+
+			nexusPollService.save(np);
 			
 		};
 

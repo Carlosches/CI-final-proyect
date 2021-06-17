@@ -50,12 +50,13 @@
                         <td th:text="${poll.nexpollStartdate}"></td>
                         <td th:text="${poll.nexpollEnddate}"></td>
                         <td>
-                            <a th:href="@{/front/phycheckups/showFromVisit/{id}(id=${visit.visitId})}">Show nexus questions</a>
+<!--                            TODO -->
+<!--                            <a th:href="@{/front/nexuspoll/showFromVisit/{id}(id=${poll.nexpollId})}">Show nexus questions</a>-->
                         </td>
 
-                        <td><a th:href="@{/front/visits/edit/{id}(id=${visit.visitId})}"
+                        <td><a th:href="@{/front/nexuspoll/edit/{id}(id=${poll.nexpollId})}"
                                class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-                        <td><a th:href="@{/front/visits/del/{id}(id=${visit.visitId})}"
+                        <td><a th:href="@{/front/nexuspoll/del/{id}(id=${poll.nexpollId})}"
                                class="btn btn-primary"><i class="fas fa-minus-circle"></i></a></td>
                     </tr>
                     </tbody>
@@ -65,7 +66,7 @@
         </div>
     </div>
     <p class="my-5">
-        <a href="/front/visits/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add visit</a>
+        <a href="/front/nexuspoll/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add nexus poll</a>
     </p>
     <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
 </div>

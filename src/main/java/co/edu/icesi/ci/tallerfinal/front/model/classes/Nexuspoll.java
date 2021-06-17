@@ -1,6 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -16,10 +17,14 @@ public class Nexuspoll implements Serializable {
 
 	private BigDecimal instInstId;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nexpollEnddate;
 
 	private String nexpollName;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nexpollStartdate;
 
 	@JsonIgnore
