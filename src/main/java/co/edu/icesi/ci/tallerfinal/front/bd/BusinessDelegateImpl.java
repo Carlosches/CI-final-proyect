@@ -1,6 +1,8 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -9,10 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class BusinessDelegateImpl implements BusinessDelegate {
@@ -21,10 +20,9 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     private RestTemplate restTemplate;
 
-
-    public BusinessDelegateImpl() {
-
-        this.restTemplate = new RestTemplate();
+    public BusinessDelegateImpl(RestTemplate restTemplate) {
+       //  this.restTemplate = restTemplate;
+        this.restTemplate = restTemplate;
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
@@ -46,7 +44,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         return response;
     }
-
+    public Person personFindById(long persId){
+        String endpoint = REST_URL+"/persons/"+persId;
+        Person r = restTemplate.getForObject(endpoint, Person.class);
+        return r;
+    }
 
     // ==========================
     // Institution
@@ -78,7 +80,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         return response;
 
     }
-
+    public Institutioncampus institutioncampusFindById(long instId){
+        String endpoint = REST_URL + "/institutioncampus/"+instId;
+        Institutioncampus r = restTemplate.getForObject(endpoint, Institutioncampus.class);
+        return r;
+    }
 
     // ==========================
     // Visit
@@ -140,7 +146,6 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public void setVisit(Visit visit){
 
         String endpoint = REST_URL + "/visits/";
-
         restTemplate.put(endpoint, visit, Visit.class);
 
     }

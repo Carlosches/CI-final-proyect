@@ -4,7 +4,6 @@ import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasur;
 import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasurPK;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.CheckMeasurRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

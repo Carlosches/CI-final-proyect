@@ -6,7 +6,6 @@ import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.VisitRestContr
 import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
 import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,18 +37,19 @@ public class VisitRestControllerImpl implements VisitRestController {
 
     @Override
     @PostMapping("/visits/")
-    public Visit saveVisit(@RequestBody Visit visit,
-                          @RequestParam(value = "personId", required = true) long personId,
-                          @RequestParam(value = "campusId", required = true) long campusId){
+    public void saveVisit(@RequestBody Visit visit,
+                                          @RequestParam(value = "personId", required = true) long personId,
+                                          @RequestParam(value = "campusId", required = true) long campusId){
 
         visitService.addVisit(visit,personId, campusId);
 
-        return new Visit(); //TODO: Change with added entity
+        //return new Visit(); //TODO: Change with added entity
     }
 
     @Override
     @PutMapping("/visits/")
-    public void updateVisit(Visit visit){
+    public void updateVisit(@RequestBody Visit visit){
+        System.out.println("llego al update del rest");
         visitService.editVisit(visit);
     }
 

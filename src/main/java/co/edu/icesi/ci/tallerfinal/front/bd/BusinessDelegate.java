@@ -83,5 +83,7 @@ public interface BusinessDelegate {
     void setCheckMeasur(CheckMeasur checkMeasur);
 
     void deleteCheckMeasur(CheckMeasur checkMeasur);
+    Institutioncampus institutioncampusFindById(long instId);
+    Person personFindById(long persId);
 
 }
