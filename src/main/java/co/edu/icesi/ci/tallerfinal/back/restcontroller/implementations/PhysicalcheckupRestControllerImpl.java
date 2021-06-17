@@ -3,12 +3,11 @@ package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.PhysicaclchekcupRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+
+@RequestMapping("/api")
 public class PhysicalcheckupRestControllerImpl implements PhysicaclchekcupRestController {
 
     private PhysicalcheckupService physicalcheckupService;
@@ -33,4 +32,10 @@ public class PhysicalcheckupRestControllerImpl implements PhysicaclchekcupRestCo
         physicalcheckupService.editPhysicalcheckup(phyche);
     }
 
+    @GetMapping("/phycheckups/{pycheId}")
+    public Physicalcheckup physicalcheckupsFindById(@PathVariable("pycheId") long pycheId) {
+        return physicalcheckupService.getPhysicalcheckup(pycheId);
+    }
+
+   // public Iterable<Physicalcheckup>
 }

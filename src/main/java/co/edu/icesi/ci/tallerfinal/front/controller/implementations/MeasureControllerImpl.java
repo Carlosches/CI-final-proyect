@@ -3,6 +3,8 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 import java.util.ArrayList;
 
 import co.edu.icesi.ci.tallerfinal.back.repositories.InstitutionRepository;
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.AddMeasurement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,33 +18,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.MeasureController;
-import co.edu.icesi.ci.tallerfinal.back.groups.AddMeasurement;
-import co.edu.icesi.ci.tallerfinal.back.model.Measurement;
-import co.edu.icesi.ci.tallerfinal.back.service.MeasurementService;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.Measurement;
 
 @Controller
-@RequestMapping("/api/measurements")
+@RequestMapping("/front/measurements")
 public class MeasureControllerImpl implements MeasureController {
-	public MeasurementService measureService;
-	public InstitutionRepository institutionRepository;
+
+	public BusinessDelegate bd;
 
 	@Autowired
-	public MeasureControllerImpl( MeasurementService measureService,InstitutionRepository institutionRepository) {
-		this.measureService = measureService;
-		this.institutionRepository=institutionRepository;
+	public MeasureControllerImpl(BusinessDelegate bd) {
+		this.bd	= bd;
 	}
 
 	@Override
 	@GetMapping("/")
 	public String indexMeasure(Model model) {
-		model.addAttribute("measures", measureService.findAll());
+		model.addAttribute("measures", bd.measurementFindAll());
 		return "measurements/index";
 	}
 	@Override
 	@GetMapping("/add/")
 	public String addMeasurement(Model model) {
 		model.addAttribute("measurement", new Measurement());
-		model.addAttribute("institutions", institutionRepository.findAll());
+		model.addAttribute("institutions", bd.institutionFindAll());
 		return "measurements/add-measure";
 	}
 	@Override
@@ -50,10 +49,10 @@ public class MeasureControllerImpl implements MeasureController {
 	public String saveMeasurement(@RequestParam(value = "action", required = true) String action, @Validated({AddMeasurement.class}) Measurement measurement, BindingResult result, Model model ) {
 		if (!action.equals("Cancel")) {
 			if (result.hasErrors()) {
-				model.addAttribute("institutions", institutionRepository.findAll());
+				model.addAttribute("institutions", bd.institutionFindAll());
 				return "measurements/add-measure";
 			}
-			measureService.addMeasurement(measurement, measurement.getInstitution().getInstId());
+			bd.saveMeasurement(measurement, measurement.getInstitution().getInstId());
 		}
 
 		return "redirect:/measurements/";
@@ -62,10 +61,10 @@ public class MeasureControllerImpl implements MeasureController {
 	@Override
 	@GetMapping("/edit/{id}")
 	public String editMeasurement(@PathVariable("id") long id, Model model) {
-		Measurement measurement = measureService.getMeasurement(id);
+		Measurement measurement = bd.measurementFindById(id);
 		
 		model.addAttribute("measurement", measurement);
-		model.addAttribute("institutions", institutionRepository.findAll());
+		model.addAttribute("institutions", bd.institutionFindAll());
 		return "measurements/update-measure";
 	}
 	@Override
@@ -77,12 +76,12 @@ public class MeasureControllerImpl implements MeasureController {
 			if (bindingResult.hasErrors()) {
 
 				measurement.setMeasId(id);
-				model.addAttribute("institutions", institutionRepository.findAll());
+				model.addAttribute("institutions", bd.institutionFindAll());
 				
 				return "measurements/update-measure";
 			}
 			measurement.setMeasId(id);
-			measureService.editMeasurement(measurement);
+			bd.setMeasurement(measurement);
 		}
 		return "redirect:/measurements/";
 	}
@@ -90,8 +89,8 @@ public class MeasureControllerImpl implements MeasureController {
 	@Override
 	@GetMapping("/del/{id}")
 	public String deleteMeasurement(@PathVariable("id") long id) {
-		Measurement measurement = measureService.getMeasurement(id);
-		measureService.delete(measurement);
+		Measurement measurement = bd.measurementFindById(id);
+		bd.deleteMeasurement(measurement.getMeasId());
 		return "redirect:/measurements/";
 	}
 	
@@ -99,7 +98,7 @@ public class MeasureControllerImpl implements MeasureController {
 	@GetMapping("/showFromCheckMeasur/{id}")
 	public String showFromCheckMeasur(Model model, @PathVariable("id") long id) {
 		ArrayList<Measurement> measures = new ArrayList<>();
-		measures.add(measureService.getMeasurement(id));
+		measures.add(bd.measurementFindById(id));
 		model.addAttribute("measures",measures);
 		
 		return "measurements/show-measurements";

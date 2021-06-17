@@ -7,4 +7,5 @@ public interface VisitRestController {
     public Iterable<Visit> getVisits();
     public Visit saveVisit(Visit visit, long personId, long campusId);
     public void updateVisit(Visit visit);
+    public void deleteVisit(long id);
 }

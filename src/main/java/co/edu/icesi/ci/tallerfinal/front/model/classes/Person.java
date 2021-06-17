@@ -1,5 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -40,8 +42,10 @@ public class Person {
 
     private Institution institution;
 
+    @JsonIgnore
     private List<Visit> visits;
 
+    @JsonIgnore
     private List<Physicalcheckup> physicalcheckups;
 
     public Person() {

@@ -3,7 +3,7 @@ package co.edu.icesi.ci.tallerfinal.front.controller.interfaces;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasur;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.CheckMeasur;
 
 public interface CheckMeasureController {
 

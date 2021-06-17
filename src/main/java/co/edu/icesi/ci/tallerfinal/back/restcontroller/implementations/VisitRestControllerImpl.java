@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class VisitRestControllerImpl implements VisitRestController {
 
     private VisitService visitService;
@@ -24,8 +24,15 @@ public class VisitRestControllerImpl implements VisitRestController {
         return visitService.findAll();
     }
 
+
+    //GET
+    @GetMapping("/visits/{persId}")
+    public Visit visitFindById(@PathVariable("persId") long persId){
+        return visitService.getVisit(persId); // TODO
+    }
+
     @Override
-    @PostMapping(path="/visits", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/visits/")
     public Visit saveVisit(@RequestBody Visit visit,
                           @RequestParam(value = "personId", required = true) long personId,
                           @RequestParam(value = "campusId", required = true) long campusId){
@@ -41,10 +48,10 @@ public class VisitRestControllerImpl implements VisitRestController {
         visitService.editVisit(visit);
     }
 
-    //TEST
-    @GetMapping("/visit/")
-    public Visit visit(){
-        return new Visit();
+    @Override
+    @DeleteMapping("/visits/{persId}")
+    public void deleteVisit(@PathVariable("id") long id) {
+        Visit visit = visitService.getVisit(id);
+        visitService.delete(visit);
     }
-
 }

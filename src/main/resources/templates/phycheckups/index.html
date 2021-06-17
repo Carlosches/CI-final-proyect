@@ -46,15 +46,15 @@
                   <td th:text="${phycheckup.phycheDate}"></td>
                   <td th:text="${phycheckup.person.persName}"></td>
                   <td >
-                  	<a th:href="@{/visits/showFromPhycheckup/{id}(id=${phycheckup.visit.visitId})}" th:text="'id:'+ ${phycheckup.visit.visitId} +  '  person: ' +${phycheckup.visit.person.persName}"></a>
+                  	<a th:href="@{/front/visits/showFromPhycheckup/{id}(id=${phycheckup.visit.visitId})}" th:text="'id:'+ ${phycheckup.visit.visitId} +  '  person: ' +${phycheckup.visit.person.persName}"></a>
                   </td>
                   <td>
-                 	 <a th:href="@{/checkmeasures/showFromPhycheckup/{id}(id=${phycheckup.phycheId})}">Show check measures</a>
+                 	 <a th:href="@{/front/checkmeasures/showFromPhycheckup/{id}(id=${phycheckup.phycheId})}">Show check measures</a>
                   </td>	
                   
-                  <td><a th:href="@{/phycheckups/edit/{id}(id=${phycheckup.phycheId})}"
+                  <td><a th:href="@{/front/phycheckups/edit/{id}(id=${phycheckup.phycheId})}"
 						class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-				  <td><a th:href="@{/phycheckups/del/{id}(id=${phycheckup.phycheId})}"
+				  <td><a th:href="@{/front/phycheckups/del/{id}(id=${phycheckup.phycheId})}"
 						class="btn btn-primary"><i class="fas fa-minus-circle"></i></a></td>
                 </tr>
               </tbody>
@@ -64,7 +64,7 @@
         </div>
       </div>
       <p class="my-5">
-					<a href="/phycheckups/add/" class="btn btn-primary">
+					<a href="/front/phycheckups/add/" class="btn btn-primary">
 					<i class="fas fa-plus-circle"></i>  Add physical checkup</a>
 				</p>
       <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>

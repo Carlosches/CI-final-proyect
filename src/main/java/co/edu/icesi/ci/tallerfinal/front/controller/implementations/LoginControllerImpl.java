@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.LoginController;
 
 @Controller
-@RequestMapping("/api/")
+@RequestMapping("/front")
 public class LoginControllerImpl implements LoginController{
 	
 	@Override
-	@GetMapping("login")
+	@GetMapping("/login")
 	public String login() {
 		return "/customLogin";
+	}
+
+	@GetMapping("/")
+	public String index(){
+		return "/index";
 	}
 }

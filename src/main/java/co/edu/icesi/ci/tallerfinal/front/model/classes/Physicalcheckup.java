@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,12 +15,19 @@ public class Physicalcheckup {
 
     private long phycheId;
 
+    @NotNull(message="se debe seleccionar una fecha", groups= AddPhycheckup.class)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent(message="La fecha debe ser en el futuro", groups=AddPhycheckup.class)
     private Date phycheDate;
 
+    @JsonIgnore
     private List<CheckMeasur> checkMeasurs;
 
+    @NotNull(message="se debe seleccionar una persona", groups=AddPhycheckup.class)
     private Person person;
 
+    @NotNull(message="se debe seleccionar una visita", groups=AddPhycheckup.class)
     private Visit visit;
 
     public Physicalcheckup() {

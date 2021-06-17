@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,18 +16,27 @@ public class Visit {
 
     private long visitId;
 
+    @Size(min =5, message="El tamaño debe ser mayor a 5",groups = AddVisit.class)
     private String visitDetail;
 
+    @NotNull(message="La fecha de ingreso es obligatoria", groups=AddVisit.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent(message="La fecha de ingreso debe ser en el futuro", groups=AddVisit.class)
     private Date visitEntrancedate;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent(message="La fecha de egreso debe ser en el futuro", groups=AddVisit.class)
     private Date visitExitdate;
 
-
+    @JsonIgnore
     private List<Physicalcheckup> physicalcheckups;
 
-
+    @NotNull(message="Se debe elegir una institución", groups=AddVisit.class)
     private Institutioncampus institutioncampus;
 
+    @NotNull(message="Se debe elegir una persona", groups=AddVisit.class)
     private Person person;
 
     public Visit() {

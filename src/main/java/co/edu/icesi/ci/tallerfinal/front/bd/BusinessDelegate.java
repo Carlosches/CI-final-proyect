@@ -1,76 +1,85 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
-import co.edu.icesi.ci.tallerfinal.front.model.wrapper.VisitList;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import java.util.List;
 
-import java.util.*;
-
-@Component
-public class BusinessDelegate {
-
-    public static final String REST_URL = "http://localhost:8080";
-
-    private RestTemplate restTemplate;
-
-
-    public BusinessDelegate() {
-
-        this.restTemplate = new RestTemplate();
-
-
-    }
+public interface BusinessDelegate {
 
     // ==========================
-    // Visit
+    // PERSON
     // ==========================
 
-    //GET
-    public List<Visit> visitFindAll() {
-        String endpoint = REST_URL + "/visits/";
+    List<Person> personFindAll();
 
-        Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
-        List<Visit> response = Arrays.asList(r);
+    // ==========================
+    // INSTITUTION
+    // ==========================
 
-        return response;
-    }
+    List<Institution> institutionFindAll();
 
-    //POST
-    public Visit saveVisit(Visit visit, long personId, long campusId){
+    // ==========================
+    // INSTITUTION CAMPUS
+    // ==========================
 
-        // REST endpoint
-        String endpoint = REST_URL + "/visits";
+    List<Institutioncampus> institutionCampusFindAll();
 
-        // Add query parameters to URL
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
-                .queryParam("personId", personId)
-                .queryParam("campusId", campusId);
-        endpoint = builder.toUriString();
+    // ==========================
+    // VISIT
+    // ==========================
 
-        // Create JSON Header
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+    List<Visit> visitFindAll();
 
-        // Add Entity
-        HttpEntity<Visit> request = new HttpEntity<>(visit, headers);
+    Visit visitFindById(long persId);
 
-        // Perform REST CALL
-        Visit response = restTemplate.postForObject(endpoint, request, Visit.class);
+    Visit saveVisit(Visit visit, long personId, long campusId);
 
-        return response;
+    void setVisit(Visit visit);
 
-    }
+    void deleteVisit(long visitId);
 
-    //PUT
-    public void setVisit(){
+    // ==========================
+    // PhysicalCheckup
+    // ==========================
 
-    }
+    List<Physicalcheckup> physicalcheckupsFindAll();
+
+    Physicalcheckup physicalcheckupsFindById(long id);
+
+    Physicalcheckup savePhysicalcheckup(Physicalcheckup pc, long persId, long visitId);
+
+    void setPhysicalcheckup(Physicalcheckup pc);
+
+    void deletePhysicalcheckup(long phycheId);
+
+    // ==========================
+    // MEASUREMENT
+    // ==========================
+
+    List<Measurement> measurementFindAll();
+
+    Measurement measurementFindById(long measId);
+
+    Measurement saveMeasurement(Measurement measurement, long instId);
+
+    void setMeasurement(Measurement measurement);
+
+    void deleteMeasurement(long measId);
+
+    // ==========================
+    // CHECK MEASURES
+    // ==========================
+
+    List<CheckMeasur> checkMeasurFindAll();
+
+    boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK);
+
+    CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK);
+
+    CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId);
+
+    void setCheckMeasur(CheckMeasur checkMeasur);
+
+    void deleteCheckMeasur(CheckMeasur checkMeasur);
 
 }

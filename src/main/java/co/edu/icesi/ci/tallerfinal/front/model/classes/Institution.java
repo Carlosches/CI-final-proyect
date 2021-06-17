@@ -1,5 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -41,14 +43,15 @@ public class Institution {
 
     private String instName;
 
+    @JsonIgnore
     private List<Institutioncampus> institutioncampuses;
 
     // bi-directional many-to-one association to Measurement
-    @OneToMany(mappedBy = "institution")
+    @JsonIgnore
     private List<Measurement> measurements;
 
     // bi-directional many-to-one association to Person
-    @OneToMany(mappedBy = "institution")
+    @JsonIgnore
     private List<Person> persons;
 
     public Institution() {

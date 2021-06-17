@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<form action="#" 
-					th:action="@{/checkmeasures/edit/{id1}/{id2}(id1=${checkMeasur.id.phychePhycheId}, id2=${checkMeasur.id.measMeasId})}" method="post" th:object="${checkMeasur}">
+					th:action="@{/front/checkmeasures/edit/{id1}/{id2}(id1=${checkMeasur.id.phychePhycheId}, id2=${checkMeasur.id.measMeasId})}" method="post" th:object="${checkMeasur}">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="measvalue" class="col-form-label">Measure value</label> <input

@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,10 +13,13 @@ public class CheckMeasur {
 
     private CheckMeasurPK id;
 
+    @NotNull(message="se debe agregar un valor", groups= AddCheckMeasure.class)
     private BigDecimal measvalue;
 
+    @NotNull(message="se debe agregar una medida", groups=AddCheckMeasure.class)
     private Measurement measurement;
 
+    @NotNull(message="se debe agregar un chequeo físico", groups=AddCheckMeasure.class)
     private Physicalcheckup physicalcheckup;
 
     public CheckMeasur() {

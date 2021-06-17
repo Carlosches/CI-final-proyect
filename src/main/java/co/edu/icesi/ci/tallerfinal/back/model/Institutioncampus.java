@@ -2,6 +2,7 @@ package co.edu.icesi.ci.tallerfinal.back.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
@@ -32,10 +33,12 @@ public class Institutioncampus implements Serializable {
 	private BigDecimal instcamOccupation;
 
 	//bi-directional many-to-one association to Device
+	@JsonIgnore
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Device> devices;
 
 	//bi-directional many-to-one association to HatCapacitydetail
+	@JsonIgnore
 	@OneToMany(mappedBy="institutioncampus")
 	private List<HatCapacitydetail> hatCapacitydetails;
 
@@ -45,16 +48,17 @@ public class Institutioncampus implements Serializable {
 	private Institution institution;
 
 	//bi-directional many-to-one association to Physicalspace
-	//@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Physicalspace> physicalspaces;
 
 	//bi-directional many-to-one association to Visit
-	@JsonManagedReference(value="visit-institutioncampus")
+	@JsonIgnore
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Visit> visits;
 
 	//bi-directional many-to-one association to Visitreason
+	@JsonIgnore
 	@OneToMany(mappedBy="institutioncampus")
 	private List<Visitreason> visitreasons;
 

@@ -20,7 +20,7 @@
 		<h2 class="mb-5">New Visit</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/visits/add/}" th:object="${visit}"
+				<form action="#" th:action="@{/front/visits/add/}" th:object="${visit}"
 					method="post">
 					<div class="row">
 					<div class="form-group col-md-6">
@@ -45,18 +45,21 @@
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="institutioncampus" class="col-form-label">Institution</label> <select
-								th:field="*{institutioncampus}">
-								<option th:each="inst : ${institutions}" th:value="${inst.instcamId}"
-									class="form-control" th:text="${inst.instcamName}"
-									th:selected="${visit.institutioncampus=inst}"></option>
-							</select> <span th:if="${#fields.hasErrors('institutioncampus')}"
+							<label for="institutioncampus" class="col-form-label">Institution</label>
+							<select id="institutioncampus" th:field="*{institutioncampus}">
+							<option th:each="ic : ${institutions}"
+									th:value="${ic.instcamId}"
+									th:text="${ic.instcamId + ': ' + ic.instcamName}"
+									th:selected="${visit.institutioncampus==ic}">
+							</option>
+						</select>
+							<span th:if="${#fields.hasErrors('institutioncampus')}"
 								th:errors="*{institutioncampus}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="person" class="col-form-label">Person</label> <select
 								th:field="*{person}">
-								<option th:each="per : ${persons}" th:value="${per.persId}"
+								<option id ="person" th:each="per : ${persons}" th:value="${per.persId}"
 									class="form-control" th:text="${per.persName}"
 									th:selected="${visit.person=per}"></option>
 							</select> <span th:if="${#fields.hasErrors('person')}"

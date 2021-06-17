@@ -3,12 +3,10 @@ package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 import co.edu.icesi.ci.tallerfinal.back.model.Measurement;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.MeasurementRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.MeasurementService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class MeasurementRestControllerImpl implements MeasurementRestController {
 
     private MeasurementService measurementService;

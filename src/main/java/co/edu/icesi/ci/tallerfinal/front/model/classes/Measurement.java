@@ -1,5 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,18 +15,25 @@ public class Measurement {
 
     private long measId;
 
+    @NotEmpty(message="Se debe agregar una descripción", groups= AddMeasurement.class)
     private String measDescription;
 
+    @NotNull(message="Se debe agregar un umbral máximo", groups= AddMeasurement.class)
     private BigDecimal measMaxthreshold;
 
+    @NotNull(message="Se debe agregar un umbral mínimo", groups= AddMeasurement.class)
     private BigDecimal measMinthreshold;
 
+    @NotEmpty(message="Se debe agregar un nombre", groups= AddMeasurement.class)
     private String measName;
 
+    @NotEmpty(message="Se debe agregar una unidad", groups= AddMeasurement.class)
     private String measUnit;
 
+    @JsonIgnore
     private List<CheckMeasur> checkMeasurs;
 
+    @NotNull(message="Se debe elegir una institución", groups= AddMeasurement.class)
     private Institution institution;
 
     public Measurement() {

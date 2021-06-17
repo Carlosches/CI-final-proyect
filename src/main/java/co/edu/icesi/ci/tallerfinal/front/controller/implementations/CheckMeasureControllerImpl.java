@@ -2,6 +2,8 @@ package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
 import java.util.List;
 
+import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,36 +17,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.CheckMeasureController;
-import co.edu.icesi.ci.tallerfinal.back.groups.AddCheckMeasure;
-import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasur;
-import co.edu.icesi.ci.tallerfinal.back.model.CheckMeasurPK;
-import co.edu.icesi.ci.tallerfinal.back.model.Measurement;
-import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
-import co.edu.icesi.ci.tallerfinal.back.service.CheckMeasurService;
-import co.edu.icesi.ci.tallerfinal.back.service.MeasurementService;
-import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
-
 
 
 @Controller
-@RequestMapping("/api/checkmeasures")
+@RequestMapping("/front/checkmeasures")
 public class CheckMeasureControllerImpl implements CheckMeasureController {
-	
-	private CheckMeasurService checkMeasureService;
-	private MeasurementService measurementService;
-	private PhysicalcheckupService phychechupService;
+
+	public BusinessDelegate bd;
 	
 	@Autowired
-	public CheckMeasureControllerImpl(CheckMeasurService checkMeasureService, MeasurementService measurementService,
-			PhysicalcheckupService phychechupService) {
-		this.checkMeasureService = checkMeasureService;
-		this.measurementService = measurementService;
-		this.phychechupService = phychechupService;
+	public CheckMeasureControllerImpl(BusinessDelegate bd) {
+		this.bd = bd;
 	}
 	@Override
 	@GetMapping("/")
 	public String indexCheckmeasure(Model model) {
-		model.addAttribute("checkmeasures", checkMeasureService.findAll());
+		model.addAttribute("checkmeasures", bd.checkMeasurFindAll());
 		return "/checkmeasures/index";
 	}
 
@@ -52,8 +40,8 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 	@GetMapping("/add/")
 	public String addCheckmeasure(Model model) {
 		model.addAttribute("checkMeasur", new CheckMeasur());
-		model.addAttribute("measures", measurementService.findAll());
-		model.addAttribute("phycheckups", phychechupService.findAll());
+		model.addAttribute("measures", bd.measurementFindAll());
+		model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
 		model.addAttribute("from","get");
 		return "checkmeasures/add-checkmeasure";
 	}
@@ -63,8 +51,8 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 		if (!action.equals("Cancel")) {
 			if (result.hasErrors()) {
 				model.addAttribute("checkMeasur", checkmeasure);
-				model.addAttribute("measures", measurementService.findAll());
-				model.addAttribute("phycheckups", phychechupService.findAll());
+				model.addAttribute("measures", bd.measurementFindAll());
+				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
 				model.addAttribute("from","error");
 				return "checkmeasures/add-checkmeasure";
 			}
@@ -72,20 +60,20 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 			checkMeasurePK.setMeasMeasId(checkmeasure.getMeasurement().getMeasId());
 			checkMeasurePK.setPhychePhycheId(checkmeasure.getPhysicalcheckup().getPhycheId());
 			checkmeasure.setId(checkMeasurePK);
-			if(checkMeasureService.existById(checkMeasurePK)==true) {
+			if(bd.checkMeasurExistById(checkMeasurePK)==true) {
 				model.addAttribute("checkMeasur", checkmeasure);
-				model.addAttribute("measures", measurementService.findAll());
-				model.addAttribute("phycheckups", phychechupService.findAll());
+				model.addAttribute("measures", bd.measurementFindAll());
+				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
 				model.addAttribute("from","sameId");
 				return "checkmeasures/add-checkmeasure";
 			}
-			checkMeasureService.addCheckMeasur(checkmeasure, checkmeasure.getMeasurement().getMeasId(), checkmeasure.getPhysicalcheckup().getPhycheId());
+			bd.saveCheckMeasur(checkmeasure, checkmeasure.getMeasurement().getMeasId(), checkmeasure.getPhysicalcheckup().getPhycheId());
 			Physicalcheckup phy = checkmeasure.getPhysicalcheckup();
 			phy.addCheckMeasur(checkmeasure);
-			phychechupService.editPhysicalcheckup(phy);
+			bd.setPhysicalcheckup(phy);
 			Measurement meas = checkmeasure.getMeasurement();
 			meas.addCheckMeasur(checkmeasure);
-			measurementService.editMeasurement(meas);
+			bd.setMeasurement(meas);
 		}
 
 		return "redirect:/checkmeasures/";
@@ -97,11 +85,11 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 		CheckMeasurPK chPK = new CheckMeasurPK();
 		chPK.setPhychePhycheId(id);
 		chPK.setMeasMeasId(id2);
-		CheckMeasur checkMeasur = checkMeasureService.getCheckMeasur(chPK);
+		CheckMeasur checkMeasur = bd.CheckMeasurFindById(chPK);
 		
 		model.addAttribute("checkMeasur", checkMeasur);
-		model.addAttribute("measures", measurementService.findAll());
-		model.addAttribute("phycheckups", phychechupService.findAll());
+		model.addAttribute("measures", bd.measurementFindAll());
+		model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
 		model.addAttribute("from","get");
 		return "checkmeasures/update-checkmeasure";
 	}
@@ -115,13 +103,13 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 		if (action != null && !action.equals("Cancel")) {
 			if (bindingResult.hasErrors()) {
 				checkMeasur.setId(chPK);
-				model.addAttribute("measures", measurementService.findAll());
-				model.addAttribute("phycheckups", phychechupService.findAll());
+				model.addAttribute("measures", bd.measurementFindAll());
+				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
 				model.addAttribute("from","error");
 				return "checkmeasures/update-checkmeasure";
 			}
 			checkMeasur.setId(chPK);
-			checkMeasureService.editCheckMeasur(checkMeasur);
+			bd.setCheckMeasur(checkMeasur);
 		}
 		return "redirect:/checkmeasures/";
 	}
@@ -132,14 +120,14 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 		CheckMeasurPK chPK = new CheckMeasurPK();
 		chPK.setPhychePhycheId(id);
 		chPK.setMeasMeasId(id2);
-		CheckMeasur check = checkMeasureService.getCheckMeasur(chPK);
-		checkMeasureService.deleted(check);
+		CheckMeasur check = bd.CheckMeasurFindById(chPK);
+		bd.deleteCheckMeasur(check);
 		return "redirect:/checkmeasures/";
 	}
 	@Override
 	@GetMapping("/showFromPhycheckup/{id}")
 	public String showFromPhycheckup(@PathVariable("id") long id, Model model) {
-		Physicalcheckup phy = phychechupService.getPhysicalcheckup(id);
+		Physicalcheckup phy = bd.physicalcheckupsFindById(id);
 		List<CheckMeasur> ch = (List<CheckMeasur>) phy.getCheckMeasurs();
 		model.addAttribute("checkmeasures", ch);
 		return "/checkmeasures/index";
@@ -147,7 +135,7 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 	@Override
 	@GetMapping("/showFromMeasures/{id}")
 	public String showFromMeasures(@PathVariable("id") long id, Model model) {
-		Measurement measurement = measurementService.getMeasurement(id);
+		Measurement measurement = bd.measurementFindById(id);
 		List<CheckMeasur> ch = (List<CheckMeasur>) measurement.getCheckMeasurs();
 		model.addAttribute("checkmeasures", ch);
 		return "/checkmeasures/show-checkmeasures";

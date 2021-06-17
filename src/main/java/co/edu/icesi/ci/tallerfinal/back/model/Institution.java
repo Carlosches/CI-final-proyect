@@ -2,6 +2,8 @@ package co.edu.icesi.ci.tallerfinal.back.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
@@ -70,46 +72,57 @@ public class Institution implements Serializable {
 	private String instName;
 
 	// bi-directional many-to-one association to Accessdenialevent
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Accessdenialevent> accessdenialevents;
 
 	// bi-directional many-to-one association to Devicestatus
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Devicestatus> devicestatuses;
 
 	// bi-directional many-to-one association to Devicetype
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Devicetype> devicetypes;
 
 	// bi-directional many-to-one association to Epidemstatustransition
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Epidemstatustransition> epidemstatustransitions;
 
 	// bi-directional many-to-one association to Eventstatus
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Eventstatus> eventstatuses;
 
 	// bi-directional many-to-one association to HatParameter
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<HatParameter> hatParameters;
 
 	// bi-directional many-to-one association to Institutioncampus
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Institutioncampus> institutioncampuses;
 
 	// bi-directional many-to-one association to Measurement
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Measurement> measurements;
 
 	// bi-directional many-to-one association to Person
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Person> persons;
 
 	// bi-directional many-to-one association to Physicalspacetype
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Physicalspacetype> physicalspacetypes;
 
 	// bi-directional many-to-one association to Posessiontype
+	@JsonIgnore
 	@OneToMany(mappedBy = "institution")
 	private List<Posessiontype> posessiontypes;
 

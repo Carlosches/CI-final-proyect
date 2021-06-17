@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 import co.edu.icesi.ci.tallerfinal.back.groups.AddPhycheckup;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,13 +33,13 @@ public class Physicalcheckup implements Serializable {
 
 	@NotNull(message="se debe seleccionar una fecha", groups= AddPhycheckup.class)
 	@Temporal(TemporalType.DATE)
-	@Column(name="PHYCHE_DATE")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@FutureOrPresent(message="La fecha debe ser en el futuro", groups=AddPhycheckup.class)
+	@Column(name="PHYCHE_DATE")
 	private Date phycheDate;
 
 	//bi-directional many-to-one association to CheckMeasur
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy="physicalcheckup")
 	private List<CheckMeasur> checkMeasurs;
 
@@ -46,12 +47,9 @@ public class Physicalcheckup implements Serializable {
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una persona", groups=AddPhycheckup.class)
 	@JoinColumn(name="PERS_PERS_ID")
-	@JsonBackReference
 	private Person person;
 
 	//bi-directional many-to-one association to Visit
-	//@JoinColumn(name = "VISIT_VISIT_ID")
-	@JsonBackReference(value="visit-physicalcheckups")
 	@ManyToOne
 	@NotNull(message="se debe seleccionar una visita", groups=AddPhycheckup.class)
 	private Visit visit;

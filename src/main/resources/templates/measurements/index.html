@@ -52,12 +52,12 @@
                   <td th:text="${measure.measUnit}"></td>
                   <td th:text="${measure.institution.instName}"></td>
                    <td>
-                 	 <a th:href="@{/checkmeasures/showFromMeasures/{id}(id=${measure.measId})}">Show check measures</a>
+                 	 <a th:href="@{/front/checkmeasures/showFromMeasures/{id}(id=${measure.measId})}">Show check measures</a>
                   </td>	
                   
-                  <td><a th:href="@{/measurements/edit/{id}(id=${measure.measId})}"
+                  <td><a th:href="@{/front/measurements/edit/{id}(id=${measure.measId})}"
 						class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-				  <td><a th:href="@{/measurements/del/{id}(id=${measure.measId})}"
+				  <td><a th:href="@{/front/measurements/del/{id}(id=${measure.measId})}"
 						class="btn btn-primary"><i class="fas fa-minus-circle"></i></a></td>
                 </tr>
               </tbody>
