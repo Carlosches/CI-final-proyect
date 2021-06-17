@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.back.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import co.edu.icesi.ci.tallerfinal.back.dao.CheckMeasurDao;
@@ -19,11 +20,12 @@ public class CheckMeasurServiceImpl implements CheckMeasurService {
 	private CheckMeasurDao checkMeasurDao;
 	private MeasurementDao measurementDao;
 	private PhysicalcheckupDao physicalcheckupDao;
-	
-	
-	
+
+
+
+
 	public CheckMeasurServiceImpl(CheckMeasurDao checkMeasurDao,
-			MeasurementDao measurementDao, PhysicalcheckupDao physicalcheckupDao) {
+								  MeasurementDao measurementDao, PhysicalcheckupDao physicalcheckupDao) {
 		this.checkMeasurDao = checkMeasurDao;
 		this.measurementDao = measurementDao;
 		this.physicalcheckupDao = physicalcheckupDao;
@@ -114,5 +116,13 @@ public class CheckMeasurServiceImpl implements CheckMeasurService {
 		return true;
 		
 	}
-	
+	@Override
+	public List<CheckMeasur> findByPycheId(long pycheId) {
+		return checkMeasurDao.findByPycheId(pycheId);
+	}
+
+	@Override
+	public List<CheckMeasur> findByMeasId(long measId) {
+		return checkMeasurDao.findByMeasId(measId);
+	}
 }

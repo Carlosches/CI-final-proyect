@@ -76,7 +76,7 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 			bd.setMeasurement(meas);
 		}
 
-		return "redirect:/checkmeasures/";
+		return "redirect:/front/checkmeasures/";
 
 	} 
 	@Override
@@ -111,7 +111,7 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 			checkMeasur.setId(chPK);
 			bd.setCheckMeasur(checkMeasur);
 		}
-		return "redirect:/checkmeasures/";
+		return "redirect:/front/checkmeasures/";
 	}
 
 	@Override
@@ -122,16 +122,9 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 		chPK.setMeasMeasId(id2);
 		CheckMeasur check = bd.CheckMeasurFindById(chPK);
 		bd.deleteCheckMeasur(check);
-		return "redirect:/checkmeasures/";
+		return "redirect:/front/checkmeasures/";
 	}
-	@Override
-	@GetMapping("/showFromPhycheckup/{id}")
-	public String showFromPhycheckup(@PathVariable("id") long id, Model model) {
-		Physicalcheckup phy = bd.physicalcheckupsFindById(id);
-		List<CheckMeasur> ch = (List<CheckMeasur>) phy.getCheckMeasurs();
-		model.addAttribute("checkmeasures", ch);
-		return "/checkmeasures/index";
-	}
+
 	@Override
 	@GetMapping("/showFromMeasures/{id}")
 	public String showFromMeasures(@PathVariable("id") long id, Model model) {

@@ -50,7 +50,7 @@
                    <td th:text="${visit.institutioncampus.instcamName}"></td>
                   <td th:text="${visit.person.persName}"></td>
                   <td>
-                 	 <a th:href="@{/front/phycheckups/showFromVisit/{id}(id=${visit.visitId})}">Show physical checkups</a>
+                 	 <a th:href="@{/front/visits/phycheckups/{visitId}(visitId=${visit.visitId})}">Show physical checkups</a>
                   </td>
                   
                   <td><a th:href="@{/front/visits/edit/{id}(id=${visit.visitId})}"

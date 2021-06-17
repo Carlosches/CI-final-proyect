@@ -112,7 +112,7 @@ public class PhysicalcheckupServiceImpl implements PhysicalcheckupService {
 	}
 
 	@Override
-	public Physicalcheckup findByVisitId(long id) {
+	public List<Physicalcheckup> findByVisitId(long id) {
 		return physicalcheckupDao.findByVisitId(id);
 	}
 

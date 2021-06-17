@@ -217,9 +217,9 @@ public class PhysicalcheckupIntegrationTest {
 			checkup.setPhycheDate(new Date()); //date mandatory
 			
 			physicalcheckupService.addPhysicalcheckup(checkup,person2.getPersId(),visit2.getVisitId());  
-			Physicalcheckup phyche = physicalcheckupService.findByVisitId(visit2.getVisitId());
+			List<Physicalcheckup> phyche = physicalcheckupService.findByVisitId(visit2.getVisitId());
 			assertNotNull(phyche);
-			assertEquals(checkup.getPhycheId(), phyche.getPhycheId());
+			assertEquals(checkup.getPhycheId(), phyche.get(0).getPhycheId());
 		}
 		@Test
 		public void findByDateTest() {

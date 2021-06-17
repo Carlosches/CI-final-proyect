@@ -55,7 +55,7 @@ public class MeasureControllerImpl implements MeasureController {
 			bd.saveMeasurement(measurement, measurement.getInstitution().getInstId());
 		}
 
-		return "redirect:/measurements/";
+		return "redirect:/front/measurements/";
 
 	} 
 	@Override
@@ -83,7 +83,7 @@ public class MeasureControllerImpl implements MeasureController {
 			measurement.setMeasId(id);
 			bd.setMeasurement(measurement);
 		}
-		return "redirect:/measurements/";
+		return "redirect:/front/measurements/";
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class MeasureControllerImpl implements MeasureController {
 	public String deleteMeasurement(@PathVariable("id") long id) {
 		Measurement measurement = bd.measurementFindById(id);
 		bd.deleteMeasurement(measurement.getMeasId());
-		return "redirect:/measurements/";
+		return "redirect:/front/measurements/";
 	}
 	
 	@Override
@@ -102,5 +102,11 @@ public class MeasureControllerImpl implements MeasureController {
 		model.addAttribute("measures",measures);
 		
 		return "measurements/show-measurements";
+	}
+	@Override
+	@GetMapping("/checkmeasures/{measId}")
+	public String getCheckMeasures(@PathVariable("measId") long measId, Model model) {
+		model.addAttribute("checkmeasures", bd.getCheckMeasureFromMeas(measId));
+		return "/checkmeasures/show-checkmeasures";
 	}
 }

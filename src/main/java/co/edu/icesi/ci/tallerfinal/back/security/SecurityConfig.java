@@ -54,10 +54,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers("/front/checkmeasures/**").hasRole("operator")
         .antMatchers("/front/**").authenticated().anyRequest().permitAll()
         .and()
-            .formLogin().loginPage("/front/login").failureUrl("/login?error")
+            .formLogin().loginPage("/front/login").failureUrl("/front/login?error")
                 .usernameParameter("username").passwordParameter("password")
-        .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-        .permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+        .and().logout().invalidateHttpSession(true).clearAuthentication(true).
+				logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/front/login")
+				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+
 	}
 
 

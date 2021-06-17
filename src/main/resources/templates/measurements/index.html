@@ -52,7 +52,7 @@
                   <td th:text="${measure.measUnit}"></td>
                   <td th:text="${measure.institution.instName}"></td>
                    <td>
-                 	 <a th:href="@{/front/checkmeasures/showFromMeasures/{id}(id=${measure.measId})}">Show check measures</a>
+                 	 <a th:href="@{/front/measurements/checkmeasures/{measId}(measId=${measure.measId})}">Show check measures</a>
                   </td>	
                   
                   <td><a th:href="@{/front/measurements/edit/{id}(id=${measure.measId})}"
@@ -67,10 +67,10 @@
         </div>
       </div>
       <p class="my-5">
-					<a href="/measurements/add/" class="btn btn-primary">
+					<a href="/front/measurements/add/" class="btn btn-primary">
 					<i class="fas fa-plus-circle"></i> Add measurement</a>
 				</p>
-      <a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
+      <a href="/front/"><i class="fas fa-home ml-2"></i> Go back to main</a>
     </div>
   </body>
 </html>

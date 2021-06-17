@@ -4,6 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Physicalcheckup;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface PhysicalCheckupController {
 	
@@ -19,7 +20,7 @@ public interface PhysicalCheckupController {
 
 	public String deletePhycheckup(long id);
 
-	public String showFromVisit(long id, Model model);
+	public String getCheckMeasures(@PathVariable("pycheId") long pycheId, Model model);
 
 	public String showFromCheckMeasur(Model model, long id);
 }

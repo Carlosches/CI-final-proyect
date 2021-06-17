@@ -12,6 +12,6 @@ public interface PhysicalcheckupService {
 	public Physicalcheckup getPhysicalcheckup(long id);
 	public Iterable<Physicalcheckup> findAll();
 	public void delete(Physicalcheckup phycheckuo);
-	public Physicalcheckup findByVisitId(long id);
+	public List<Physicalcheckup> findByVisitId(long id);
 	public List<Physicalcheckup> findByDate(Date date);
 }

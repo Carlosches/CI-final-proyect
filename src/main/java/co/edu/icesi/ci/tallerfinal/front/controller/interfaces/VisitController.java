@@ -20,4 +20,5 @@ public interface VisitController {
 	public String deleteVisist(long id);
 
 	public String showFromPhycheckup(Model model, long id);
+	public String getPychesFromVisit(Model model,long visitId);
 }

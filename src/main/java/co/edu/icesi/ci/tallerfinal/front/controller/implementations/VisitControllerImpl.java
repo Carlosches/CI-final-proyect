@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
+import co.edu.icesi.ci.tallerfinal.front.model.classes.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.VisitController;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
@@ -106,5 +107,13 @@ public class VisitControllerImpl implements VisitController {
         model.addAttribute("visits", visits);
         return "/visits/index";
     }
-
+    @Override
+    @GetMapping("/phycheckups/{visitId}")
+    public String getPychesFromVisit(Model model, @PathVariable("visitId") long visitId){
+        List<Physicalcheckup> phycheckups = bd.getPychesFromVisit(visitId);
+        model.addAttribute("phycheckups", phycheckups);
+        model.addAttribute("idVisit", visitId);
+        model.addAttribute("from", "visit");
+        return  "phycheckups/index";
+    }
 }
