@@ -15,4 +15,5 @@ public interface CheckMeasurService {
 	public boolean existById(CheckMeasurPK checkMeasurePK);
 	public List<CheckMeasur> findByPycheId(long pycheId);
 	public List<CheckMeasur> findByMeasId(long measId);
+	CheckMeasur findById(CheckMeasurPK checkMeasurPK);
 }

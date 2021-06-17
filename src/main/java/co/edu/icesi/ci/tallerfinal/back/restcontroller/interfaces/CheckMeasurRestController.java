@@ -8,4 +8,6 @@ public interface CheckMeasurRestController {
     public Iterable<CheckMeasur> getChekMeasur();
     public void saveCheckMeasur(CheckMeasur checkMeasur, long measurementId, long phycheId);
     public void updateCheckMeasur(CheckMeasur checkMeasur);
+
+    CheckMeasur findById(long phycheId, long measId);
 }

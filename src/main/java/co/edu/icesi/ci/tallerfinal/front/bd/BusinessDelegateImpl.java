@@ -307,11 +307,10 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         return response;
     }
 
-    // POST // TODO in REST CONTROLLER
-    public CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK){
-        String endpoint = REST_URL + "/checkmeasures/";
-
-        CheckMeasur response = restTemplate.postForObject(endpoint, checkMeasurPK, CheckMeasur.class);
+    // GET // TODO in REST CONTROLLER
+    public CheckMeasur checkMeasurFindById(long phycheId, long measId){
+        String endpoint = REST_URL + "/checkmeasures/"+phycheId + "/" + measId;
+        CheckMeasur response = restTemplate.getForObject(endpoint, CheckMeasur.class);
 
         return response;
 

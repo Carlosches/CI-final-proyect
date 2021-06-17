@@ -76,7 +76,7 @@ public interface BusinessDelegate {
 
     boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK);
 
-    CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK);
+    CheckMeasur checkMeasurFindById(long phycheId, long measId);
 
     CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId);
 
