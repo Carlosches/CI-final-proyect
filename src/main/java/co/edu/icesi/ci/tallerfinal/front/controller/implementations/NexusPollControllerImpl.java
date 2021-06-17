@@ -27,7 +27,6 @@ public class NexusPollControllerImpl {
     }
 
 
-    @Override
     @GetMapping("/edit/{id}")
     public String editVisit(@PathVariable("id") long id, Model model) {
 //        Visit visit = bd.visitFindById(id);
