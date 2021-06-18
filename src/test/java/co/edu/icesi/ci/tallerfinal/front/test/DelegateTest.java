@@ -3,6 +3,7 @@ package co.edu.icesi.ci.tallerfinal.front.test;
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegateImpl;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -103,14 +104,14 @@ public class DelegateTest {
             Institutioncampus inst2 = new Institutioncampus();
 
             Institutioncampus[] instList = {inst1,inst2};
-            when(restTemplate.getForObject(REST_URL+"/institutionscampus/",Institutioncampus[].class))
+            when(restTemplate.getForObject(REST_URL+"/institutioncampus/",Institutioncampus[].class))
                     .thenReturn(instList);
 
             List<Institutioncampus> listResponse =businessDelegate.institutionCampusFindAll();
             assertNotNull(listResponse);
             assertEquals(inst1.getInstcamId(), listResponse.get(0).getInstcamId());
             assertEquals(inst2.getInstcamId(), listResponse.get(1).getInstcamId());
-            verify(restTemplate).getForObject(REST_URL+"/institutionscampus/",Institutioncampus[].class);
+            verify(restTemplate).getForObject(REST_URL+"/institutioncampus/",Institutioncampus[].class);
         }
 
         @Test
@@ -248,6 +249,94 @@ public class DelegateTest {
         }
 
         @Test
+        public void checkMeasurFindAllTest(){
+            Measurement measurement = new Measurement();
+            Measurement measurement2 = new Measurement();
+            Physicalcheckup pyche = new Physicalcheckup();
+            Physicalcheckup pyche2 = new Physicalcheckup();
+
+            CheckMeasur measur1 = new CheckMeasur();
+            measur1.setMeasurement(measurement);
+            measur1.setPhysicalcheckup(pyche);
+            CheckMeasur measur2 = new CheckMeasur();
+            measur2.setMeasurement(measurement2);
+            measur2.setPhysicalcheckup(pyche2);
+
+            CheckMeasur[] measurList = {measur1,measur2};
+            when(restTemplate.getForObject(REST_URL+"/checkmeasures/",CheckMeasur[].class))
+                    .thenReturn(measurList);
+
+            List<CheckMeasur> listResponse =businessDelegate.checkMeasurFindAll();
+            assertNotNull(listResponse);
+            assertEquals(measur1.getMeasurement().getMeasId(), listResponse.get(0).getMeasurement().getMeasId());
+            assertEquals(measur2.getPhysicalcheckup().getPhycheId(), listResponse.get(0).getPhysicalcheckup().getPhycheId());
+            verify(restTemplate).getForObject(REST_URL+"/checkmeasures/",CheckMeasur[].class);
+        }
+        @Test
+        public void checkMeasurFindByIdTest(){
+            Measurement measurement = new Measurement();
+            Physicalcheckup pyche = new Physicalcheckup();
+            CheckMeasur measur = new CheckMeasur();
+            CheckMeasurPK measurPK = new CheckMeasurPK();
+            measurPK.setMeasMeasId(measurement.getMeasId());
+            measurPK.setPhychePhycheId(pyche.getPhycheId());
+            measur.setId(measurPK);
+            when(restTemplate.getForObject(REST_URL+"/checkmeasures/"+pyche.getPhycheId()+"/"+measurement.getMeasId(),CheckMeasur.class))
+                    .thenReturn(measur);
+            CheckMeasur measResponse = businessDelegate.checkMeasurFindById(measur.getId().getMeasMeasId(), measur.getId().getPhychePhycheId());
+            assertNotNull(measResponse);
+            assertEquals(measResponse.getId().getMeasMeasId(), measur.getId().getMeasMeasId());
+            assertEquals(measResponse.getId().getPhychePhycheId(), measur.getId().getPhychePhycheId());
+
+            verify(restTemplate).getForObject(REST_URL+"/checkmeasures/"+pyche.getPhycheId()+"/"+measurement.getMeasId(),CheckMeasur.class);
+        }
+        @Test
+        public void saveCheckmeasurTest(){
+            CheckMeasur measur = new CheckMeasur();
+            // REST endpoint
+            String endpoint = REST_URL + "/checkmeasures/";
+            Measurement meas = new Measurement();
+            Physicalcheckup pyche = new Physicalcheckup();
+            measur.setMeasurement(meas);
+            measur.setPhysicalcheckup(pyche);
+
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
+                    .queryParam("measId", meas.getMeasId())
+                    .queryParam("phycheId", pyche.getPhycheId());
+            endpoint = builder.toUriString();
+
+
+            when(restTemplate.postForObject(endpoint, measur, CheckMeasur.class))
+                    .thenReturn(measur);
+
+            CheckMeasur measResponse = businessDelegate.saveCheckMeasur(measur, meas.getMeasId(), pyche.getPhycheId());
+            assertNotNull(measResponse);
+            assertEquals(measur.getMeasurement().getMeasId(), measResponse.getMeasurement().getMeasId());
+            assertEquals(measur.getPhysicalcheckup().getPhycheId(), measResponse.getPhysicalcheckup().getPhycheId());
+            verify(restTemplate).postForObject(endpoint, measur, CheckMeasur.class);
+
+        }
+        @Test
+        public void setCheckMeasurTest(){
+            Measurement measurement = new Measurement();
+            Physicalcheckup pyche = new Physicalcheckup();
+            CheckMeasur measur = new CheckMeasur();
+            CheckMeasurPK measurPK = new CheckMeasurPK();
+            measurPK.setMeasMeasId(measurement.getMeasId());
+            measurPK.setPhychePhycheId(pyche.getPhycheId());
+            measur.setId(measurPK);
+
+            String endpoint = REST_URL+"/checkmeasures/"+measurement.getMeasId()+"/"+pyche.getPhycheId();
+
+            when(restTemplate.getForObject(endpoint,CheckMeasur.class)).thenReturn(measur);
+
+            CheckMeasur measurToUpdate = businessDelegate.checkMeasurFindById(measur.getId().getMeasMeasId(), measur.getId().getPhychePhycheId());
+            businessDelegate.setCheckMeasur(measurToUpdate);
+            verify(restTemplate).getForObject(endpoint,CheckMeasur.class);
+            verify(restTemplate).put(REST_URL + "/checkmeasures/", measur, CheckMeasur.class);
+            assertNotNull(measurToUpdate);
+        }
+        @Test
         public void physicalcheckupsFindAllTest(){
             Physicalcheckup phyche1 = new Physicalcheckup();
             Physicalcheckup phyche2 = new Physicalcheckup();
@@ -318,6 +407,5 @@ public class DelegateTest {
             verify(restTemplate).put(REST_URL + "/phycheckups/", pycheToUpdate, Physicalcheckup.class);
             assertNotNull(pycheToUpdate);
         }
-
     }
 }

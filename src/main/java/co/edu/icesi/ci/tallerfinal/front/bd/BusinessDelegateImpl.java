@@ -316,19 +316,19 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // POST // TODO in REST CONTROLLER
-    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
-        String endpoint = REST_URL + "/checkmeasures/fk";
+//    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
+//        String endpoint = REST_URL + "/checkmeasures/fk";
+//
+//        Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
+//
+//        return response.booleanValue();
 
-        Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
-
-        return response.booleanValue();
-
-    }
+//    }
 
     // POST // TODO in REST CONTROLLER
     public CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId){
 
-        String endpoint = REST_URL + "/checkmeasures/data";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -343,7 +343,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     // PUT // TODO in REST CONTROLLER
     public void setCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/checkmeasures/data";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         restTemplate.put(endpoint, checkMeasur, CheckMeasur.class);
 

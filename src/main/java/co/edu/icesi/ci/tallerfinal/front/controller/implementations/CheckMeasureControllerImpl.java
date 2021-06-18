@@ -56,17 +56,17 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 				model.addAttribute("from","error");
 				return "checkmeasures/add-checkmeasure";
 			}
-			CheckMeasurPK checkMeasurePK = new CheckMeasurPK();
-			checkMeasurePK.setMeasMeasId(checkmeasure.getMeasurement().getMeasId());
-			checkMeasurePK.setPhychePhycheId(checkmeasure.getPhysicalcheckup().getPhycheId());
-			checkmeasure.setId(checkMeasurePK);
-			if(bd.checkMeasurExistById(checkMeasurePK)==true) {
-				model.addAttribute("checkMeasur", checkmeasure);
-				model.addAttribute("measures", bd.measurementFindAll());
-				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
-				model.addAttribute("from","sameId");
-				return "checkmeasures/add-checkmeasure";
-			}
+//			CheckMeasurPK checkMeasurePK = new CheckMeasurPK();
+//			checkMeasurePK.setMeasMeasId(checkmeasure.getMeasurement().getMeasId());
+//			checkMeasurePK.setPhychePhycheId(checkmeasure.getPhysicalcheckup().getPhycheId());
+//			checkmeasure.setId(checkMeasurePK);
+//			if(bd.checkMeasurExistById(checkMeasurePK)==true) {
+//				model.addAttribute("checkMeasur", checkmeasure);
+//				model.addAttribute("measures", bd.measurementFindAll());
+//				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
+//				model.addAttribute("from","sameId");
+//				return "checkmeasures/add-checkmeasure";
+//			}
 			bd.saveCheckMeasur(checkmeasure, checkmeasure.getMeasurement().getMeasId(), checkmeasure.getPhysicalcheckup().getPhycheId());
 			Physicalcheckup phy = checkmeasure.getPhysicalcheckup();
 			phy.addCheckMeasur(checkmeasure);

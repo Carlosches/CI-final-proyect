@@ -26,7 +26,7 @@ public class CheckMeasurRestControllerImpl implements CheckMeasurRestController 
     }
 
     @Override
-    @PostMapping("/checkmeasures/data")
+    @PostMapping("/checkmeasures/")
     public void saveCheckMeasur(@RequestBody CheckMeasur checkMeasur,
                                 @RequestParam(value = "phycheId", required = true) long phycheId,
                                 @RequestParam(value = "measId", required = true) long measId){
