@@ -1,8 +1,7 @@
-package co.edu.icesi.ci.tallerfinal.back.model;
-
-
+package co.edu.icesi.ci.tallerfinal.front.model.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,44 +9,25 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the NEXUSPOLL database table.
- * 
- */
-@Entity
-@NamedQuery(name="Nexuspoll.findAll", query="SELECT n FROM Nexuspoll n")
 public class Nexuspoll implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="NEXUSPOLL_NEXPOLLID_GENERATOR", sequenceName="NEXUSPOLL_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NEXUSPOLL_NEXPOLLID_GENERATOR")
-	@Column(name="NEXPOLL_ID")
 	private long nexpollId;
 
-	@Column(name="INST_INST_ID")
 	private BigDecimal instInstId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="NEXPOLL_ENDDATE")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nexpollEnddate;
 
-	@Column(name="NEXPOLL_NAME")
 	private String nexpollName;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="NEXPOLL_STARTDATE")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nexpollStartdate;
 
-	//bi-directional many-to-one association to Epidemevent
-	@ManyToOne
-	@JoinColumn(name="EPIEVE_EPIEVE_ID")
-	private Epidemevent epidemevent;
-
-	//bi-directional many-to-one association to Nexusquestion
 	@JsonIgnore
-	@OneToMany(mappedBy="nexuspoll")
 	private List<Nexusquestion> nexusquestions;
 
 	public Nexuspoll() {
@@ -93,30 +73,22 @@ public class Nexuspoll implements Serializable {
 		this.nexpollStartdate = nexpollStartdate;
 	}
 
-	public Epidemevent getEpidemevent() {
-		return this.epidemevent;
-	}
-
-	public void setEpidemevent(Epidemevent epidemevent) {
-		this.epidemevent = epidemevent;
-	}
-
-	public List<Nexusquestion> getNexusquestions() {
+	public List<co.edu.icesi.ci.tallerfinal.front.model.classes.Nexusquestion> getNexusquestions() {
 		return this.nexusquestions;
 	}
 
-	public void setNexusquestions(List<Nexusquestion> nexusquestions) {
+	public void setNexusquestions(List<co.edu.icesi.ci.tallerfinal.front.model.classes.Nexusquestion> nexusquestions) {
 		this.nexusquestions = nexusquestions;
 	}
 
-	public Nexusquestion addNexusquestion(Nexusquestion nexusquestion) {
+	public co.edu.icesi.ci.tallerfinal.front.model.classes.Nexusquestion addNexusquestion(co.edu.icesi.ci.tallerfinal.front.model.classes.Nexusquestion nexusquestion) {
 		getNexusquestions().add(nexusquestion);
 		nexusquestion.setNexuspoll(this);
 
 		return nexusquestion;
 	}
 
-	public Nexusquestion removeNexusquestion(Nexusquestion nexusquestion) {
+	public co.edu.icesi.ci.tallerfinal.front.model.classes.Nexusquestion removeNexusquestion(Nexusquestion nexusquestion) {
 		getNexusquestions().remove(nexusquestion);
 		nexusquestion.setNexuspoll(null);
 

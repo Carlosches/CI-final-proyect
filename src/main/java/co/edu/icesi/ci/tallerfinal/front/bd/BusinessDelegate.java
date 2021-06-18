@@ -88,5 +88,34 @@ public interface BusinessDelegate {
 
     void deleteCheckMeasur(CheckMeasur checkMeasur);
 
+    // ==========================
+    // NEXUS POLL
+    // ==========================
+
+    List<Nexuspoll> nexusPollFindAll();
+
+    Nexuspoll addNexusPoll(Nexuspoll nexuspoll);
+
+    Nexuspoll nexusPollFindById(long id);
+
+    Nexuspoll updateNexusPoll(Nexuspoll nexuspoll);
+
+    void deleteNexusPoll(Nexuspoll nexuspoll);
+
+    // ==========================
+    // NEXUS POLL QUESTIONS
+    // ==========================
+
+    List<Nexusquestion> nexusQuestionsFindAll();
+
+    Nexusquestion addNexusPollQuestion(Nexusquestion nexuspollQuestion);
+
+    Nexusquestion nexusPollQuestionFindById(long id);
+
+    Nexusquestion updateNexusPollQuestion(Nexusquestion nexuspollquestion);
+
+    void deleteNexusQuestion(Nexusquestion nexusquestion);
+
+
 
 }

@@ -4,6 +4,7 @@ import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -38,6 +39,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // Person
     // ==========================
 
+    @Override
     public List<Person> personFindAll(){
 
         String endpoint = REST_URL + "/persons/";
@@ -58,6 +60,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
 
     // TODO in REST CONTROLLER
+    @Override
     public List<Institution> institutionFindAll(){
 
         String endpoint = REST_URL + "/institutions/";
@@ -73,6 +76,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // InstitutionCampus
     // ==========================
 
+    @Override
     public List<Institutioncampus> institutionCampusFindAll(){
 
         String endpoint = REST_URL + "/institutioncampus/";
@@ -94,6 +98,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
 
     //GET
+    @Override
     public List<Visit> visitFindAll() {
         String endpoint = REST_URL + "/visits/";
       //  System.out.println(endpoint);
@@ -104,6 +109,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     //GET
+    @Override
     public Visit visitFindById(long persId){
 
         // REST endpoint
@@ -114,6 +120,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     //POST
+    @Override
     public Visit saveVisit(Visit visit, long personId, long campusId){
 
         // REST endpoint
@@ -137,6 +144,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     //PUT
+    @Override
     public void setVisit(Visit visit){
 
         String endpoint = REST_URL + "/visits/";
@@ -145,12 +153,15 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // DELETE // TODO in REST CONTROLLER
+    @Override
     public void deleteVisit(long visitId){
 
         String endpoint = REST_URL + "/visits/" + visitId;
 
         restTemplate.delete(endpoint);
     }
+
+    @Override
     public List<Physicalcheckup> getPychesFromVisit(long visitId){
         String endpoint = REST_URL + "/visits/phycheckups/"+visitId;
         Physicalcheckup[] r = restTemplate.getForObject(endpoint, Physicalcheckup[].class);
@@ -162,6 +173,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
 
     // GET // TODO in REST CONTROLLER
+    @Override
     public List<Physicalcheckup> physicalcheckupsFindAll(){
 
         String endpoint = REST_URL + "/phycheckups/";
@@ -174,6 +186,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // GET // TODO in REST CONTROLLER
+    @Override
     public Physicalcheckup physicalcheckupsFindById(long id){
 
         String endpoint = REST_URL + "/phycheckups/" + id;
@@ -184,6 +197,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // POST // TODO in REST CONTROLLER
+    @Override
     public Physicalcheckup savePhysicalcheckup(Physicalcheckup pc, long persId, long visitId){
 
         // REST endpoint
@@ -207,6 +221,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     //PUT // TODO in REST CONTROLLER
+    @Override
     public void setPhysicalcheckup(Physicalcheckup pc){
 
         String endpoint = REST_URL + "/phycheckups/";
@@ -216,6 +231,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // DELETE // TODO in REST CONTROLLER
+    @Override
     public void deletePhysicalcheckup(long phycheId){
 
         String endpoint = REST_URL + "/phycheckups/" + phycheId;
@@ -223,6 +239,8 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         restTemplate.delete(endpoint);
 
     }
+
+    @Override
     public List<CheckMeasur> getCheckMeasureFromPyche(long pycheId){
         String endpoint = REST_URL + "/phycheckups/checkmeasures/" + pycheId;
         CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
@@ -234,6 +252,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
 
     // GET // TODO in REST CONTROLLER
+    @Override
     public List<Measurement> measurementFindAll(){
 
         String endpoint = REST_URL + "/measurements/";
@@ -245,6 +264,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // GET // TODO in REST CONTROLLER
+    @Override
     public Measurement measurementFindById(long measId){
 
         String endpoint = REST_URL + "/measurements/" + measId;
@@ -256,6 +276,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // POST // TODO in REST CONTROLLER
+    @Override
     public Measurement saveMeasurement(Measurement measurement, long instId){
         // REST endpoint
         String endpoint = REST_URL + "/measurements";
@@ -272,6 +293,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // PUT // TODO in REST CONTROLLER
+    @Override
     public void setMeasurement(Measurement measurement){
         String endpoint = REST_URL + "/measurements/";
 
@@ -279,6 +301,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // DELETE  // TODO in REST CONTROLLER
+    @Override
     public void deleteMeasurement(long measId){
 
         String endpoint = REST_URL + "/measurements/" + measId;
@@ -286,6 +309,8 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         restTemplate.delete(endpoint);
 
     }
+
+    @Override
     public List<CheckMeasur> getCheckMeasureFromMeas(long measId){
         String endpoint = REST_URL + "/measurements/checkmeasures/" + measId;
         CheckMeasur[] r = restTemplate.getForObject(endpoint, CheckMeasur[].class);
@@ -297,6 +322,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
 
     // GET // TODO in REST CONTROLLER
+    @Override
     public List<CheckMeasur> checkMeasurFindAll(){
         String endpoint = REST_URL + "/checkmeasures/";
 
@@ -311,11 +337,13 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         String endpoint = REST_URL + "/checkmeasures/"+phycheId + "/" + measId;
         CheckMeasur response = restTemplate.getForObject(endpoint, CheckMeasur.class);
 
+
         return response;
 
     }
 
     // POST // TODO in REST CONTROLLER
+
 //    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
 //        String endpoint = REST_URL + "/checkmeasures/fk";
 //
@@ -323,9 +351,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 //
 //        return response.booleanValue();
 
+
 //    }
 
     // POST // TODO in REST CONTROLLER
+    @Override
     public CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId){
 
         String endpoint = REST_URL + "/checkmeasures/";
@@ -342,6 +372,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // PUT // TODO in REST CONTROLLER
+    @Override
     public void setCheckMeasur(CheckMeasur checkMeasur){
         String endpoint = REST_URL + "/checkmeasures/";
 
@@ -350,11 +381,129 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     }
 
     // DELETE // TODO in REST CONTROLLER
+    @Override
     public void deleteCheckMeasur(CheckMeasur checkMeasur){
         String endpoint = REST_URL + "/checkmeasures/data";
 
         restTemplate.delete(endpoint, checkMeasur, CheckMeasur.class);
 
     }
+
+    // ==========================
+    // NEXUS POLL
+    // ==========================
+
+    @Override
+    public List<Nexuspoll> nexusPollFindAll(){
+        String endpoint = REST_URL + "/nexus-poll/";
+
+        Nexuspoll[] r = restTemplate.getForObject(endpoint, Nexuspoll[].class);
+        List<Nexuspoll> response = Arrays.asList(r);
+
+        return response;
+    }
+
+    @Override
+    public Nexuspoll addNexusPoll(Nexuspoll nexuspoll){
+        String endpoint = REST_URL + "/nexus-poll/";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
+
+        Nexuspoll response = restTemplate.postForObject(endpoint, request, Nexuspoll.class);
+        return response;
+    }
+
+    @Override
+    public Nexuspoll nexusPollFindById(long id){
+        String endpoint = REST_URL + "/nexus-poll/"+id;
+
+        Nexuspoll response = restTemplate.getForObject(endpoint, Nexuspoll.class);
+        return response;
+    }
+
+    @Override
+    public Nexuspoll updateNexusPoll(Nexuspoll nexuspoll){
+
+        String endpoint = REST_URL + "/nexus-poll/";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
+
+        restTemplate.put(endpoint, request ,Nexuspoll.class);
+
+        return nexuspoll;
+
+    }
+
+    @Override
+    public void deleteNexusPoll(Nexuspoll nexuspoll){
+        String endpoint = REST_URL + "/nexus-poll/" + nexuspoll.getNexpollId();
+        restTemplate.delete(endpoint,Nexuspoll.class);
+    }
+
+    // ==========================
+    // NEXUS POLL QUESTIONS
+    // ==========================
+
+    @Override
+    public List<Nexusquestion> nexusQuestionsFindAll(){
+        String endpoint = REST_URL + "/nexus-quest/";
+
+        Nexusquestion[] r = restTemplate.getForObject(endpoint, Nexusquestion[].class);
+        List<Nexusquestion> response = Arrays.asList(r);
+
+        return response;
+    }
+
+    @Override
+    public Nexusquestion addNexusPollQuestion(Nexusquestion nexuspollQuestion){
+        String endpoint = REST_URL + "/nexus-quest/";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Nexusquestion> request = new HttpEntity<>(nexuspollQuestion, headers);
+
+        Nexusquestion response = restTemplate.postForObject(endpoint, request, Nexusquestion.class);
+        return response;
+    }
+
+    @Override
+    public Nexusquestion nexusPollQuestionFindById(long id){
+        String endpoint = REST_URL + "/nexus-quest/"+id;
+
+        Nexusquestion response = restTemplate.getForObject(endpoint, Nexusquestion.class);
+        return response;
+    }
+
+    @Override
+    public Nexusquestion updateNexusPollQuestion(Nexusquestion nexuspollquestion){
+
+        String endpoint = REST_URL + "/nexus-quest/";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Nexusquestion> request = new HttpEntity<>(nexuspollquestion, headers);
+
+        restTemplate.put(endpoint, request ,Nexusquestion.class);
+
+        return nexuspollquestion;
+
+    }
+
+    @Override
+    public void deleteNexusQuestion(Nexusquestion nexusquestion){
+        String endpoint = REST_URL + "/nexus-quest/" + nexusquestion.getNexquesId();
+        restTemplate.delete(endpoint,Nexuspoll.class);
+
+    }
+
+
 
 }
