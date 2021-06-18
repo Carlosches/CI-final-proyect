@@ -56,17 +56,17 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 				model.addAttribute("from","error");
 				return "checkmeasures/add-checkmeasure";
 			}
-			CheckMeasurPK checkMeasurePK = new CheckMeasurPK();
-			checkMeasurePK.setMeasMeasId(checkmeasure.getMeasurement().getMeasId());
-			checkMeasurePK.setPhychePhycheId(checkmeasure.getPhysicalcheckup().getPhycheId());
-			checkmeasure.setId(checkMeasurePK);
-			if(bd.checkMeasurExistById(checkMeasurePK)==true) {
-				model.addAttribute("checkMeasur", checkmeasure);
-				model.addAttribute("measures", bd.measurementFindAll());
-				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
-				model.addAttribute("from","sameId");
-				return "checkmeasures/add-checkmeasure";
-			}
+//			CheckMeasurPK checkMeasurePK = new CheckMeasurPK();
+//			checkMeasurePK.setMeasMeasId(checkmeasure.getMeasurement().getMeasId());
+//			checkMeasurePK.setPhychePhycheId(checkmeasure.getPhysicalcheckup().getPhycheId());
+//			checkmeasure.setId(checkMeasurePK);
+//			if(bd.checkMeasurExistById(checkMeasurePK)==true) {
+//				model.addAttribute("checkMeasur", checkmeasure);
+//				model.addAttribute("measures", bd.measurementFindAll());
+//				model.addAttribute("phycheckups", bd.physicalcheckupsFindAll());
+//				model.addAttribute("from","sameId");
+//				return "checkmeasures/add-checkmeasure";
+//			}
 			bd.saveCheckMeasur(checkmeasure, checkmeasure.getMeasurement().getMeasId(), checkmeasure.getPhysicalcheckup().getPhycheId());
 			Physicalcheckup phy = checkmeasure.getPhysicalcheckup();
 			phy.addCheckMeasur(checkmeasure);
@@ -80,12 +80,9 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 
 	} 
 	@Override
-	@GetMapping("/edit/{id}/{id2}")
-	public String editCheckmeasure(@PathVariable("id") long id,@PathVariable("id2") long id2, Model model) {
-		CheckMeasurPK chPK = new CheckMeasurPK();
-		chPK.setPhychePhycheId(id);
-		chPK.setMeasMeasId(id2);
-		CheckMeasur checkMeasur = bd.CheckMeasurFindById(chPK);
+	@GetMapping("/edit/{phycheId}/{measId}")
+	public String editCheckmeasure(@PathVariable("phycheId") long phycheId,@PathVariable("measId") long measId, Model model) {
+		CheckMeasur checkMeasur = bd.checkMeasurFindById(phycheId,measId);
 		
 		model.addAttribute("checkMeasur", checkMeasur);
 		model.addAttribute("measures", bd.measurementFindAll());
@@ -115,22 +112,11 @@ public class CheckMeasureControllerImpl implements CheckMeasureController {
 	}
 
 	@Override
-	@GetMapping("/del/{id}/{id2}")
-	public String deleteCheckmeasure(@PathVariable("id") long id,@PathVariable("id2") long id2) {
-		CheckMeasurPK chPK = new CheckMeasurPK();
-		chPK.setPhychePhycheId(id);
-		chPK.setMeasMeasId(id2);
-		CheckMeasur check = bd.CheckMeasurFindById(chPK);
+	@GetMapping("/del/{phycheId}/{measId}")
+	public String deleteCheckmeasure(@PathVariable("phycheId") long phycheId, @PathVariable("measId") long measId) {
+		CheckMeasur check = bd.checkMeasurFindById(phycheId,measId);
 		bd.deleteCheckMeasur(check);
 		return "redirect:/front/checkmeasures/";
 	}
 
-	@Override
-	@GetMapping("/showFromMeasures/{id}")
-	public String showFromMeasures(@PathVariable("id") long id, Model model) {
-		Measurement measurement = bd.measurementFindById(id);
-		List<CheckMeasur> ch = (List<CheckMeasur>) measurement.getCheckMeasurs();
-		model.addAttribute("checkmeasures", ch);
-		return "/checkmeasures/show-checkmeasures";
-	}
 }

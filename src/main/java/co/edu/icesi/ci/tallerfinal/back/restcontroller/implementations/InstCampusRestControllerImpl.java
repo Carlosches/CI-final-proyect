@@ -7,6 +7,7 @@ import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.InstCampusRest
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,4 +27,12 @@ public class InstCampusRestControllerImpl implements InstCampusRestController {
     public Iterable<Institutioncampus> getInstCampus(){
         return campusRepository.findAll();
     }
+
+    @Override
+    @GetMapping("/institutioncampus/{instId}")
+    public Institutioncampus getInstCampus(@PathVariable("instId") long instId){
+        return campusRepository.findById(instId).get();
+    }
+
+
 }

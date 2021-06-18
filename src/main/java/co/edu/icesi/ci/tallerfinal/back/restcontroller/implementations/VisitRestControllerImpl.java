@@ -2,11 +2,12 @@ package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 
 import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
+import co.edu.icesi.ci.tallerfinal.back.repositories.CampusRepository;
+import co.edu.icesi.ci.tallerfinal.back.repositories.PersonRepository;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.VisitRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
 import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,11 +16,14 @@ public class VisitRestControllerImpl implements VisitRestController {
 
     private VisitService visitService;
     private PhysicalcheckupService physicalcheckupService;
+    private PersonRepository personRepository;
+    private CampusRepository campusRepository;
 
-    @Autowired
-    public VisitRestControllerImpl(VisitService visitService, PhysicalcheckupService physicalcheckupService){
+    public VisitRestControllerImpl(VisitService visitService, PhysicalcheckupService physicalcheckupService, PersonRepository personRepository, CampusRepository campusRepository) {
         this.visitService = visitService;
         this.physicalcheckupService = physicalcheckupService;
+        this.personRepository = personRepository;
+        this.campusRepository = campusRepository;
     }
 
     @Override
@@ -38,18 +42,18 @@ public class VisitRestControllerImpl implements VisitRestController {
 
     @Override
     @PostMapping("/visits/")
-    public Visit saveVisit(@RequestBody Visit visit,
-                          @RequestParam(value = "personId", required = true) long personId,
-                          @RequestParam(value = "campusId", required = true) long campusId){
+    public void saveVisit(@RequestBody Visit visit,
+                                          @RequestParam(value = "personId", required = true) long personId,
+                                          @RequestParam(value = "campusId", required = true) long campusId){
 
         visitService.addVisit(visit,personId, campusId);
 
-        return new Visit(); //TODO: Change with added entity
+        //return new Visit(); //TODO: Change with added entity
     }
 
     @Override
     @PutMapping("/visits/")
-    public void updateVisit(Visit visit){
+    public void updateVisit(@RequestBody Visit visit){
         visitService.editVisit(visit);
     }
 

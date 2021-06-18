@@ -107,6 +107,8 @@ public class CheckMeasurServiceImpl implements CheckMeasurService {
 		checkMeasurDao.delete(checkMeasur);
 		
 	}
+
+
 	@Transactional
 	@Override
 	public boolean existById(CheckMeasurPK checkMeasurePK) {
@@ -125,4 +127,9 @@ public class CheckMeasurServiceImpl implements CheckMeasurService {
 	public List<CheckMeasur> findByMeasId(long measId) {
 		return checkMeasurDao.findByMeasId(measId);
 	}
+	@Override
+	public CheckMeasur findById(CheckMeasurPK checkMeasurPK) {
+		return checkMeasurDao.findById(checkMeasurPK);
+	}
+
 }

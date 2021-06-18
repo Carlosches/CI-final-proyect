@@ -1,6 +1,8 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,10 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class BusinessDelegateImpl implements BusinessDelegate {
@@ -22,19 +21,21 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     private RestTemplate restTemplate;
 
-
     public BusinessDelegateImpl() {
-
+       //  this.restTemplate = restTemplate;
         this.restTemplate = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
         messageConverters.add(converter);
         this.restTemplate.setMessageConverters(messageConverters);
 
     }
 
-    // ==========================
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+// ==========================
     // Person
     // ==========================
 
@@ -48,7 +49,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         return response;
     }
-
+    public Person personFindById(long persId){
+        String endpoint = REST_URL+"/persons/"+persId;
+        Person r = restTemplate.getForObject(endpoint, Person.class);
+        return r;
+    }
 
     // ==========================
     // Institution
@@ -82,7 +87,11 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         return response;
 
     }
-
+    public Institutioncampus institutioncampusFindById(long instId){
+        String endpoint = REST_URL + "/institutioncampus/"+instId;
+        Institutioncampus r = restTemplate.getForObject(endpoint, Institutioncampus.class);
+        return r;
+    }
 
     // ==========================
     // Visit
@@ -105,15 +114,6 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         // REST endpoint
         String endpoint = REST_URL + "/visits/" + persId;
-     /*   List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
-      //Add the Jackson Message converter
-      MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-
-      // Note: here we are making this converter to process any kind of response, 
-      // not only application/*json, which is the default behaviour
-      converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));        
-      messageConverters.add(converter);  
-      super.setMessageConverters(messageConverters);*/
 
         Visit response = restTemplate.getForObject(endpoint, Visit.class);
         return response; // TODO
@@ -148,7 +148,6 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     public void setVisit(Visit visit){
 
         String endpoint = REST_URL + "/visits/";
-
         restTemplate.put(endpoint, visit, Visit.class);
 
     }
@@ -333,33 +332,33 @@ public class BusinessDelegateImpl implements BusinessDelegate {
         return response;
     }
 
-    // POST // TODO in REST CONTROLLER
-    @Override
-    public CheckMeasur CheckMeasurFindById(CheckMeasurPK checkMeasurPK){
-        String endpoint = REST_URL + "/checkmeasures/";
+    // GET // TODO in REST CONTROLLER
+    public CheckMeasur checkMeasurFindById(long phycheId, long measId){
+        String endpoint = REST_URL + "/checkmeasures/"+phycheId + "/" + measId;
+        CheckMeasur response = restTemplate.getForObject(endpoint, CheckMeasur.class);
 
-        CheckMeasur response = restTemplate.postForObject(endpoint, checkMeasurPK, CheckMeasur.class);
 
         return response;
 
     }
 
     // POST // TODO in REST CONTROLLER
-    @Override
-    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
-        String endpoint = REST_URL + "/checkmeasures/fk";
 
-        Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
+//    public boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK){
+//        String endpoint = REST_URL + "/checkmeasures/fk";
+//
+//        Boolean response = restTemplate.postForObject(endpoint, checkMeasurePK, Boolean.class);
+//
+//        return response.booleanValue();
 
-        return response.booleanValue();
 
-    }
+//    }
 
     // POST // TODO in REST CONTROLLER
     @Override
     public CheckMeasur saveCheckMeasur(CheckMeasur checkMeasur, long measId, long phycheId){
 
-        String endpoint = REST_URL + "/checkmeasures/data";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         // Add query parameters to URL
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
@@ -375,7 +374,7 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // PUT // TODO in REST CONTROLLER
     @Override
     public void setCheckMeasur(CheckMeasur checkMeasur){
-        String endpoint = REST_URL + "/checkmeasures/data";
+        String endpoint = REST_URL + "/checkmeasures/";
 
         restTemplate.put(endpoint, checkMeasur, CheckMeasur.class);
 

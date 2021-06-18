@@ -7,8 +7,6 @@ import co.edu.icesi.ci.tallerfinal.front.model.classes.CheckMeasur;
 
 public interface CheckMeasureController {
 
-	public String showFromMeasures(long id, Model model);
-
 
 	public String deleteCheckmeasure(long id, long id2);
 

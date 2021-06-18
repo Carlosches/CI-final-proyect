@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,13 +34,33 @@ public class Visit {
     @JsonIgnore
     private List<Physicalcheckup> physicalcheckups;
 
-    @NotNull(message="Se debe elegir una institución", groups=AddVisit.class)
+    //@NotNull(message="Se debe elegir una institución", groups=AddVisit.class)
     private Institutioncampus institutioncampus;
 
-    @NotNull(message="Se debe elegir una persona", groups=AddVisit.class)
+    //@NotNull(message="Se debe elegir una persona", groups=AddVisit.class)
     private Person person;
 
+    private long instId;
+    private long persId;
+
+    public void setInstId(long instId) {
+        this.instId = instId;
+    }
+
+    public void setPersId(long persId) {
+        this.persId = persId;
+    }
+
+    public long getInstId() {
+        return this.instId;
+    }
+
+    public long getPersId() {
+        return this.persId;
+    }
+
     public Visit() {
+        physicalcheckups = new ArrayList<>();
     }
 
     public long getVisitId() {

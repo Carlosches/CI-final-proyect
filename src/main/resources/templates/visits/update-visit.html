@@ -45,7 +45,7 @@
 								th:field="*{institutioncampus}">
 								<option th:each="inst : ${institutions}" th:value="${inst.instcamId}"
 									class="form-control" th:text="${inst.instcamName}"
-									th:selected="${visit.institutioncampus=inst}"></option>
+									th:selected="${visit.instId=inst.instcamId}"></option>
 							</select> <span th:if="${#fields.hasErrors('institutioncampus')}"
 								th:errors="*{institutioncampus}" class="text-danger"></span>
 						</div>
@@ -54,7 +54,7 @@
 								th:field="*{person}">
 								<option th:each="per : ${persons}" th:value="${per.persId}"
 									class="form-control" th:text="${per.persName}"
-									th:selected="${visit.person=per}"></option>
+									th:selected="${visit.persId=per.persId}"></option>
 							</select> <span th:if="${#fields.hasErrors('person')}"
 								th:errors="*{person}" class="text-danger"></span>
 						</div>
