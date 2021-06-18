@@ -443,15 +443,8 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     @Override
     public void deleteNexusPoll(Nexuspoll nexuspoll){
-        String endpoint = REST_URL + "/nexus-poll/";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Nexuspoll> request = new HttpEntity<>(nexuspoll, headers);
-
-        restTemplate.delete(endpoint, request ,Nexuspoll.class);
-
+        String endpoint = REST_URL + "/nexus-poll/" + nexuspoll.getNexpollId();
+        restTemplate.delete(endpoint,Nexuspoll.class);
     }
 
     // ==========================
@@ -507,14 +500,8 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     @Override
     public void deleteNexusQuestion(Nexusquestion nexusquestion){
-        String endpoint = REST_URL + "/nexus-quest/";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Nexusquestion> request = new HttpEntity<>(nexusquestion, headers);
-
-        restTemplate.delete(endpoint, request ,Nexusquestion.class);
+        String endpoint = REST_URL + "/nexus-quest/" + nexusquestion.getNexquesId();
+        restTemplate.delete(endpoint,Nexuspoll.class);
 
     }
 

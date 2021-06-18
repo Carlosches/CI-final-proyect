@@ -42,9 +42,12 @@ public class NexusPollRestControllerImpl implements NexusPollRestController {
     }
 
     @Override
-    @DeleteMapping("/nexus-poll/")
-    public void deleteNexusPollQUestion(@RequestBody Nexuspoll nexuspoll){
-        nexusPollService.delete(nexuspoll);
+    @DeleteMapping("/nexus-poll/{id}")
+    public void deleteNexusPoll(@PathVariable("id") long id){
+        Nexuspoll nexuspoll = nexusPollService.findById(id);
+        if(nexuspoll != null) {
+            nexusPollService.delete(nexuspoll);
+        }
     }
 
 }

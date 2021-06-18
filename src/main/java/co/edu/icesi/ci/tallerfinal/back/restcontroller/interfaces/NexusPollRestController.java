@@ -14,6 +14,6 @@ public interface NexusPollRestController {
 
     Nexuspoll putNexusPoll(@RequestBody Nexuspoll nexuspoll);
 
-    void deleteNexusPollQUestion(@RequestBody Nexuspoll nexuspoll);
+    void deleteNexusPoll(@PathVariable("id") long id);
 
 }

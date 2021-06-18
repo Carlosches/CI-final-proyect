@@ -44,9 +44,16 @@ public class NexusQuestionRestControllerImpl implements NexusQuestionRestControl
     }
 
     @Override
-    @DeleteMapping("/nexus-quest/")
-    public void deleteNexusPollQUestion(@RequestBody Nexusquestion nexusquestion){
-        nexusQuestionService.delete(nexusquestion);
+    @DeleteMapping("/nexus-quest/{id}")
+    public void deleteNexusPollQUestion(@PathVariable("id") long id){
+
+        Nexusquestion nexusquestion = nexusQuestionService.findById(id);
+
+        if(nexusquestion != null){
+            nexusQuestionService.delete(nexusquestion);
+        }
+
+
     }
 
 }
