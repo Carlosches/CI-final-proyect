@@ -36,7 +36,7 @@
             <th>Active</th>
             <th>Name</th>
             <th>Weight</th>
-            <th>Nexus Poll</th>
+            <!--<th>Nexus Poll</th>-->
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -47,10 +47,9 @@
             <td th:text="${quest.nexquesIsactive}"></td>
             <td th:text="${quest.nexquesName}"></td>
             <td th:text="${quest.nexquesWeight}"></td>
-            <td>
-              <!--                            TODO -->
-              <!--                            <a th:href="@{/front/nexuspoll/showFromVisit/{id}(id=${poll.nexpollId})}">Show nexus questions</a>-->
-            </td>
+            <!--<td>
+                                             <a th:href="@{/front/nexuspoll/showFromVisit/{id}(id=${poll.nexpollId})}">Show nexus questions</a>
+            </td>-->
 
             <td><a th:href="@{/front/nexusquest/edit/{id}(id=${quest.nexquesId})}"
                    class="btn btn-primary"><i class="fas fa-edit"></i></a></td>

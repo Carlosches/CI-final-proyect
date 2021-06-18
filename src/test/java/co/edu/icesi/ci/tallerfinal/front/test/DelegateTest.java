@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
@@ -43,9 +45,6 @@ public class DelegateTest {
         businessDelegate = new BusinessDelegateImpl();
         businessDelegate.setRestTemplate(restTemplate);
     }
-    @Nested
-    @DisplayName("Person and institution test")
-    class PersonAndInsitution{
 
         @Test
         public void personFindAllTest(){
@@ -144,7 +143,7 @@ public class DelegateTest {
         public void saveVisitTest(){
             Visit visit1 = new Visit();
             // REST endpoint
-            String endpoint = REST_URL + "/visits";
+            String endpoint = REST_URL + "/visits/";
             Person person = new Person();
             Institutioncampus inst = new Institutioncampus();
             visit1.setPerson(person);
@@ -213,7 +212,7 @@ public class DelegateTest {
         public void saveMeasurementTest(){
             Measurement meas1 = new Measurement();
             // REST endpoint
-            String endpoint = REST_URL + "/measurements";
+            String endpoint = REST_URL + "/measurements/";
             Institution inst = new Institution();
             meas1.setInstitution(inst);
             // Add query parameters to URL
@@ -365,7 +364,7 @@ public class DelegateTest {
         public void savePhysicalcheckupTest(){
             Physicalcheckup pyche1 = new Physicalcheckup();
             // REST endpoint
-            String endpoint = REST_URL + "/phycheckups";
+            String endpoint = REST_URL + "/phycheckups/";
             Person person = new Person();
             Visit visit = new Visit();
             pyche1.setPerson(person);
@@ -407,5 +406,130 @@ public class DelegateTest {
             verify(restTemplate).put(REST_URL + "/phycheckups/", pycheToUpdate, Physicalcheckup.class);
             assertNotNull(pycheToUpdate);
         }
-    }
+        @Test
+        public void nexusPollFindallTest(){
+            Nexuspoll poll1 = new Nexuspoll();
+            Nexuspoll poll2 = new Nexuspoll();
+
+            Nexuspoll[] nexusList = {poll1,poll2};
+            when(restTemplate.getForObject(REST_URL+"/nexus-poll/",Nexuspoll[].class))
+                    .thenReturn(nexusList);
+
+            List<Nexuspoll> listResponse =businessDelegate.nexusPollFindAll();
+            assertNotNull(listResponse);
+            assertEquals(poll1.getNexpollId(), listResponse.get(0).getNexpollId());
+            assertEquals(poll2.getNexpollId(), listResponse.get(1).getNexpollId());
+            verify(restTemplate).getForObject(REST_URL+"/nexus-poll/",Nexuspoll[].class);
+        }
+        @Test
+        public void nexusPollFindById(){
+            Nexuspoll poll1 = new Nexuspoll();
+            when(restTemplate.getForObject(REST_URL+"/nexus-poll/"+poll1.getNexpollId(),Nexuspoll.class))
+                    .thenReturn(poll1);
+            Nexuspoll poll = businessDelegate.nexusPollFindById(poll1.getNexpollId());
+            assertNotNull(poll);
+            assertEquals(poll1.getNexpollId(), poll.getNexpollId());
+            verify(restTemplate).getForObject(REST_URL+"/nexus-poll/"+poll1.getNexpollId(),Nexuspoll.class);
+        }
+        @Test
+        public void saveNexPollTest(){
+            Nexuspoll poll1 = new Nexuspoll();
+            // REST endpoint
+            String endpoint = REST_URL + "/nexus-poll/";
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Nexuspoll> request = new HttpEntity<>(poll1, headers);
+
+
+            when(restTemplate.postForObject(endpoint, request, Nexuspoll.class))
+                    .thenReturn(poll1);
+
+            Nexuspoll poll = businessDelegate.addNexusPoll(poll1);
+            assertNotNull(poll);
+            assertEquals(poll1.getNexpollId(), poll.getNexpollId());
+            verify(restTemplate).postForObject(endpoint, request, Nexuspoll.class);
+
+        }
+        @Test
+        public void updateNexusPollTest(){
+            Nexuspoll nex = new Nexuspoll();
+            nex.setNexpollName("poll1");
+            String endpoint = REST_URL+"/nexus-poll/"+nex.getNexpollId();
+
+            when(restTemplate.getForObject(endpoint, Nexuspoll.class)).thenReturn(nex);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+
+            Nexuspoll pollToUpdate = businessDelegate.nexusPollFindById(nex.getNexpollId());
+            HttpEntity<Nexuspoll> request = new HttpEntity<>(pollToUpdate, headers);
+            pollToUpdate.setNexpollName("name2");
+            businessDelegate.updateNexusPoll(nex);
+            verify(restTemplate).getForObject(endpoint, Nexuspoll.class);
+            verify(restTemplate).put(REST_URL + "/nexus-poll/", request, Nexuspoll.class);
+        }
+
+        @Test
+        public void nexusQuestFindallTest(){
+            Nexusquestion quest1 = new Nexusquestion();
+            Nexusquestion quest2= new Nexusquestion();
+
+            Nexusquestion[] nexList = {quest1,quest2};
+            when(restTemplate.getForObject(REST_URL+"/nexus-quest/",Nexusquestion[].class))
+                    .thenReturn(nexList);
+
+            List<Nexusquestion> listResponse =businessDelegate.nexusQuestionsFindAll();
+            assertNotNull(listResponse);
+            assertEquals(quest1.getNexquesId(), listResponse.get(0).getNexquesId());
+            assertEquals(quest2.getNexquesId(), listResponse.get(1).getNexquesId());
+            verify(restTemplate).getForObject(REST_URL+"/nexus-quest/",Nexusquestion[].class);
+        }
+        @Test
+        public void nexusQuestFindById(){
+            Nexusquestion quest = new Nexusquestion();
+            when(restTemplate.getForObject(REST_URL+"/nexus-quest/"+quest.getNexquesId(),Nexusquestion.class))
+                    .thenReturn(quest);
+            Nexusquestion questResponse = businessDelegate.nexusPollQuestionFindById(quest.getNexquesId());
+            assertNotNull(questResponse);
+            assertEquals(quest.getNexquesId(), questResponse.getNexquesId());
+            verify(restTemplate).getForObject(REST_URL+"/nexus-quest/"+quest.getNexquesId(),Nexusquestion.class);
+        }
+        @Test
+        public void saveNexusQuestTest(){
+            Nexusquestion nex = new Nexusquestion();
+            // REST endpoint
+            String endpoint = REST_URL + "/nexus-quest/";
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Nexusquestion> request = new HttpEntity<>(nex, headers);
+
+            when(restTemplate.postForObject(endpoint, request, Nexusquestion.class))
+                    .thenReturn(nex);
+
+            Nexusquestion quest = businessDelegate.addNexusPollQuestion(nex);
+            assertNotNull(nex);
+            assertEquals(nex.getNexquesId(), quest.getNexquesId());
+            verify(restTemplate).postForObject(endpoint, request, Nexusquestion.class);
+
+        }
+        @Test
+        public void updateNexusquestTest(){
+            Nexusquestion nex = new Nexusquestion();
+            nex.setNexquesName("quest1");
+            nex.setNexquesId(1);
+            String endpoint = REST_URL + "/nexus-quest/"+nex.getNexquesId();
+            when(restTemplate.getForObject(endpoint, Nexusquestion.class)).thenReturn(nex);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Nexusquestion> request = new HttpEntity<>(nex, headers);
+
+            Nexusquestion quesToUpdate = businessDelegate.nexusPollQuestionFindById(nex.getNexquesId());
+            businessDelegate.updateNexusPollQuestion(nex);
+            verify(restTemplate).getForObject(endpoint, Nexusquestion.class);
+            verify(restTemplate).put(REST_URL + "/nexus-quest/", request, Nexusquestion.class);
+        }
+
 }
