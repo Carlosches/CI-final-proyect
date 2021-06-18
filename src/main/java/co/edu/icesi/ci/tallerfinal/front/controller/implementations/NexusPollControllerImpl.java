@@ -52,12 +52,6 @@ public class NexusPollControllerImpl{
         return "redirect:/front/nexuspoll/";
     }
 
-    @GetMapping("/del/{id}")
-    public String deleteNexuspoll(@PathVariable("id") long id) {
-        // TODO LLAMAR AL BD
-        return "redirect:/front/nexuspoll";
-    }
-
     @GetMapping("/edit/{id}")
     public String editNexusPoll(@PathVariable("id") long id, Model model) {
 
