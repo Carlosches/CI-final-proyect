@@ -20,6 +20,7 @@ public interface BusinessDelegate {
     // ==========================
 
     List<Institution> institutionFindAll();
+    Institution institutionFindById(long id);      // falta test
     Institutioncampus institutioncampusFindById(long instId);
 
     // ==========================
@@ -78,7 +79,7 @@ public interface BusinessDelegate {
 
     List<CheckMeasur> checkMeasurFindAll();
 
-    //boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK);
+    boolean checkMeasurExistById(CheckMeasurPK checkMeasurePK);    //falta test
 
     CheckMeasur checkMeasurFindById(long phycheId, long measId);
 

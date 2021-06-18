@@ -4,5 +4,7 @@ import co.edu.icesi.ci.tallerfinal.back.model.Institution;
 
 public interface InstitutionRestController {
 
-    public Iterable<Institution> getInstitution();
+    public Iterable<Institution> getInstitutions();
+    Institution getInstitutionById(long id);
+
 }

@@ -7,6 +7,7 @@ import co.edu.icesi.ci.tallerfinal.back.repositories.InstitutionRepository;
 import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.InstitutionRestController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,13 @@ public class InstitutionRestControllerImpl implements InstitutionRestController 
     }
     @Override
     @GetMapping("/")
-    public Iterable<Institution> getInstitution(){
+    public Iterable<Institution> getInstitutions(){
         return institutionRepository.findAll();
+    }
+
+    @Override
+    @GetMapping("/{instId}")
+    public Institution getInstitutionById(@PathVariable("instId") long instId) {
+        return institutionRepository.findById(instId).get();
     }
 }

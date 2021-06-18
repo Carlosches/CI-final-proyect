@@ -26,12 +26,14 @@ public class PhysicalcheckupRestControllerImpl implements PhysicaclchekcupRestCo
 
     @Override
     @PostMapping("/phycheckups/")
-    public void savePhyche(Physicalcheckup phyche, long personId, long visitId){
+    public void savePhyche(@RequestBody  Physicalcheckup phyche,
+                           @RequestParam(value="persId", required = true) long personId,
+                           @RequestParam(value = "visitId", required=true) long visitId){
         physicalcheckupService.addPhysicalcheckup(phyche, personId, visitId);
     }
     @Override
     @PutMapping("/phycheckups/")
-    public void updatePhyche(Physicalcheckup phyche){
+    public void updatePhyche(@RequestBody Physicalcheckup phyche){
         physicalcheckupService.editPhysicalcheckup(phyche);
     }
 

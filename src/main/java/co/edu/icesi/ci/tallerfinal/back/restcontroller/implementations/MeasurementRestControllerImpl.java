@@ -26,13 +26,14 @@ public class MeasurementRestControllerImpl implements MeasurementRestController 
 
     @Override
     @PostMapping("/measurements/")
-    public void saveMeasurement(Measurement measurement, long insitutionId){
-        measurementService.addMeasurement(measurement, insitutionId);
+    public void saveMeasurement(@RequestBody Measurement measurement,
+                                @RequestParam("instId") long instId){
+        measurementService.addMeasurement(measurement, instId);
     }
 
     @Override
     @PutMapping("/measurements/")
-    public void updateMeasurement(Measurement measurement){
+    public void updateMeasurement(@RequestBody Measurement measurement){
         measurementService.editMeasurement(measurement);
     }
 

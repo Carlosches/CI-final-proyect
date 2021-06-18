@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Measurement {
@@ -37,6 +38,7 @@ public class Measurement {
     private Institution institution;
 
     public Measurement() {
+        this.checkMeasurs = new ArrayList<>();
     }
 
     public long getMeasId() {

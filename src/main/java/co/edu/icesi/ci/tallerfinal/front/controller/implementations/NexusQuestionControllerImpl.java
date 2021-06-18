@@ -35,15 +35,15 @@ public class NexusQuestionControllerImpl {
     }
 
     @PostMapping("/add/")
-    public String saveNexusPollQuestion(@Validated(AddNexusQuestion.class)Nexusquestion nexusquestion,
+    public String saveNexusPollQuestion(Nexusquestion nexusquestion,
                                 BindingResult result,
                                 Model model,
                                 @RequestParam(value = "action", required = true) String action){
 
         if (!action.equals("Cancel")) {
             if (result.hasErrors()) {
-                model.addAttribute("institutions", bd.institutionFindAll());
-                return "nexuspoll/add-nexusquest";
+                model.addAttribute("polls", bd.nexusPollFindAll());
+                return "nexusquest/add-nexusquest";
             }
 
             bd.addNexusPollQuestion(nexusquestion);
@@ -66,7 +66,7 @@ public class NexusQuestionControllerImpl {
 
         model.addAttribute("quest", nexuspollQuestion);
         model.addAttribute("polls", bd.nexusPollFindAll());
-        return "nexuspoll/update-nexusquest";
+        return "nexusquest/update-nexusquest";
 
     }
 
@@ -81,7 +81,7 @@ public class NexusQuestionControllerImpl {
             if (bindingResult.hasErrors()) {
                 nexuspollQuestion.setNexquesId(id);
                 model.addAttribute("polls", bd.nexusPollFindAll());
-                return "nexuspoll/update-nexusquest";
+                return "nexusquest/update-nexusquest";
             }
             nexuspollQuestion.setNexquesId(id);
 
