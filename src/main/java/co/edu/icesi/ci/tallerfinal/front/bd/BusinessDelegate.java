@@ -4,6 +4,7 @@ import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import jdk.jfr.consumer.RecordedStackTrace;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 
 public interface BusinessDelegate {
@@ -32,7 +33,7 @@ public interface BusinessDelegate {
     // ==========================
     // VISIT
     // ==========================
-
+    List<Visit> visitByExitDate(String date);
     List<Visit> visitFindAll();
 
     Visit visitFindById(long persId);

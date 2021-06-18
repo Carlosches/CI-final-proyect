@@ -3,6 +3,7 @@ package co.edu.icesi.ci.tallerfinal.front.bd;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -101,7 +102,18 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     // ==========================
     // Visit
     // ==========================
-
+    //GET
+    @Override
+    public List<Visit> visitByExitDate(String exiDate){
+        String endpoint = REST_URL+"/visits/byexitdate/"+exiDate;
+//        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
+//                .queryParam("exitDate", exiDate);
+//        endpoint = builder.toUriString();
+        Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
+        List<Visit> response = Arrays.asList(r);
+        System.out.println("list response size: "+ response.size());
+        return response;
+    }
     //GET
     @Override
     public List<Visit> visitFindAll() {

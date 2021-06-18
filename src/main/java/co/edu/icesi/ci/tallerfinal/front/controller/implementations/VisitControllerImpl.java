@@ -6,13 +6,17 @@ import co.edu.icesi.ci.tallerfinal.front.controller.interfaces.VisitController;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
 import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -115,5 +119,18 @@ public class VisitControllerImpl implements VisitController {
         model.addAttribute("idVisit", visitId);
         model.addAttribute("from", "visit");
         return  "phycheckups/index";
+    }
+    @GetMapping("/bydate/")
+    public String getVisitsByDate(Model model,
+                                @RequestParam(value = "entranceDate", required = false) String entranceDate,
+                                @RequestParam(value="exitDate", required = false) String exitDate){
+        System.out.println("Exitdate: " + exitDate);
+        model.addAttribute("visits", bd.visitByExitDate(exitDate));
+        return"visits/index";
+    }
+    @GetMapping("/visitsbydate/")
+    public String showConsultOption(Model model){
+        model.addAttribute("visit", new Visit());
+        return "/visits/consult-visit";
     }
 }

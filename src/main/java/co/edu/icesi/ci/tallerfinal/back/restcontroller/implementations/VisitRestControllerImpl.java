@@ -8,7 +8,13 @@ import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.VisitRestContr
 import co.edu.icesi.ci.tallerfinal.back.service.PhysicalcheckupService;
 import co.edu.icesi.ci.tallerfinal.back.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api")
@@ -68,4 +74,16 @@ public class VisitRestControllerImpl implements VisitRestController {
     public Iterable<Physicalcheckup> getPychesFromVisit(@PathVariable("visitId") long visitId){
         return physicalcheckupService.findByVisitId(visitId);
     }
+    @GetMapping("/visits/byexitdate/{exitDate}")
+    public Iterable<Visit> getVisitByExitDate(@PathVariable("exitDate") String exitDate){
+        Date exDate = null;
+        try {
+            exDate= new SimpleDateFormat("yyyy-MM-dd").parse(exitDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return visitService.findByExitdate(exDate);
+    }
+
+
 }
