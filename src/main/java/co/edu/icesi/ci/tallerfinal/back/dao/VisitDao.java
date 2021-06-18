@@ -16,7 +16,7 @@ public interface VisitDao {
 	public Visit update(Visit visit);
 	public void delete(Visit visit);
 	public List<Visit> findAll();
-	public Map<Person, Long> findPersonsByVisitDate(Date entranceDate, Date exitDate);
+	public List<Person> findPersonsByVisitDate(Date entranceDate, Date exitDate);
 	public List<Visit> findVisitsWihtFewerTwoPhy(Date date);
 	public Visit findById(long id);
 	

@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface BusinessDelegate {
     void setRestTemplate(RestTemplate restTemplate);
@@ -34,6 +35,8 @@ public interface BusinessDelegate {
     // VISIT
     // ==========================
     List<Visit> visitByExitDate(String date);
+    List<Visit> visitByEntranceDate(String date);
+    List<Person> getPersonsByVisitDate(String entranceDate, String exitDate);
     List<Visit> visitFindAll();
 
     Visit visitFindById(long persId);

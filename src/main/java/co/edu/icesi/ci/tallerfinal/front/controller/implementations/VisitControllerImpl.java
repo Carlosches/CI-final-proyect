@@ -123,14 +123,27 @@ public class VisitControllerImpl implements VisitController {
     @GetMapping("/bydate/")
     public String getVisitsByDate(Model model,
                                 @RequestParam(value = "entranceDate", required = false) String entranceDate,
-                                @RequestParam(value="exitDate", required = false) String exitDate){
-        System.out.println("Exitdate: " + exitDate);
-        model.addAttribute("visits", bd.visitByExitDate(exitDate));
-        return"visits/index";
+                                @RequestParam(value="exitDate", required = false) String exitDate,
+                                  @RequestParam(value = "action", required = true) String action){
+        if(action.equals("Show all visits")){
+            model.addAttribute("visits",bd.visitFindAll());
+            return "visits/index";
+        }
+        else if(action.equals("Consult visit by entrance date")){
+            model.addAttribute("visits", bd.visitByEntranceDate(entranceDate));
+            return"visits/index";
+        }else if(action.equals("Consult visit by exit date")){
+            model.addAttribute("visits", bd.visitByExitDate(exitDate));
+            return"visits/index";
+        }else{
+            model.addAttribute("persons", bd.getPersonsByVisitDate(entranceDate,exitDate));
+            return "persons/index";
+        }
+
     }
-    @GetMapping("/visitsbydate/")
-    public String showConsultOption(Model model){
-        model.addAttribute("visit", new Visit());
-        return "/visits/consult-visit";
-    }
+//    @GetMapping("/visitsbydate/")
+//    public String showConsultOption(Model model){
+//        model.addAttribute("visit", new Visit());
+//        return "/visits/consult-visit";
+//    }
 }

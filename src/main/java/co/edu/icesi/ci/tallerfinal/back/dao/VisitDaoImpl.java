@@ -1,9 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.back.dao;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -47,8 +44,9 @@ public class VisitDaoImpl implements VisitDao {
 	}
 	// map  --->  { person, number of visits}
 	@Override
-	public Map<Person, Long> findPersonsByVisitDate(Date entranceDate, Date exitDate) {
-		Map<Person, Long> map = new HashMap<>();
+	public List<Person> findPersonsByVisitDate(Date entranceDate, Date exitDate) {
+		//Map<Person, Long> map = new HashMap<>();
+		List<Person> list = new ArrayList<>();
 		String jpql = "select v.person, (select count(*) from v.person.visits) from Visit v where v.visitEntrancedate between :entranceDate and :exitDate ORDER BY v.visitEntrancedate";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("entranceDate", entranceDate);
@@ -60,9 +58,11 @@ public class VisitDaoImpl implements VisitDao {
 			Person person =(Person) obj[0];
 			long cant = (long) obj[1];
 			
-			map.put(person, cant);
+		//	map.put(person, cant);
+			person.setVisitsQuantity(person.getVisits().size());
+			list.add(person);
 		}
-		return map;
+		return list;
 	}
 	
 	@Override

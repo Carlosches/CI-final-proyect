@@ -41,6 +41,7 @@ public class Person {
     private Date persPoliticsaccepteddate;
 
     private Institution institution;
+    private int visitsQuantity;
 
     @JsonIgnore
     private List<Visit> visits;
@@ -49,6 +50,13 @@ public class Person {
     private List<Physicalcheckup> physicalcheckups;
 
     public Person() {
+    }
+    public void setVisitsQuantity(int visitsQuantity) {
+        this.visitsQuantity = visitsQuantity;
+    }
+
+    public int getVisitsQuantity() {
+        return visitsQuantity;
     }
 
     public long getPersId() {

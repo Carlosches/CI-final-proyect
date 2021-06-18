@@ -17,7 +17,7 @@ public interface VisitService {
 	public List<Visit> findByPersonId(long persId);
 	public List<Visit> findByEntrancedate(Date entranceDate);
 	public  List<Visit> findByExitdate(Date exitDate);
-	public Map<Person, Long> findPersonsByVisitDate(Date entranceDate, Date exitDate);
+	public List<Person> findPersonsByVisitDate(Date entranceDate, Date exitDate);
 	public  List<Visit> findVisitsWihtFewerTwoPhy(Date date);
 	
 }

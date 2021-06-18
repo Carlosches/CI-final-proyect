@@ -191,11 +191,22 @@ public class Person implements Serializable {
 	@OneToMany(mappedBy="person")
 	private List<Visit> visits;
 
+	@Column(name="PERS_VISIT_QUANTITY")
+	private int visitsQuantity;
+
 	public Person() {
 	}
 
 	public long getPersId() {
 		return this.persId;
+	}
+
+	public void setVisitsQuantity(int visitsQuantity) {
+		this.visitsQuantity = visitsQuantity;
+	}
+
+	public int getVisitsQuantity() {
+		return visitsQuantity;
 	}
 
 	public void setPersId(long persId) {

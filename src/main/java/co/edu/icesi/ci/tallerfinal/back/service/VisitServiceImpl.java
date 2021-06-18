@@ -142,7 +142,7 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public Map<Person, Long> findPersonsByVisitDate(Date entranceDate, Date exitDate) {
+    public List<Person> findPersonsByVisitDate(Date entranceDate, Date exitDate) {
 
         return visitDao.findPersonsByVisitDate(entranceDate, exitDate);
     }

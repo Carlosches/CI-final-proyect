@@ -308,12 +308,12 @@ public class VisitIntegrationTest {
 			visitService.addVisit(visit2, person.getPersId(), campus.getInstcamId()); 
 			
 			// map  --->  { person, number of visits}
-			Map<Person, Long> visitFound = visitService.findPersonsByVisitDate(date,exitDate);
+			List<Person> visitFound = visitService.findPersonsByVisitDate(date,exitDate);
 			assertNotNull(visitFound);
 			assertTrue(visitFound.size()!=0);
 			boolean flag = false;
-			for(Map.Entry<Person, Long> e: visitFound.entrySet()) {
-				if(e.getKey().getPersId() == person.getPersId())
+			for(Person e: visitFound) {
+				if(e.getPersId() == person.getPersId())
 					flag=true;
 			}
 			assertTrue(flag);

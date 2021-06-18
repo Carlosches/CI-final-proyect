@@ -106,14 +106,28 @@ public class BusinessDelegateImpl implements BusinessDelegate {
     @Override
     public List<Visit> visitByExitDate(String exiDate){
         String endpoint = REST_URL+"/visits/byexitdate/"+exiDate;
-//        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint)
-//                .queryParam("exitDate", exiDate);
-//        endpoint = builder.toUriString();
         Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
         List<Visit> response = Arrays.asList(r);
-        System.out.println("list response size: "+ response.size());
         return response;
     }
+
+    @Override
+    public List<Visit> visitByEntranceDate(String entranceDate) {
+        String endpoint = REST_URL+"/visits/byentrancedate/"+entranceDate;
+        Visit[] r = restTemplate.getForObject(endpoint, Visit[].class);
+        List<Visit> response = Arrays.asList(r);
+        return response;
+    }
+
+    @Override
+    public List<Person> getPersonsByVisitDate(String entranceDate, String exitDate) {
+        String endpoint = REST_URL+"/visits/personsbetweendates/"+exitDate+"/"+entranceDate;
+        Person[] r = restTemplate.getForObject(endpoint, Person[].class);
+        List<Person> response = Arrays.asList(r);
+        return response;
+
+    }
+
     //GET
     @Override
     public List<Visit> visitFindAll() {

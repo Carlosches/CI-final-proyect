@@ -1,5 +1,6 @@
 package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 
+import co.edu.icesi.ci.tallerfinal.back.model.Person;
 import co.edu.icesi.ci.tallerfinal.back.model.Physicalcheckup;
 import co.edu.icesi.ci.tallerfinal.back.model.Visit;
 import co.edu.icesi.ci.tallerfinal.back.repositories.CampusRepository;
@@ -15,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -84,6 +87,28 @@ public class VisitRestControllerImpl implements VisitRestController {
         }
         return visitService.findByExitdate(exDate);
     }
-
+    @GetMapping("/visits/byentrancedate/{entranceDate}")
+    public Iterable<Visit> getVisitByEntranceDate(@PathVariable("entranceDate") String entranceDate){
+        Date enDate = null;
+        try {
+            enDate= new SimpleDateFormat("yyyy-MM-dd").parse(entranceDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return visitService.findByEntrancedate(enDate);
+    }
+    @GetMapping("/visits/personsbetweendates/{exitDate}/{entranceDate}")
+    public List<Person> getPersonsByVisitDate(@PathVariable("exitDate") String exitDate,
+                                              @PathVariable("entranceDate") String entranceDate){
+        Date enDate = null;
+        Date exDate = null;
+        try {
+            exDate= new SimpleDateFormat("yyyy-MM-dd").parse(exitDate);
+            enDate= new SimpleDateFormat("yyyy-MM-dd").parse(entranceDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return visitService.findPersonsByVisitDate(enDate,exDate);
+    }
 
 }

@@ -67,9 +67,40 @@
       <p class="my-5">
 					<a href="/front/visits/add/" class="btn btn-primary"><i class="fas fa-plus-circle"></i>  Add visit</a>
 				</p>
-      <a href="/front/"><i class="fas fa-home ml-2"></i> Go back to main</a>
-      <a href="/front/visits/visitsbydate/"><i class="fas fa-home ml-2"></i> Go to consult visits</a>
+     <!-- <a href="/front/visits/visitsbydate/"><i class="fas fa-home ml-2"></i> Go to consult visits</a>-->
+      <h2 class="my-5">Consult visits</h2>
+      <form action="#"
+            th:action="@{/front/visits/bydate/}">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="visitEntranceDate" class="col-form-label">Entrance date</label> <input
+                  type="date" th:name="entranceDate" class="form-control" id="visitEntrancedate"
+                  placeholder="Date">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="visitExitdate" class="col-form-label">Exit date</label> <input
+                  type="date" th:name="exitDate" class="form-control" id="visitExitdate"
+                  placeholder="9">
+          </div>
 
+        </div>
+        <div class="row">
+          <div class="col-md-4 mt-3">
+            <input type="submit" name="action" class="btn btn-primary" value="Consult Persons by visit dates">
+          </div>
+          <div class="col-md-3 mt-3">
+            <input type="submit" name="action" class="btn btn-secondary" value="Consult visit by entrance date">
+          </div>
+          <div class="col-md-3 mt-3">
+            <input type="submit" name="action" class="btn btn-secondary" value="Consult visit by exit date">
+          </div>
+          <div class="col-md-3 mt-3">
+            <input type="submit" name="action" class="btn btn-secondary" value="Show all visits">
+          </div>
+        </div>
+      </form>
+
+      <a href="/front/"><i class="fas fa-home ml-2"></i> Go back to main</a>
     </div>
   </body>
 </html>
