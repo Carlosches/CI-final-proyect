@@ -1,9 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.AddNexusPoll;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Nexuspoll;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,72 +23,77 @@ public class NexusQuestionControllerImpl {
     @GetMapping("/")
     public String indexVisit(Model model) {
         model.addAttribute("quests", bd.nexusQuestionsFindAll()); // TODO
-        return "nexuspoll/index";
+        return "nexusquest/index";
     }
 
-//    @GetMapping("/add/")
-//    public String addNexusPoll(Model model){
-//        model.addAttribute("poll", new Nexuspoll());
-//        model.addAttribute("institutions", bd.institutionFindAll());
-//        return "nexuspoll/add-nexuspoll";
-//
-//    }
+    @GetMapping("/add/")
+    public String addNexusPollQuestion(Model model){
+        model.addAttribute("quest", new Nexusquestion());
+        model.addAttribute("polls", bd.nexusPollFindAll());
+        return "nexusquest/add-nexusquest";
 
-//    @PostMapping("/add/")
-//    public String saveNexusPoll(@Validated(AddNexusPoll.class)Nexuspoll nexuspoll,
-//                                BindingResult result,
-//                                Model model,
-//                                @RequestParam(value = "action", required = true) String action){
-//
-//        if (!action.equals("Cancel")) {
-//            if (result.hasErrors()) {
-//                model.addAttribute("institutions", bd.institutionFindAll());
-//                return "nexuspoll/add-nexuspoll";
-//            }
-//
-//            bd.addNexusPoll(nexuspoll);
-//        }
-//
-//        return "redirect:/front/nexuspoll/";
-//    }
+    }
 
-//    @GetMapping("/del/{id}")
-//    public String deleteNexuspoll(@PathVariable("id") long id) {
-//        // TODO LLAMAR AL BD
-//        return "redirect:/front/nexuspoll";
-//    }
+    @PostMapping("/add/")
+    public String saveNexusPollQuestion(@Validated(AddNexusQuestion.class)Nexusquestion nexusquestion,
+                                BindingResult result,
+                                Model model,
+                                @RequestParam(value = "action", required = true) String action){
 
-//    @GetMapping("/edit/{id}")
-//    public String editNexusPoll(@PathVariable("id") long id, Model model) {
-//
-//        Nexuspoll nexuspoll = bd.nexusPollFindById(id);
-//
-//        model.addAttribute("poll", nexuspoll);
-//        model.addAttribute("institutions", bd.institutionFindAll());
-//        return "nexuspoll/update-nexuspoll";
-//
-//    }
+        if (!action.equals("Cancel")) {
+            if (result.hasErrors()) {
+                model.addAttribute("institutions", bd.institutionFindAll());
+                return "nexuspoll/add-nexusquest";
+            }
 
-//    @PostMapping("/edit/{id}")
-//    public String editPostNexusPoll(@PathVariable("id") long id,
-//                                    @RequestParam(value = "action", required = true) String action,
-//                                    @ModelAttribute("visit") @Validated({AddVisit.class}) Nexuspoll nexuspoll,
-//                                    BindingResult bindingResult,
-//                                    Model model){
-//
-//        if (action != null && !action.equals("Cancel")) {
-//            if (bindingResult.hasErrors()) {
-//                nexuspoll.setNexpollId(id);
-//                model.addAttribute("institutions", bd.institutionFindAll());
-//                return "nexuspoll/update-nexuspoll";
-//            }
-//            nexuspoll.setNexpollId(id);
-//
-//            bd.updateNexusPoll(nexuspoll);
-//        }
-//        return "redirect:/front/nexuspoll/";
-//
-//
-//    }
+            bd.addNexusPollQuestion(nexusquestion);
+        }
+
+        return "redirect:/front/nexusquest/";
+    }
+
+    @GetMapping("/del/{id}")
+    public String deleteNexusPollQuestion(@PathVariable("id") long id) {
+        Nexusquestion nexusquestion = bd.nexusPollQuestionFindById(id);
+        bd.deleteNexusQuestion(nexusquestion);
+        return "redirect:/front/nexusquest/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editNexusPollQuestion(@PathVariable("id") long id, Model model) {
+
+        Nexusquestion nexuspollQuestion = bd.nexusPollQuestionFindById(id);
+
+        model.addAttribute("quest", nexuspollQuestion);
+        model.addAttribute("polls", bd.nexusPollFindAll());
+        return "nexuspoll/update-nexusquest";
+
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPostNexusPoll(@PathVariable("id") long id,
+                                    @RequestParam(value = "action", required = true) String action,
+                                    @ModelAttribute("visit") @Validated({AddVisit.class}) Nexusquestion nexuspollQuestion,
+                                    BindingResult bindingResult,
+                                    Model model){
+
+        if (action != null && !action.equals("Cancel")) {
+            if (bindingResult.hasErrors()) {
+                nexuspollQuestion.setNexquesId(id);
+                model.addAttribute("polls", bd.nexusPollFindAll());
+                return "nexuspoll/update-nexusquest";
+            }
+            nexuspollQuestion.setNexquesId(id);
+
+            bd.updateNexusPollQuestion(nexuspollQuestion);
+        }
+        return "redirect:/front/nexusquest/";
+
+
+    }
+
+
+
+
 
 }

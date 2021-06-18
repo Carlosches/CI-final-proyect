@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/nexus-quest")
+@RequestMapping("/api")
 public class NexusQuestionRestControllerImpl implements NexusQuestionRestController {
 
     private NexusQuestionService nexusQuestionService;
@@ -41,6 +41,12 @@ public class NexusQuestionRestControllerImpl implements NexusQuestionRestControl
     @PutMapping("/nexus-quest/")
     public Nexusquestion putNexusPollQuestion(@RequestBody Nexusquestion nexusquestion){
         return nexusQuestionService.update(nexusquestion);
+    }
+
+    @Override
+    @DeleteMapping("/nexus-quest/")
+    public void deleteNexusPollQUestion(@RequestBody Nexusquestion nexusquestion){
+        nexusQuestionService.delete(nexusquestion);
     }
 
 }

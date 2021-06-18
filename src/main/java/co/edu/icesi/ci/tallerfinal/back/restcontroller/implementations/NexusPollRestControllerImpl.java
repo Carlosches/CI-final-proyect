@@ -1,16 +1,14 @@
 package co.edu.icesi.ci.tallerfinal.back.restcontroller.implementations;
 
 import co.edu.icesi.ci.tallerfinal.back.model.Nexuspoll;
-import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.NexusPollController;
+import co.edu.icesi.ci.tallerfinal.back.restcontroller.interfaces.NexusPollRestController;
 import co.edu.icesi.ci.tallerfinal.back.service.NexusPollService;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class NexusPollRestControllerImpl implements NexusPollController {
+public class NexusPollRestControllerImpl implements NexusPollRestController {
 
     private NexusPollService nexusPollService;
 
@@ -41,6 +39,12 @@ public class NexusPollRestControllerImpl implements NexusPollController {
     @PutMapping("/nexus-poll/")
     public Nexuspoll putNexusPoll(@RequestBody Nexuspoll nexuspoll){
         return nexusPollService.update(nexuspoll);
+    }
+
+    @Override
+    @DeleteMapping("/nexus-poll/")
+    public void deleteNexusPollQUestion(@RequestBody Nexuspoll nexuspoll){
+        nexusPollService.delete(nexuspoll);
     }
 
 }

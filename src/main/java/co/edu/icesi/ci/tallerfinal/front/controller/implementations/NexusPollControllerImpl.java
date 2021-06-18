@@ -1,10 +1,7 @@
 package co.edu.icesi.ci.tallerfinal.front.controller.implementations;
 
 import co.edu.icesi.ci.tallerfinal.front.bd.BusinessDelegate;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.AddNexusPoll;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.AddVisit;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Nexuspoll;
-import co.edu.icesi.ci.tallerfinal.front.model.classes.Visit;
+import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/front/nexuspoll")
-public class NexusPollControllerImpl {
+public class NexusPollControllerImpl{
 
     public BusinessDelegate bd;
 
@@ -94,8 +91,11 @@ public class NexusPollControllerImpl {
 
     }
 
-
-
-
+    @GetMapping("/del/{id}")
+    public String deleteNexusPoll(@PathVariable("id") long id) {
+        Nexuspoll nexuspoll = bd.nexusPollFindById(id);
+        bd.deleteNexusPoll(nexuspoll);
+        return "redirect:/front/nexuspoll/";
+    }
 
 }

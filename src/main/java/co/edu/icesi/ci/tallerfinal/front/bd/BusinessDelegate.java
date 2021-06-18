@@ -96,9 +96,21 @@ public interface BusinessDelegate {
 
     Nexuspoll updateNexusPoll(Nexuspoll nexuspoll);
 
+    void deleteNexusPoll(Nexuspoll nexuspoll);
+
     // ==========================
     // NEXUS POLL QUESTIONS
     // ==========================
 
     List<Nexusquestion> nexusQuestionsFindAll();
+
+    Nexusquestion addNexusPollQuestion(Nexusquestion nexuspollQuestion);
+
+    Nexusquestion nexusPollQuestionFindById(long id);
+
+    Nexusquestion updateNexusPollQuestion(Nexusquestion nexuspollquestion);
+
+    void deleteNexusQuestion(Nexusquestion nexusquestion);
+
+
 }
