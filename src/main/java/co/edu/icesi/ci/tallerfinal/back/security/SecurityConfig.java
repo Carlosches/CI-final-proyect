@@ -42,9 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
 
 
-		httpSecurity.authorizeRequests()
+		httpSecurity.csrf().
+				disable()
+				.authorizeRequests()
         .antMatchers("/front/login**").permitAll()
-				.antMatchers("/api**").permitAll()
+				.antMatchers("/api/**").permitAll()
         .antMatchers("/h2/**").permitAll()
         .antMatchers("/front/measurements/showFromCheckMeasur/**").hasAnyRole("admin", "operator")
         //.antMatchers("/front/checkmeasures/showFromMeasures/**").hasAnyRole("admin", "operator")

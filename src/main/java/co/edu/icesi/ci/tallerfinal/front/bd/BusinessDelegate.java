@@ -1,22 +1,26 @@
 package co.edu.icesi.ci.tallerfinal.front.bd;
 
 import co.edu.icesi.ci.tallerfinal.front.model.classes.*;
+import jdk.jfr.consumer.RecordedStackTrace;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 public interface BusinessDelegate {
-
+    void setRestTemplate(RestTemplate restTemplate);
     // ==========================
     // PERSON
     // ==========================
 
     List<Person> personFindAll();
 
+    Person personFindById(long persId);
     // ==========================
     // INSTITUTION
     // ==========================
 
     List<Institution> institutionFindAll();
+    Institutioncampus institutioncampusFindById(long instId);
 
     // ==========================
     // INSTITUTION CAMPUS
@@ -37,7 +41,7 @@ public interface BusinessDelegate {
     void setVisit(Visit visit);
 
     void deleteVisit(long visitId);
-    public List<Physicalcheckup> getPychesFromVisit(long visitId);
+    public List<Physicalcheckup> getPychesFromVisit(long visitId);       ////////// Falta test
     // ==========================
     // PhysicalCheckup
     // ==========================
@@ -83,7 +87,6 @@ public interface BusinessDelegate {
     void setCheckMeasur(CheckMeasur checkMeasur);
 
     void deleteCheckMeasur(CheckMeasur checkMeasur);
-    Institutioncampus institutioncampusFindById(long instId);
-    Person personFindById(long persId);
+
 
 }

@@ -20,18 +20,21 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
     private RestTemplate restTemplate;
 
-    public BusinessDelegateImpl(RestTemplate restTemplate) {
+    public BusinessDelegateImpl() {
        //  this.restTemplate = restTemplate;
-        this.restTemplate = restTemplate;
+        this.restTemplate = new RestTemplate();
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
         messageConverters.add(converter);
         this.restTemplate.setMessageConverters(messageConverters);
 
     }
 
-    // ==========================
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+// ==========================
     // Person
     // ==========================
 
@@ -105,15 +108,6 @@ public class BusinessDelegateImpl implements BusinessDelegate {
 
         // REST endpoint
         String endpoint = REST_URL + "/visits/" + persId;
-     /*   List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();        
-      //Add the Jackson Message converter
-      MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-
-      // Note: here we are making this converter to process any kind of response, 
-      // not only application/*json, which is the default behaviour
-      converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));        
-      messageConverters.add(converter);  
-      super.setMessageConverters(messageConverters);*/
 
         Visit response = restTemplate.getForObject(endpoint, Visit.class);
         return response; // TODO

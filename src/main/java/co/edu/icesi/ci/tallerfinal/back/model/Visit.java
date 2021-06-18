@@ -68,6 +68,16 @@ public class Visit implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="visit")
 	private List<VisitVisitreason> visitVisitreasons;
+	private long instId;
+	private long persId;
+
+	public long getInstId() {
+		return instId;
+	}
+
+	public long getPersId() {
+		return persId;
+	}
 
 	public Visit() {
 	}
